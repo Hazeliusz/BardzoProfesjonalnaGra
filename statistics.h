@@ -44,5 +44,13 @@ class Statistics
 				break;
 			}
 		}
-
+		void setStatistics(int s, int p, int e, int c, int i, int a, int l) {
+			sila = s;
+			percepcja = p;
+			wytrzymalosc = e;
+			charyzma = c;
+			inteligencja = i;
+			zrecznosc = a;
+			szczescie = l;
+		}
 };

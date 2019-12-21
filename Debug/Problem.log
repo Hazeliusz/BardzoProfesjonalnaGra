@@ -1,0 +1,9 @@
+﻿  Source.cpp
+D:\Programowanie\Obiektowe\Problem\Interactions.h(53,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Programowanie\Obiektowe\Problem\Interactions.h(59,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Programowanie\Obiektowe\Problem\Interactions.h(67,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Programowanie\Obiektowe\Problem\Interactions.h(73,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Programowanie\Obiektowe\Problem\Interactions.h(91,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Programowanie\Obiektowe\Problem\Interactions.h(97,14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+D:\Programowanie\Obiektowe\Problem\Source.cpp(6,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Problem.vcxproj -> D:\Programowanie\Obiektowe\Problem\Debug\Problem.exe

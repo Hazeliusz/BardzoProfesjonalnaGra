@@ -29,7 +29,10 @@
     <ClInclude Include="statistics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterInteractions.h">
+    <ClInclude Include="monster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interactions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

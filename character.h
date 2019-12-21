@@ -6,11 +6,15 @@
 #include <cstdlib>
 #include <fstream>
 
+enum Proffesion {
+	PROFF_KNIGHT, PROFF_ARCHER, PROFF_BARD, PROFF_DARK_KNIGHT, PROFF_CLERIC, PROFF_MAGE
+};
+
 class Character {
 protected:
-	std::string klasa;
 	std::string imie;
-	bool plec; //true - kobieta, false - mê¿czyzna
+	Proffesion klasa;
+	bool plec; //true - kobieta, false - mezczyzna
 	Statistics special;
 public:
 	Character(std::string imie, bool plec, Statistics statystyki = Statistics());
@@ -19,9 +23,31 @@ public:
 		return special;
 	}
 
+	Proffesion GetProffesion() {
+		return klasa;
+	}
+
 	std::string GetName()
 	{
 		return imie;
+	}
+	std::string GetProffesionName() {
+		switch (klasa) {
+		case PROFF_KNIGHT:
+			return "rycerz";
+		case PROFF_ARCHER:
+			return "lucznik";
+		case PROFF_BARD:
+			return "bard";
+		case PROFF_CLERIC:
+			return "kleryk";
+		case PROFF_DARK_KNIGHT:
+			return "upadly rycerz";
+		case PROFF_MAGE:
+			return "mag";
+		default:
+			return "nieznana";
+		}
 	}
 
 	//haffff-> character.h to plik naglowkowy, w tym pliku
