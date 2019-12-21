@@ -23,29 +23,29 @@ void Character::wypisz_statystyki() {
 
 Knight::Knight(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	klasa = "rycerz";
+	klasa = PROFF_KNIGHT;
 }
 Archer::Archer(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	klasa = "lucznik";
+	klasa = PROFF_ARCHER;
 }
 
 Bard::Bard(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	klasa = "bard";
+	klasa = PROFF_BARD;
 }
 Dark_Knight::Dark_Knight(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	klasa = "upadly Rycerz";
+	klasa = PROFF_DARK_KNIGHT;
 }
 
 Cleric::Cleric(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	klasa = "kleryk";
+	klasa = PROFF_CLERIC;
 }
 Mage::Mage(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	klasa = "mag";
+	klasa = PROFF_MAGE;
 }
 
 //Randomizing statistics
@@ -115,7 +115,7 @@ void Mage::wylosuj_statystyki() {
 void Character::wypisz_karte_postaci()
 {
 	std::cout << "Imie: " << this->imie << std::endl;
-	std::cout << "Klasa: " << this->klasa << std::endl;
+	std::cout << "Klasa: " << this->GetProffesionName() << std::endl;
 	std::cout << "Plec: ";
 	std::cout << (plec ? "kobieta":"mezczyzna") << std::endl;
 	wypisz_statystyki();
