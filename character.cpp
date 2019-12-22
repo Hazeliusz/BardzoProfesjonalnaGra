@@ -7,6 +7,18 @@ Character::Character(std::string imie, bool plec, Statistics statystyki) {
 	this->imie = imie;
 	this->plec = plec;
 	this->special = statystyki;
+	umiejetnosci["Atak fizyczny"] = [](Character* character1, Character* character2, bufor& bf) {
+		int dmg = character1->GetStats().getByEnum(Sila) * 0.5 +
+			rand() % character1->GetStats().getByEnum(Szczescie);
+		character2->hp -= dmg;
+		std::cout << character2->GetName() << " oberwal za " << dmg << " HP." << std::endl;
+	};
+	umiejetnosci["Atak magiczny"] = [](Character* character1, Character* character2, bufor& bf) {
+		int dmg = character1->GetStats().getByEnum(Inteligencja) * 0.5 +
+			rand() % character1->GetStats().getByEnum(Szczescie);
+		character2->hp -= dmg;
+		std::cout << character2->GetName() << " zostal zaatakowany magicznie za " << dmg << " HP." << std::endl;
+	};
 }
 
 void Character::wypisz_statystyki() {
@@ -23,11 +35,29 @@ void Character::wypisz_statystyki() {
 
 Knight::Knight(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
+	umiejetnosci["POTEZNY atak"] = [](Character* p1, Character* p2, bufor& bf) {
+		if (p2->GetStats().zrecznosc < 5)
+		{
+			p2->hp -= 50;
+			std::cout << p1->GetName() << " Zadaje Potezny cios mieczem zabierajac 15 hp " << p2->GetName();
+		}
+		else
+		{
+			std::cout << p2->GetName() << " unika ciosu " << p1->GetName() << std::endl;
+		}
+		bf[p1->GetName() + "_POTEZNY atak_cooldown"] = 5;
+		};
 	klasa = PROFF_KNIGHT;
 }
 Archer::Archer(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
 	klasa = PROFF_ARCHER;
+	umiejetnosci["Strzal z luku"] = [](Character* character1, Character* character2, bufor& bf) {
+		int dmg = character1->GetStats().getByEnum(Zrecznosc) * 0.5 +
+			(rand() % character1->GetStats().getByEnum(Szczescie));
+		character2->hp -= dmg;
+		std::cout << character2->GetName() << " zostal postrzelony za " << dmg << " HP." << std::endl;
+		};
 }
 
 Bard::Bard(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)

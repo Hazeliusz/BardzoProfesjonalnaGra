@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "character.h"
 #include "monster.h"
+#include <vector>
 
 class CharactersInteractions
 {
@@ -18,105 +19,68 @@ public:
 	//Skrypt walki, zwraca wskaźnik na zwycięzcę (lub nullptr w przypadku jego braku
 	Character * Fight()
 	{
-		int hp1 = character1->GetStats().getByEnum(Wytrzymalosc) * 10;
-		int hp2 = character2->GetStats().getByEnum(Wytrzymalosc) * 10;
+		bufor bf;
+
+		character1->hp = character1->GetStats().getByEnum(Wytrzymalosc) * 10;
+		character2->hp = character2->GetStats().getByEnum(Wytrzymalosc) * 10;
+
 		bool turn = true; //true - 1, false - 2
 		std::cout << "Walka: " << character1->GetName() << " vs. " << character2->GetName() << std::endl;
+
 		while (true) {
-			std::cout << "Aktualny gracz: " << (turn ? character1->GetName() : character2->GetName()) << std::endl;
-			std::cout << "Aktualne HP: " << (turn ? hp1 : hp2) << std::endl;
+			Character* attacking = (turn ? character1 : character2);
+			Character* defending = (turn ? character2 : character1);
+			//minela tura, odejmujemy 1 od kazdego cooldowna
+			for (auto const& x : bf)
+				if (x.first.find("cooldown") != std::string::npos)
+					bf[x.first]--;
+
+			std::vector<std::string> skills;
+
+			for (auto const& x : attacking->GetSkills())
+			{
+				if (bf[attacking->GetName() + "_" + x.first + "_cooldown"] < 1)
+				{
+					skills.push_back(x.first);
+				}
+			}
+
+			std::cout << "Aktualny gracz: " << attacking->GetName() << std::endl;
+			std::cout << "Aktualne HP: " << attacking->hp << std::endl;
 			int decyzja = 0;
 			while (true) {
 				std::cout << "Wybierz akcje: " << std::endl;
-				std::cout << "1. Atak fizyczny." << std::endl;
-				std::cout << "2. Atak magiczny." << std::endl;
-				std::cout << "3. Ucieknij";
-				if (turn) {
-					if (character1->GetProffesion() == PROFF_ARCHER)
-						std::cout << "4. Strzel z luku" << std::endl;
+				for (int i = 0; i < skills.size(); i++)
+				{
+					std::cout << (i + 1) << ". " << skills[i] << std::endl;
 				}
-				else {
-					if (character2->GetProffesion() == PROFF_ARCHER)
-						std::cout << "4. Strzel z luku";
-				}
+				std::cout << 0 << ". Ucieczka" << std::endl;
 				std::cin >> decyzja;
-				if (decyzja > 4 && decyzja < 1) {
+				if (decyzja < 0 || decyzja > skills.size()) {
 					std::cout << "Niepoprawna decyzja";
 				}
 				else {
 					break;
 				}
 			}
-			switch (decyzja) {
-			case 1:
-				if (turn) {
-					int dmg = character1->GetStats().getByEnum(Sila) * 0.5 +
-						rand() % character1->GetStats().getByEnum(Szczescie);
-					hp2 -= dmg;
-					std::cout << character2->GetName() << " oberwal za " << dmg << " HP." << std::endl;
-				}
-				else {
-					int dmg = character2->GetStats().getByEnum(Sila) * 0.5 +
-						rand() % character2->GetStats().getByEnum(Szczescie);
-					hp1 -= dmg;
-					std::cout << character1->GetName() << " oberwal za " << dmg << " HP." << std::endl;
-				}
-				break;
-			case 2:
-				if (turn) {
-					int dmg = character1->GetStats().getByEnum(Inteligencja) * 0.5 +
-						rand() % character1->GetStats().getByEnum(Szczescie);
-					hp2 -= dmg;
-					std::cout << character2->GetName() << " zostal zaatakowany magicznie za " << dmg << " HP." << std::endl;
-				}
-				else {
-					int dmg = character2->GetStats().getByEnum(Inteligencja) * 0.5 +
-						(rand() % character2->GetStats().getByEnum(Szczescie));
-					hp1 -= dmg;
-					std::cout << character1->GetName() << " zostal zaatakowany magicznie za " << dmg << " HP." << std::endl;
-				}
-				break;
-			case 3:
-				if (turn) {
-					std::cout << character1->GetName() << " uciekl!" << std::endl;
-					return character2;
-				}
-				else {
-					std::cout << character2->GetName() << " uciekl!" << std::endl;
-					return character1;
-				}
-				break;
-			case 4:
-				if (turn) {
-					int dmg = character1->GetStats().getByEnum(Zrecznosc) * 0.5 +
-						(rand() % character1->GetStats().getByEnum(Szczescie));
-					hp2 -= dmg;
-					std::cout << character2->GetName() << " zostal postrzelony za " << dmg << " HP." << std::endl;
-				}
-				else {
-					int dmg = character2->GetStats().getByEnum(Zrecznosc) * 0.5 +
-						(rand() % character2->GetStats().getByEnum(Szczescie));
-					hp1 -= dmg;
-					std::cout << character1->GetName() << " zostal postrzelony za " << dmg << " HP." << std::endl;
-				}
-				break;
+
+			if (decyzja == 0)
+			{
+				std::cout << attacking->GetName() << "Uciekl!" << std::endl;
+				return defending;
 			}
-				if (hp2 <= 0) {
-					std::cout << character1->GetName() << " wygrywa!" << std::endl;
-					return character1;
-				}
-			
-				if (hp1 <= 0) {
-					std::cout << character2->GetName() << " wygrywa!" << std::endl;
-					return character2;
-				}
-				if (turn)
-					turn = false;
-				else
-					turn = true;
-			
+
+			attacking->GetSkills()[skills[decyzja - 1]](attacking, defending, bf);
+
+			if (defending->hp <= 0)
+			{
+				std::cout << attacking->GetName() << "Wygrywa!" << std::endl;
+				return attacking;
+			}
+
+			turn = !turn;
 		}
-	}	
+	}
 };
 
 class MonsterFight {

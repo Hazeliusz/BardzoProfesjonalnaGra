@@ -4,7 +4,14 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
+#include <map>
 #include <fstream>
+
+ class Character;
+
+typedef std::map<std::string, int> bufor;
+typedef void(*skill)(Character* uzywajacy, Character* atakowany, bufor& bf);
+
 
 enum Proffesion {
 	PROFF_KNIGHT, PROFF_ARCHER, PROFF_BARD, PROFF_DARK_KNIGHT, PROFF_CLERIC, PROFF_MAGE
@@ -14,10 +21,12 @@ class Character {
 protected:
 	std::string imie;
 	Proffesion klasa;
+	std::map<std::string, skill> umiejetnosci;
 	bool plec; //true - kobieta, false - mezczyzna
 	Statistics special;
 public:
 	Character(std::string imie, bool plec, Statistics statystyki = Statistics());
+	int hp;
 	Statistics GetStats()
 	{
 		return special;
@@ -25,6 +34,11 @@ public:
 
 	Proffesion GetProffesion() {
 		return klasa;
+	}
+
+	std::map<std::string, skill> GetSkills()
+    {
+		return umiejetnosci;
 	}
 
 	std::string GetName()
