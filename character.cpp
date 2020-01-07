@@ -3,40 +3,62 @@
 #include <iostream>
 #include <ctime>
 
-Character::Character(std::string imie, bool plec, Statistics statystyki) {
-	this->imie = imie;
-	this->plec = plec;
-	this->special = statystyki;
-	umiejetnosci["Atak fizyczny"] = [](Character* character1, Character* character2, bufor& bf) {
-		int dmg = character1->GetStats().getByEnum(Sila) * 0.5 +
-			rand() % character1->GetStats().getByEnum(Szczescie);
+int Level::getLevelThreshold(int lvl) {
+	if (lvl == 1)
+		return 50;
+	else
+		return (lvl * 10) + getLevelThreshold(lvl - 1);
+}
+
+Level::Level(int lvl){
+	this->level = lvl;
+	this->currentEXP = 0;
+	this->thresholdEXP = getLevelThreshold(lvl);
+}
+
+int Level::getLevel() {
+	return level;
+}
+
+void Level::setLevel(int lvl) {
+	this->level = lvl;
+}
+
+Character::Character(std::string name, bool sex, Statistics stats, int lvls) {
+	this->name = name;
+	this->sex = sex;
+	this->special = stats;
+	skills["Atak fizyczny"] = [](Character* character1, Character* character2, bufor& bf) {
+		int dmg = character1->GetStats().getByEnum(Strength) * 0.5 +
+			rand() % character1->GetStats().getByEnum(Luck);
 		character2->hp -= dmg;
 		std::cout << character2->GetName() << " oberwal za " << dmg << " HP." << std::endl;
 	};
-	umiejetnosci["Atak magiczny"] = [](Character* character1, Character* character2, bufor& bf) {
-		int dmg = character1->GetStats().getByEnum(Inteligencja) * 0.5 +
-			rand() % character1->GetStats().getByEnum(Szczescie);
+	skills["Atak magiczny"] = [](Character* character1, Character* character2, bufor& bf) {
+		int dmg = character1->GetStats().getByEnum(Intelligence) * 0.5 +
+			rand() % character1->GetStats().getByEnum(Luck);
 		character2->hp -= dmg;
 		std::cout << character2->GetName() << " zostal zaatakowany magicznie za " << dmg << " HP." << std::endl;
 	};
+	this->lvl.setLevel(lvls);
 }
 
-void Character::wypisz_statystyki() {
-	std::cout << "Sila: " << special.sila << std::endl;
-	std::cout << "Percepcja: " << special.percepcja << std::endl;
-	std::cout << "Wytrzymalosc: " << special.wytrzymalosc << std::endl;
-	std::cout << "Charyzma: " << special.charyzma << std::endl;
-	std::cout << "Inteligencja: " << special.inteligencja << std::endl;
-	std::cout << "Zrecznosc: " << special.zrecznosc << std::endl;
-	std::cout << "Szczescie: " << special.szczescie << std::endl;
+void Character::writeStatistics() {
+	std::cout << "Sila: " << special.strength << std::endl;
+	std::cout << "Percepcja: " << special.perception << std::endl;
+	std::cout << "Wytrzymalosc: " << special.endurance << std::endl;
+	std::cout << "Charyzma: " << special.charisma << std::endl;
+	std::cout << "Inteligencja: " << special.intelligence << std::endl;
+	std::cout << "Zrecznosc: " << special.agility << std::endl;
+	std::cout << "Szczescie: " << special.luck << std::endl;
 }
 
 //Constructors
 
 Knight::Knight(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	umiejetnosci["POTEZNY atak"] = [](Character* p1, Character* p2, bufor& bf) {
-		if (p2->GetStats().zrecznosc < 5)
+	skills["POTEZNY atak"] = [](Character* p1, Character* p2, bufor& bf) {
+		if (p2->GetStats().agility < 5)
 		{
 			p2->hp -= 50;
 			std::cout << p1->GetName() << " Zadaje Potezny cios mieczem zabierajac 15 hp " << p2->GetName();
@@ -47,14 +69,14 @@ Knight::Knight(std::string n, bool g, Statistics statystyki) : Character(n, g, s
 		}
 		bf[p1->GetName() + "_POTEZNY atak_cooldown"] = 5;
 		};
-	klasa = PROFF_KNIGHT;
+	CharClass = PROFF_KNIGHT;
 }
 Archer::Archer(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	klasa = PROFF_ARCHER;
-	umiejetnosci["Strzal z luku"] = [](Character* character1, Character* character2, bufor& bf) {
-		int dmg = character1->GetStats().getByEnum(Zrecznosc) * 0.5 +
-			(rand() % character1->GetStats().getByEnum(Szczescie));
+	CharClass = PROFF_ARCHER;
+	skills["Strzal z luku"] = [](Character* character1, Character* character2, bufor& bf) {
+		int dmg = character1->GetStats().getByEnum(Agility) * 0.5 +
+			(rand() % character1->GetStats().getByEnum(Luck));
 		character2->hp -= dmg;
 		std::cout << character2->GetName() << " zostal postrzelony za " << dmg << " HP." << std::endl;
 		};
@@ -62,93 +84,94 @@ Archer::Archer(std::string n, bool g, Statistics statystyki) : Character(n, g, s
 
 Bard::Bard(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	klasa = PROFF_BARD;
+	CharClass = PROFF_BARD;
 }
 Dark_Knight::Dark_Knight(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	klasa = PROFF_DARK_KNIGHT;
+	CharClass = PROFF_DARK_KNIGHT;
 }
 
 Cleric::Cleric(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	klasa = PROFF_CLERIC;
+	CharClass = PROFF_CLERIC;
 }
 Mage::Mage(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
-	klasa = PROFF_MAGE;
+	CharClass = PROFF_MAGE;
 }
 
 //Randomizing statistics
 
-void Knight::wylosuj_statystyki() {
-	special.sila = rand() % 10 + 20;
-	special.percepcja = rand() % 10 + 5;
-	special.wytrzymalosc = rand() % 10 + 25;
-	special.charyzma = rand() % 5 + 5;
-	special.inteligencja = rand() % 5 + 7;
-	special.zrecznosc = rand() % 4 + 5;
-	special.szczescie = rand() % 20 + 1;
+void Knight::randomizeStatistics() {
+	special.strength = rand() % 10 + 20;
+	special.perception = rand() % 10 + 5;
+	special.endurance = rand() % 10 + 25;
+	special.charisma = rand() % 5 + 5;
+	special.intelligence = rand() % 5 + 7;
+	special.agility = rand() % 4 + 5;
+	special.luck = rand() % 20 + 1;
 }
 
-void Archer::wylosuj_statystyki() {
-	special.sila = rand() % 5 + 5;
-	special.percepcja = rand() % 10 + 15;
-	special.wytrzymalosc = rand() % 10 + 5;
-	special.charyzma = rand() % 5 + 7;
-	special.inteligencja = rand() % 5 + 7;
-	special.zrecznosc = rand() % 10 + 25;
-	special.szczescie = rand() % 20 + 1;
+void Archer::randomizeStatistics() {
+	special.strength = rand() % 5 + 5;
+	special.perception = rand() % 10 + 15;
+	special.endurance = rand() % 10 + 5;
+	special.charisma = rand() % 5 + 7;
+	special.intelligence = rand() % 5 + 7;
+	special.agility = rand() % 10 + 25;
+	special.luck = rand() % 20 + 1;
 }
 
-void Bard::wylosuj_statystyki() {
-	special.sila = rand() % 5 + 5;
-	special.percepcja = rand() % 10 + 5;
-	special.wytrzymalosc = rand() % 10 + 5;
-	special.charyzma = rand() % 10 + 25;
-	special.inteligencja = rand() % 5 + 15;
-	special.zrecznosc = rand() % 5 + 3;
-	special.szczescie = rand() % 20 + 1;
+void Bard::randomizeStatistics() {
+	special.strength = rand() % 5 + 5;
+	special.perception = rand() % 10 + 5;
+	special.endurance = rand() % 10 + 5;
+	special.charisma = rand() % 10 + 25;
+	special.intelligence = rand() % 5 + 15;
+	special.agility = rand() % 5 + 3;
+	special.luck = rand() % 20 + 1;
 }
 
-void Dark_Knight::wylosuj_statystyki() {
-	special.sila = rand() % 10 + 30;
-	special.percepcja = rand() % 10 + 5;
-	special.wytrzymalosc = rand() % 5 + 20;
-	special.charyzma = 1;
-	special.inteligencja = rand() % 5 + 10;
-	special.zrecznosc = rand() % 5 + 10;
-	special.szczescie = 1;
+void Dark_Knight::randomizeStatistics() {
+	special.strength = rand() % 10 + 30;
+	special.perception = rand() % 10 + 5;
+	special.endurance = rand() % 5 + 20;
+	special.charisma = 1;
+	special.intelligence = rand() % 5 + 10;
+	special.agility = rand() % 5 + 10;
+	special.luck = 1;
 }
 
-void Cleric::wylosuj_statystyki() {
-	special.sila = rand() % 5 + 5;
-	special.percepcja = rand() % 10 + 5;
-	special.wytrzymalosc = rand() % 5 + 5;
-	special.charyzma = rand() % 10 + 15;
-	special.inteligencja = rand() % 5 + 25;
-	special.zrecznosc = rand() % 5 + 3;
-	special.szczescie = rand() % 10 + 15;
+void Cleric::randomizeStatistics() {
+	special.strength = rand() % 5 + 5;
+	special.perception = rand() % 10 + 5;
+	special.endurance = rand() % 5 + 5;
+	special.charisma = rand() % 10 + 15;
+	special.intelligence = rand() % 5 + 25;
+	special.agility = rand() % 5 + 3;
+	special.luck = rand() % 10 + 15;
 }
 
-void Mage::wylosuj_statystyki() {
-	special.sila = rand() % 5 + 5;
-	special.percepcja = rand() % 10 + 5;
-	special.wytrzymalosc = rand() % 10 + 5;
-	special.charyzma = rand() % 10 + 10;
-	special.inteligencja = rand() % 5 + 25;
-	special.zrecznosc = rand() % 5 + 3;
-	special.szczescie = rand() % 20 + 1;
+void Mage::randomizeStatistics() {
+	special.strength = rand() % 5 + 5;
+	special.perception = rand() % 10 + 5;
+	special.endurance = rand() % 10 + 5;
+	special.charisma = rand() % 10 + 10;
+	special.intelligence = rand() % 5 + 25;
+	special.agility = rand() % 5 + 3;
+	special.luck = rand() % 20 + 1;
 }
 
 //Draw character cards
 
-void Character::wypisz_karte_postaci()
+void Character::drawCharacterCard()
 {
-	std::cout << "Imie: " << this->imie << std::endl;
+	std::cout << "Imie: " << this->name << std::endl;
 	std::cout << "Klasa: " << this->GetProffesionName() << std::endl;
+	std::cout << "Poziom: " << lvl.getLevel() << std::endl;
 	std::cout << "Plec: ";
-	std::cout << (plec ? "kobieta":"mezczyzna") << std::endl;
-	wypisz_statystyki();
+	std::cout << (sex ? "kobieta":"mezczyzna") << std::endl;
+	writeStatistics();
 }
 
 /*void Character::zapisz_do_pliku() {
@@ -165,9 +188,9 @@ void Character::odczytaj_z_pliku() {
 	}
 }*/
 
-Magic_Item::Magic_Item(std::string n, std::string o, int m, int rz) {
-	nazwa = n;
-	opis = o;
-	moc = m;
-	rzadkosc = rz;
+Magic_Item::Magic_Item(std::string n, std::string desc, int p, int rar) {
+	name = n;
+	description = desc;
+	power = p;
+	rarity = rar;
 }

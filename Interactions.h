@@ -21,8 +21,8 @@ public:
 	{
 		bufor bf;
 
-		character1->hp = character1->GetStats().getByEnum(Wytrzymalosc) * 10;
-		character2->hp = character2->GetStats().getByEnum(Wytrzymalosc) * 10;
+		character1->hp = character1->GetStats().getByEnum(Endurance) * 10;
+		character2->hp = character2->GetStats().getByEnum(Endurance) * 10;
 
 		bool turn = true; //true - 1, false - 2
 		std::cout << "Walka: " << character1->GetName() << " vs. " << character2->GetName() << std::endl;
@@ -66,7 +66,7 @@ public:
 
 			if (decyzja == 0)
 			{
-				std::cout << attacking->GetName() << "Uciekl!" << std::endl;
+				std::cout << attacking->GetName() << " uciekl!" << std::endl;
 				return defending;
 			}
 
@@ -74,7 +74,7 @@ public:
 
 			if (defending->hp <= 0)
 			{
-				std::cout << attacking->GetName() << "Wygrywa!" << std::endl;
+				std::cout << attacking->GetName() << " wygrywa!" << std::endl;
 				return attacking;
 			}
 
