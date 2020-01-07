@@ -10,22 +10,34 @@
  class Character;
 
 typedef std::map<std::string, int> bufor;
-typedef void(*skill)(Character* uzywajacy, Character* atakowany, bufor& bf);
+typedef void(*skill)(Character* user, Character* target, bufor& bf);
 
 
 enum Proffesion {
-	PROFF_KNIGHT, PROFF_ARCHER, PROFF_BARD, PROFF_DARK_KNIGHT, PROFF_CLERIC, PROFF_MAGE
+	PROFF_KNIGHT, PROFF_ARCHER, PROFF_BARD, PROFF_DARK_KNIGHT, PROFF_CLERIC, PROFF_MAGE, PROFF_MONSTER
+};
+
+class Level {
+	int level;
+	int currentEXP;
+	int thresholdEXP;
+public:
+	void setLevel(int lvl);
+	int getLevel();
+	int getLevelThreshold(int lvl);
+	Level(int lvl = 1);
 };
 
 class Character {
 protected:
-	std::string imie;
-	Proffesion klasa;
-	std::map<std::string, skill> umiejetnosci;
-	bool plec; //true - kobieta, false - mezczyzna
+	std::string name;
+	Proffesion CharClass;
+	std::map<std::string, skill> skills;
+	bool sex; //true - kobieta, false - mezczyzna
 	Statistics special;
+	Level lvl;
 public:
-	Character(std::string imie, bool plec, Statistics statystyki = Statistics());
+	Character(std::string name, bool sex, Statistics statystyki = Statistics(), int lvls = 1);
 	int hp;
 	Statistics GetStats()
 	{
@@ -33,20 +45,20 @@ public:
 	}
 
 	Proffesion GetProffesion() {
-		return klasa;
+		return CharClass;
 	}
 
 	std::map<std::string, skill> GetSkills()
     {
-		return umiejetnosci;
+		return skills;
 	}
 
 	std::string GetName()
 	{
-		return imie;
+		return name;
 	}
 	std::string GetProffesionName() {
-		switch (klasa) {
+		switch (CharClass) {
 		case PROFF_KNIGHT:
 			return "rycerz";
 		case PROFF_ARCHER:
@@ -64,58 +76,56 @@ public:
 		}
 	}
 
-	//haffff-> character.h to plik naglowkowy, w tym pliku
-	//najlepiej opisywac rzecy. wiec lepiej dawac tutaj nazwy zmiennych aby osoba piszaca potem kod wiedziala co oznaczaja te inty
 
 
-	void wypisz_karte_postaci();
-	virtual void wylosuj_statystyki() = 0;
-	void wypisz_statystyki();
+	void drawCharacterCard();
+	virtual void randomizeStatistics() = 0;
+	void writeStatistics();
 	/*void zapisz_do_pliku();
 	void odczytaj_z_pliku();*/ 
 };
 
 class Knight : public Character {
 public:
-	virtual void wylosuj_statystyki();
-	Knight(std::string, bool, Statistics statystyki = Statistics());
+	virtual void randomizeStatistics();
+	Knight(std::string, bool, Statistics stats = Statistics());
 };
 
 class Archer : public Character {
 public:
-	virtual void wylosuj_statystyki();
-	Archer(std::string, bool, Statistics statystyki = Statistics());
+	virtual void randomizeStatistics();
+	Archer(std::string, bool, Statistics stats = Statistics());
 };
 
 class Bard : public Character {
 public:
-	virtual void wylosuj_statystyki();
-	Bard(std::string, bool, Statistics statystyki = Statistics());
+	virtual void randomizeStatistics();
+	Bard(std::string, bool, Statistics stats = Statistics());
 };
 
 class Dark_Knight : public Character {
 public:
-	virtual void wylosuj_statystyki();
-	Dark_Knight(std::string, bool, Statistics statystyki = Statistics());
+	virtual void randomizeStatistics();
+	Dark_Knight(std::string, bool, Statistics stats = Statistics());
 };
 
 class Cleric : public Character {
 public:
-	virtual void wylosuj_statystyki();
-	Cleric(std::string, bool, Statistics statystyki = Statistics());
+	virtual void randomizeStatistics();
+	Cleric(std::string, bool, Statistics stats = Statistics());
 };
 
 class Mage : public Character {
 public:
-	virtual void wylosuj_statystyki();
-	Mage(std::string, bool, Statistics statystyki = Statistics());
+	virtual void randomizeStatistics();
+	Mage(std::string, bool, Statistics stats = Statistics());
 };
 
 class Magic_Item {
-	std::string nazwa;
-	std::string opis;
-	int moc;
-	int rzadkosc; // 1 - 10
+	std::string name;
+	std::string description;
+	int power;
+	int rarity; // 1 - 10
 public:
 	Magic_Item(std::string, std::string = "opps", int = 0, int = 1);
 };
