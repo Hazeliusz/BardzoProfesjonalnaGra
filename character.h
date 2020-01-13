@@ -23,6 +23,7 @@ class Level {
 	int thresholdEXP;
 public:
 	void setLevel(int lvl);
+	int getCurrentEXP();
 	int getLevel();
 	int getLevelThreshold(int lvl);
 	Level(int lvl = 1);
