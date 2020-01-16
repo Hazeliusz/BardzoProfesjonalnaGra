@@ -5,7 +5,7 @@
 void main() {
 	setlocale(LC_ALL, "polish");
 	srand(time(NULL));
-	std::cout << "Wybierz p³eæ: 1 - kobieta, 2 - mê¿czyzna" << std::endl;
+	/*std::cout << "Wybierz p³eæ: 1 - kobieta, 2 - mê¿czyzna" << std::endl;
 	bool* chosen_sex = new bool;
 	while (true) {
 		int choice;
@@ -93,7 +93,14 @@ void main() {
 	delete chosen_profession;
 	player->randomizeStatistics();
 	player->drawCharacterCard();
-	
+	*/
+	Character* player = new Mage("Hazeliusz", false);
+	player->randomizeStatistics();
+	player->addSkill("Superskill");
+	Character* test = new Knight("Aya", true);
+	CharactersInteractions interact(player, test);
+	interact.Fight();
+
 	
 
 	system("pause");

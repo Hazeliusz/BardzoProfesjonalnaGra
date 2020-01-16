@@ -53,4 +53,30 @@ class Statistics
 			agility = a;
 			luck = l;
 		}
+		void advanceStatsByEnum(int enumStat) {
+			switch (enumStat)
+			{
+			case Strength:
+				this->strength++;
+				break;
+			case Perception:
+				perception++;
+				break;
+			case Endurance:
+				endurance++;
+				break;
+			case Charisma:
+				charisma++;
+				break;
+			case Intelligence:
+				intelligence++;
+				break;
+			case Agility:
+				agility++;
+				break;
+			case Luck:
+				luck++;
+				break;
+			}
+		}
 };
