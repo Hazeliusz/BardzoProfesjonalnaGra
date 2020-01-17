@@ -3,7 +3,7 @@
 #include "monster.h"
 #include <vector>
 
-class CharactersInteractions
+class CharactersInteractions //zelentjuniorikij
 {
 private:
 	Character * character1;
