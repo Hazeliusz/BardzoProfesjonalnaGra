@@ -172,7 +172,7 @@ Archer::Archer(std::string n, bool g, Statistics statystyki) : Character(n, g, s
 		std::cout << p2->GetName() << (p2->GetSex() ? " zosta³a postrzelona " : " zosta³ postrzelony ")  <<"za " << dmg << " HP." << std::endl;
 		bf[p1->GetName() + "_Strza³ z ³uku_cooldown"] = 2;
 		};
-}
+} // <-
 
 Bard::Bard(std::string n, bool g, Statistics statystyki) : Character(n, g, statystyki)
 {
