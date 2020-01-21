@@ -23,8 +23,12 @@ class Level {
 	int thresholdEXP;
 public:
 	void setLevel(int lvl);
+	int getCurrentEXP();
 	int getLevel();
 	int getLevelThreshold(int lvl);
+	void levelUp();
+	bool checkLevelUp();
+	void addEXP(int exp);
 	Level(int lvl = 1);
 };
 
@@ -75,12 +79,18 @@ public:
 			return "nieznana";
 		}
 	}
+	bool GetSex() {
+		return sex;
+	}
 
-
-
+	void checkLevelUp();
+	void addEXP(int exp);
 	void drawCharacterCard();
 	virtual void randomizeStatistics() = 0;
 	void writeStatistics();
+	void addSkillAt5();
+	void addSkillAt10();
+	void addSkillAt20();
 	/*void zapisz_do_pliku();
 	void odczytaj_z_pliku();*/ 
 };
