@@ -3,198 +3,342 @@
 #include "ekwipunek.h"
 #include "character.h"
 
-
+//87-43.5; 62-31; 53-26.5; 34-17; 25-12.5
 void Armor::type_def()
 {
 	srand(time(NULL));
-	if (Eq == "helm")  //wytrzyma³oœæ zbroi na start
+	Character* player; //==================
+	if (Armor_name == "helm")  //przypisanie wartoœci zbroi
 	{
-		switch (character->GetProffesion())
+		switch (player->GetProffesion()) 
 		{
-		case PROFF_KNIGHT:
-			durability_max = 20 + character->lvl.getLevel() *2;
+		case PROFF_KNIGHT:		//maks 29
+			durability_max = 9.0 + player->GetLevel.getLevel() * 1;
 			break;
-		case PROFF_ARCHER:
-			durability_max = 15 + character->lvl.getLevel();
+		case PROFF_ARCHER:		//21.3
+			durability_max = 7.3 + player->GetLevel.getLevel() * 0.7;
 			break;
-		case PROFF_BARD:
-			durability_max = 10 + character->lvl.getLevel();
+		case PROFF_BARD:		//18.3
+			durability_max = 4.3 + player->GetLevel.getLevel() * 0.7;
 			break;
-		case PROFF_CLERIC:
-			durability_max = 10 + character->lvl.getLevel();
+		case PROFF_CLERIC:		//10.7
+			durability_max = 4.7 + player->GetLevel.getLevel() * 0.3;
 			break;
-		case PROFF_DARK_KNIGHT:
-			durability_max = 20 + character->lvl.getLevel() *2;
+		case PROFF_DARK_KNIGHT:	//29
+			durability_max = 9.0 + player->GetLevel.getLevel() * 1;
 			break;
-		case PROFF_MAGE:
-			durability_max = 10 + character->lvl.getLevel();
+		case PROFF_MAGE:		//10.7
+			durability_max = 4.7 + player->GetLevel.getLevel() * 0.3;
 			break;
-		default:
-			durability_max = 10 + character->lvl.getLevel();
+		default:				//7.7
+			durability_max = 1.7 + player->GetLevel.getLevel() * 0.3;
 		}
 	}
-	else if (Eq == "napiersnik")
+	else if (Armor_name == "napiersnik")
 	{
-		switch (character->GetProffesion())
+		switch (player->GetProffesion())
 		{
-		case PROFF_KNIGHT:
-			durability_max = 30 +3* character->lvl.getLevel();
+		case PROFF_KNIGHT:		//maks 43.5
+			durability_max = 13.5 + player->GetLevel.getLevel() * 1.5;
 			break;
-		case PROFF_ARCHER:
-			durability_max = 20 +2* character->lvl.getLevel();
+		case PROFF_ARCHER:		//29.1
+			durability_max = 11.1 +	player->GetLevel.getLevel() * 0.9;
 			break;
-		case PROFF_BARD:
-			durability_max = 15 + character->lvl.getLevel();
+		case PROFF_BARD:		//24.6
+			durability_max =  6.6 +	player->GetLevel.getLevel() * 0.9;
 			break;
-		case PROFF_CLERIC:
-			durability_max = 15 + character->lvl.getLevel();
+		case PROFF_CLERIC:		//17
+			durability_max =  7.0 +	player->GetLevel.getLevel() * 0.5;
 			break;
-		case PROFF_DARK_KNIGHT:
-			durability_max = 30 +3* character->lvl.getLevel();
+		case PROFF_DARK_KNIGHT:	//43.5
+			durability_max = 13.5 + player->GetLevel.getLevel() * 1.5;
 			break;
-		case PROFF_MAGE:
-			durability_max = 15 + character->lvl.getLevel();
+		case PROFF_MAGE:		//17
+			durability_max =  7.0 +	player->GetLevel.getLevel() * 0.5;
 			break;
-		default:
-			durability_max = 15 + character->lvl.getLevel();
+		default:				//12.5
+			durability_max =  2.5 +	player->GetLevel.getLevel() * 0.5;
 		}
 	}
-	else if (Eq == "buty")
+	else if (Armor_name == "buty")
 	{
-		switch (character->GetProffesion())
+		switch (player->GetProffesion())
 		{
-		case PROFF_KNIGHT:
-			durability_max = 15;
+		case PROFF_KNIGHT:		//maks 14.5
+			durability_max = 4.5 + player->GetLevel.getLevel() * 0.5;
 			break;
-		case PROFF_ARCHER:
-			durability_max = 10;
+		case PROFF_ARCHER:		//11.6
+			durability_max = 3.6 + player->GetLevel.getLevel() * 0.4;
 			break;
-		case PROFF_BARD:
-			durability_max = 5;
+		case PROFF_BARD:		//10.1
+			durability_max = 2.1 + player->GetLevel.getLevel() * 0.4;
 			break;
-		case PROFF_CLERIC:
-			durability_max = 5;
+		case PROFF_CLERIC:		//6.3
+			durability_max = 2.3 + player->GetLevel.getLevel() * 0.2;
 			break;
-		case PROFF_DARK_KNIGHT:
-			durability_max = 10;
+		case PROFF_DARK_KNIGHT:	//14.5
+			durability_max = 4.5 + player->GetLevel.getLevel() * 0.5;
 			break;
-		case PROFF_MAGE:
-			durability_max = 5;
+		case PROFF_MAGE:		//6.3
+			durability_max = 2.3 + player->GetLevel.getLevel() * 0.2;
 			break;
-		default:
-			durability_max = 5;
+		default:				//4.8
+			durability_max = 0.8 + player->GetLevel.getLevel() * 0.2;
 		}
-		durability_max += character->lvl.getLevel();
 	}
 	else
 	{
-		std::cout << "\njakiœ b³¹d ;-;\n";
+		std::cout << "\njakiœ b³¹d w Armorze typedef ;-;\n";
 	}
-
-	switch (character->GetProffesion())
+	durability_max /= 2;
+	durability_cur = durability_max;
+	switch (player->GetProffesion())
 	{
 	case PROFF_KNIGHT:
-		strength = rand() % (4 * character->lvl.getLevel()) - character->lvl.getLevel();
-		endurance = rand() % (4 * character->lvl.getLevel()) - character->lvl.getLevel();
-		charisma = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		intelligence = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		agility = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		luck = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
+		strength = rand() % (4 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		endurance = rand() % (4 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		charisma = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		intelligence = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		agility = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		luck = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
 		break;
 	case PROFF_ARCHER:
-		strength = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
-		endurance = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
-		charisma = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
-		intelligence = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		agility = rand() % (4 * character->lvl.getLevel()) - character->lvl.getLevel();
-		luck = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
+		strength = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		endurance = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		charisma = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		intelligence = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		agility = rand() % (4 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		luck = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
 		break;
 	case PROFF_BARD:
-		strength = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		endurance = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		charisma = rand() % (4 * character->lvl.getLevel()) - character->lvl.getLevel();
-		intelligence = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
-		agility = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
-		luck = rand() % (4 * character->lvl.getLevel()) - character->lvl.getLevel();
+		strength = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		endurance = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		charisma = rand() % (4 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		intelligence = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		agility = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		luck = rand() % (4 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
 		break;
 	case PROFF_CLERIC:
-		strength = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		endurance = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		charisma = rand() % (4 * character->lvl.getLevel()) - character->lvl.getLevel();
-		intelligence = rand() % (4 * character->lvl.getLevel()) - character->lvl.getLevel();
-		agility = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
-		luck = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
+		strength = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		endurance = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		charisma = rand() % (4 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		intelligence = rand() % (4 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		agility = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		luck = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
 		break;
 	case PROFF_DARK_KNIGHT:
-		strength = rand() % (4 * character->lvl.getLevel()) - character->lvl.getLevel();
-		endurance = rand() % (4 * character->lvl.getLevel()) - character->lvl.getLevel();
-		charisma = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		intelligence = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		agility = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		luck = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
+		strength = rand() % (4 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		endurance = rand() % (4 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		charisma = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		intelligence = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		agility = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		luck = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
 		break;
 	case PROFF_MAGE:
-		strength = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		endurance = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
-		charisma = rand() % (3 * character->lvl.getLevel()) - character->lvl.getLevel();
-		intelligence = rand() % (4 * character->lvl.getLevel()) - character->lvl.getLevel();
-		agility = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		luck = rand() % (4 * character->lvl.getLevel()) - character->lvl.getLevel();
+		strength = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		endurance = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		charisma = rand() % (3 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		intelligence = rand() % (4 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		agility = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		luck = rand() % (4 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
 		break;
 	default:
-		strength = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		endurance = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		charisma = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		intelligence = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		agility = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
-		luck = rand() % (2 * character->lvl.getLevel()) - character->lvl.getLevel();
+		strength = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		endurance = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		charisma = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		intelligence = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		agility = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
+		luck = rand() % (2 * player->GetLevel().getLevel()) - player->GetLevel().getLevel();
 	}
 
 }
 
-void Armor::damage_taken()
+void Armor::damage_taken(int hp_cur)
 {
-	durability_cur -= (durability_cur*hp_cur)/hp; //hp_cur - po walce? //hp - hp w trakcie walki
+	durability_cur = durability_cur - (durability_cur*hp_cur)/ (endurance*10); //hp_cur - po walce?
 	if (durability_cur <= 0)
 	{
 		durability_cur = 1;
 	}
 
-	if (durability_max * 0.25 < durability_cur < durability_max * 0.5)
+	if (durability_max * 0.25 < durability_cur && durability_cur < durability_max * 0.5)
 	{
-		std::cout << Eq << std::endl << "jest srednio uszkodzony";
+		std::cout << Armor_name << std::endl << "jest srednio uszkodzony";
 	}
 	else if (durability_max * 0.25 > durability_cur)
 	{
-		std::cout << Eq << std::endl << "jest powaznie uszkodzony";
+		std::cout << Armor_name << std::endl << "jest powaznie uszkodzony";
 	}
 }
 
-void Armor::defending()
+float Armor::defending()
 {
-	def = 0.01 * durability_cur;
+	return durability_cur*0.01;
 }
+
 
 //--------------------
 
+void Equipment::give_statistics()
+{
+	srand(time(NULL));
+	if (eq_name == "eliksir")
+	{
+		for (int number = 0; number != 1;)
+		{
+			if (number == 0)
+			{
+				strength = rand() % 2;
+				if (strength == 1)		number++;
+
+				endurance = rand() % 2;
+				if (endurance == 1)		number++;
+
+				charisma = rand() % 2;
+				if (charisma == 1)		number++;
+
+				intelligence = rand() % 2;
+				if (intelligence == 1)	number++;
+
+				agility = rand() % 2;
+				if (agility == 1)		number++;
+
+				luck = rand() % 2;
+				if (luck == 1)			number++;
+
+			}
+			else
+			{
+				if (strength == 1)
+				{
+					strength = rand() % 2;
+					if (strength == 0) number--;
+				}
+				if (endurance == 1)
+				{
+					endurance = rand() % 2;
+					if (endurance == 0) number--;
+				}
+				if (charisma == 1)
+				{
+					charisma = rand() % 2;
+					if (charisma == 0) number--;
+				}
+				if (intelligence == 1)
+				{
+					intelligence = rand() % 2;
+					if (intelligence == 0) number--;
+				}
+				if (agility == 1)
+				{
+					agility = rand() % 2;
+					if (agility == 0) number--; 
+				}
+				if (luck == 1)
+				{
+					luck = rand() % 2;
+					if (luck == 0) number--;
+				}
+			}
+		}
+
+		if (strength == 1)			strength = rand() % 5 + 1;
+		else if(endurance == 1)		endurance = rand() % 5 + 1;
+		else if (charisma == 1)		charisma = rand() % 5 + 1;
+		else if (intelligence == 1) intelligence = rand() % 5 + 1;
+		else if (agility == 1)		agility = rand() % 5 + 1;
+		else if (luck == 1)			luck = rand() % 5 + 1;
+	}
+}
+
 void Equipment::usage()
 {
-	if (thing == "eliksir") ////
+	Character* player2; //=======================
+	if (eq_name == "eliksir")
 	{
 		usability = 0;
-		if (strength != 0)  		thing = "eliksir Galow";
-		else if (endurance != 0)	thing = "wywar z czerwonego byka";
-		else if (charisma != 0)		thing = "retoryka w butelce";
-		else if (intelligence != 0)	thing = "roztwor wronskianinu potasu";
-		else if (agility != 0)		thing = "sok z gumijagod";
-		else if (luck != 0)			thing = "wywar z totolotka";
+		if (strength != 0)  		eq_name = "eliksir Galow";
+		else if (endurance != 0)	eq_name = "wywar z czerwonego byka";
+		else if (charisma != 0)		eq_name = "retoryka w butelce";
+		else if (intelligence != 0)	eq_name = "roztwor wronskianinu potasu";
+		else if (agility != 0)		eq_name = "sok z gumijagod";
+		else if (luck != 0)			eq_name = "wywar z totolotka";
+	}
+	else if (eq_name == "klucz")
+	{
+		usability = 0;
+		if () //skrzynia na mapie w odleg³oœci 1 kratki w pionie lub poziomie
+		{
+			//skrzynia.close = open; 
+		}
+		
+	}
+	else if (eq_name == "special")
+	{
+		usability = 1;
+		switch (player2->GetProffesion())
+		{
+		case PROFF_KNIGHT:
+			eq_name = "bandana";
+			strength = 2;
+			luck = -1;
+			break;
+		case PROFF_ARCHER:
+			eq_name = "wkladka do butow";
+			agility = 2;
+			charisma = -1;
+			break;
+		case PROFF_BARD:
+			eq_name = "kostka do gitary";
+			charisma = 2;
+			strength = -1;
+			break;
+		case PROFF_CLERIC:
+			eq_name = "poœwiêcona figurka";
+			endurance = 1;
+			luck = 1;
+			intelligence = -1;
+			break;
+		case PROFF_DARK_KNIGHT:
+			eq_name = "skaza przeszlosci";
+			charisma = -1;
+			if (player2->GetLevel().getLevel() > 10) agility = -1;
+			strength = 2;
+			endurance = 1;
+			break;
+		case PROFF_MAGE:
+			eq_name = "krucha maskotka";
+			intelligence = 2;
+			agility = -1;
+			break;
+		default:
+			eq_name = "kolczyk bez nadziei";
+			endurance = 1;
+			charisma = -2;
+		}
+	}
+	else if (eq_name == "ciasto")
+	{
+		usability = 0;
+		endurance = 1;
 	}
 }
 
 void Equipment::take_buff()
 {
+	if (used == 0)
+	{
+		//wp³ywanie na staty bohatera;
+		if (usability == 0) used = 1;
+		disappear();
+	}
+	else std::cout << "\nprzedmiot jest zuzyty, nie nadaje sie juz do niczego\n";
 }
 
 void Equipment::disappear()
 {
+	if (used == 1)
+	{
+		//znikanie z plecaka;
+	}
 }
