@@ -69,6 +69,23 @@ void Square::move()
 			{
 				tab[b][a][y][x] = '-';
 				y--;
+				//dodawanie z³ota do ekwipunku
+			}
+			else if (tab[b][a][y - 1][x] == 'I')
+			{
+				tab[b][a][y][x] = '-';
+				y--;
+				//dodawanie przedmiotu do ekwipunku, ka¿dy musi mieæ wspó³rzêne, bo s¹ ró¿ne, trzeba to zrobiæ podobnie jak z NPC poni¿ej
+			}
+			else if (tab[b][a][y - 1][x] == '1' || tab[b][a][y-1][x] == '2' || tab[b][a][y - 1][x] == '3' || tab[b][a][y - 1][x] == '4' || tab[b][a][y - 1][x] == '5' || tab[b][a][y - 1][x] == '6' || tab[b][a][y - 1][x] == '7' || tab[b][a][y - 1][x] == '8' || tab[b][a][y - 1][x] == '9')
+			{
+				//tab[b][a][y][x] = '-';
+				//y--;
+				//walka z potworem wylosowanym; ka¿dy symbol od 1 do 9 losuje 1 z 2 potworów w puli; jeœli wygrana, to zmiana wspó³rzêdnych, jeœli ucieczka, to bez zmiany 
+			}
+			else if (tab[b][a][y - 1][x] == 'N' || tab[b][a][y - 1][x] == 'K' || tab[b][a][y - 1][x] == 'C' || tab[b][a][y - 1][x] == 'Z')
+			{
+				//bez zmiany wspó³rzêdnych U i trzeba zrobiæ if dla ka¿dego NPC, bo ka¿dy mówi inny tekst, ale ich wspó³rzêdne najlepiej daæ albo w metodzie draw albo niech ka¿dy NPC bêdzie obiektem klasy NPC, a w jego parametrach niech bêd¹ wspó³rzêdne
 			}
 			else if (tab[b][a][y - 1][x] == '^')
 			{
@@ -85,6 +102,12 @@ void Square::move()
 				tab[b][a][y][x] = '-';
 				x--;
 			}
+			else if (tab[b][a][y][x-1] == 'G')
+			{
+				tab[b][a][y][x] = '-';
+				x--;
+				//dodawanie z³ota do ekwipunku
+			}
 			else if (tab[b][a][y][x - 1] == '<')
 			{
 				tab[b][a][y][x] = '-';
@@ -100,6 +123,12 @@ void Square::move()
 				tab[b][a][y][x] = '-';
 				x++;
 			}
+			else if (tab[b][a][y][x+1] == 'G')
+			{
+				tab[b][a][y][x] = '-';
+				x++;
+				//dodawanie z³ota do ekwipunku
+			}
 			else if (tab[b][a][y][x + 1] == '>')
 			{
 				tab[b][a][y][x] = '-';
@@ -114,6 +143,12 @@ void Square::move()
 			{
 				tab[b][a][y][x] = '-';
 				y++;
+			}
+			else if (tab[b][a][y + 1][x] == 'G')
+			{
+				tab[b][a][y][x] = '-';
+				y++;
+				//dodawanie z³ota do ekwipunku
 			}
 			else if (tab[b][a][y + 1][x] == 'v')
 			{
