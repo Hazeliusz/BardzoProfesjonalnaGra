@@ -30,9 +30,10 @@ Square::Square()
 		}
 		plik.close();
 	}
-	
-	
+
+
 	b = 2; a = 0; y = 12; x = 1;
+	b0 = b; a0 = a; y0 = y; x0 = x;
 	tab[b][a][y][x] = 'U';
 	bufor = '-';
 }
@@ -40,12 +41,59 @@ Square::Square()
 void Square::draw()
 {
 	system("cls");
-	tab[b][a][y][x] = 'U';
-	for (int i=0;i<15;i++)
+	
+	switch (bufor)
 	{
-		for (int j=0;j<15;j++)
+	case '-':
 		{
-			std::cout << tab[b][a][i][j];
+			break;
+		}
+	case 'X':
+		{
+			b = b0;
+			a = a0;
+			y = y0;
+			x = x0;
+			break;
+		}
+	case 'N':
+		{
+			b = b0;
+			a = a0;
+			y = y0;
+			x = x0;
+			//odpalenie rozmowy z NPC w zale¿noœci od jego wspó³rzêdnych
+			break;
+		}
+		case 'G':
+		{
+			//dodanie z³ota
+			break;
+		}
+		case 'I':
+		{
+			//dodanie przedmiotu w zale¿noœci od jego wspó³rzêdnych
+			break;
+		}
+		case 'K': case 'Z': case 'C':
+		{
+			b = b0;
+			a = a0;
+			y = y0;
+			x = x0;
+			//odpowiedni sklep w zale¿noœci od wspó³rzêdnych
+			break;
+		}
+		//case PRZECIWNIK, nie wiem czy daæ to w 1 case czy w 9; gdy wygrana to exp+ i break, jeœli ucieczka to wsp=wsp0
+		//case '!': specjalna instrukcja do walki z bossem
+	}
+
+	tab[b][a][y][x] = 'U';
+	for (int i = 0; i < 15; i++)
+	{
+		for (int j = 0; j < 15; j++)
+		{
+			std::cout << tab[b][a][i][j] ;
 		}
 		std::cout << std::endl;
 	}
@@ -56,113 +104,113 @@ void Square::move()
 	char arrow;
 	arrow = _getch();
 
-		switch (arrow)
+	switch (arrow)
+	{
+	case 'w':
+	{
+		if (tab[b][a][y - 1][x] == '^')
 		{
-		case 'w':
+			bufor = tab[b-1][a][13][x];
+			b0 = b;
+			a0 = a;
+			y0 = y;
+			x0 = x;
+			tab[b][a][y][x] = '-';
+			b--;
+			y = 13;
+		}
+		else
 		{
-			if (tab[b][a][y - 1][x] == '-')
-			{
-				tab[b][a][y][x] = '-';
-				y--;
-			}
-			else if (tab[b][a][y - 1][x] == 'G')
-			{
-				tab[b][a][y][x] = '-';
-				y--;
-				//dodawanie z³ota do ekwipunku
-			}
-			else if (tab[b][a][y - 1][x] == 'I')
-			{
-				tab[b][a][y][x] = '-';
-				y--;
-				//dodawanie przedmiotu do ekwipunku, ka¿dy musi mieæ wspó³rzêne, bo s¹ ró¿ne, trzeba to zrobiæ podobnie jak z NPC poni¿ej
-			}
-			else if (tab[b][a][y - 1][x] == '1' || tab[b][a][y-1][x] == '2' || tab[b][a][y - 1][x] == '3' || tab[b][a][y - 1][x] == '4' || tab[b][a][y - 1][x] == '5' || tab[b][a][y - 1][x] == '6' || tab[b][a][y - 1][x] == '7' || tab[b][a][y - 1][x] == '8' || tab[b][a][y - 1][x] == '9')
-			{
-				//tab[b][a][y][x] = '-';
-				//y--;
-				//walka z potworem wylosowanym; ka¿dy symbol od 1 do 9 losuje 1 z 2 potworów w puli; jeœli wygrana, to zmiana wspó³rzêdnych, jeœli ucieczka, to bez zmiany 
-			}
-			else if (tab[b][a][y - 1][x] == 'N' || tab[b][a][y - 1][x] == 'K' || tab[b][a][y - 1][x] == 'C' || tab[b][a][y - 1][x] == 'Z')
-			{
-				//bez zmiany wspó³rzêdnych U i trzeba zrobiæ if dla ka¿dego NPC, bo ka¿dy mówi inny tekst, ale ich wspó³rzêdne najlepiej daæ albo w metodzie draw albo niech ka¿dy NPC bêdzie obiektem klasy NPC, a w jego parametrach niech bêd¹ wspó³rzêdne
-			}
-			else if (tab[b][a][y - 1][x] == '^')
-			{
-				tab[b][a][y][x] = '-';
-				b--;
-				y = 13;
-			}
-			break;
+			bufor = tab[b][a][y - 1][x];
+			b0 = b;
+			a0 = a;
+			y0 = y;
+			x0 = x;
+			tab[b][a][y][x] = '-';
+			y--;
 		}
-		case 'a':
+		break;
+	}
+	case 'a':
+	{
+		if (tab[b][a][y][x-1] == '<')
 		{
-			if (tab[b][a][y][x - 1] == '-')
-			{
-				tab[b][a][y][x] = '-';
-				x--;
-			}
-			else if (tab[b][a][y][x-1] == 'G')
-			{
-				tab[b][a][y][x] = '-';
-				x--;
-				//dodawanie z³ota do ekwipunku
-			}
-			else if (tab[b][a][y][x - 1] == '<')
-			{
-				tab[b][a][y][x] = '-';
-				a--;
-				x = 13;
-			}
-			break;
+			bufor = tab[b][a-1][y][13];
+			b0 = b;
+			a0 = a;
+			y0 = y;
+			x0 = x;
+			tab[b][a][y][x] = '-';
+			a--;
+			x = 13;
 		}
-		case 'd':
+		else
 		{
-			if (tab[b][a][y][x + 1] == '-')
-			{
-				tab[b][a][y][x] = '-';
-				x++;
-			}
-			else if (tab[b][a][y][x+1] == 'G')
-			{
-				tab[b][a][y][x] = '-';
-				x++;
-				//dodawanie z³ota do ekwipunku
-			}
-			else if (tab[b][a][y][x + 1] == '>')
-			{
-				tab[b][a][y][x] = '-';
-				a++;
-				x = 1;
-			}
-			break;
+			bufor = tab[b][a][y][x - 1];
+			b0 = b;
+			a0 = a;
+			y0 = y;
+			x0 = x;
+			tab[b][a][y][x] = '-';
+			x--;
 		}
-		case 's':
+		break;
+	}
+	case 'd':
+	{
+		if (tab[b][a][y][x + 1] == '>')
 		{
-			if (tab[b][a][y + 1][x] == '-')
-			{
-				tab[b][a][y][x] = '-';
-				y++;
-			}
-			else if (tab[b][a][y + 1][x] == 'G')
-			{
-				tab[b][a][y][x] = '-';
-				y++;
-				//dodawanie z³ota do ekwipunku
-			}
-			else if (tab[b][a][y + 1][x] == 'v')
-			{
-				tab[b][a][y][x] = '-';
-				b++;
-				y = 1;
-			}
-			break;
+			bufor = tab[b][a+1][y][1];
+			b0 = b;
+			a0 = a;
+			y0 = y;
+			x0 = x;
+			tab[b][a][y][x] = '-';
+			a++;
+			x = 1;
 		}
-		default:
+		else
 		{
-			std::cout << "Zla komenda!";
-			Sleep(1000);
-			break;
+			bufor = tab[b][a][y][x + 1];
+			b0 = b;
+			a0 = a;
+			y0 = y;
+			x0 = x;
+			tab[b][a][y][x] = '-';
+			x++;
 		}
+		break;
+	}
+	case 's':
+	{
+		if (tab[b][a][y + 1][x] == 'v')
+		{
+			bufor = tab[b+1][a][1][x];
+			b0 = b;
+			a0 = a;
+			y0 = y;
+			x0 = x;
+			tab[b][a][y][x] = '-';
+			b++;
+			y = 1;
 		}
+		else
+		{
+			bufor = tab[b][a][y + 1][x];
+			b0 = b;
+			a0 = a;
+			y0 = y;
+			x0 = x;
+			tab[b][a][y][x] = '-';
+			y++;
+		}
+		break;
+	}
+	default:
+	{
+		std::cout << "Zla komenda!";
+		Sleep(1000);
+		break;
+	}
+	}
 }
