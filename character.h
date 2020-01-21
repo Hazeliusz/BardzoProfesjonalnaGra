@@ -52,6 +52,10 @@ public:
 		return CharClass;
 	}
 
+	int GetLevel() {
+		return lvl.getLevel();
+	}
+
 	std::map<std::string, skill> GetSkills()
     {
 		return skills;
