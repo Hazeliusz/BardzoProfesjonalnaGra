@@ -7,8 +7,8 @@
 void Armor::type_def()
 {
 	srand(time(NULL));
-	Character* player;
-	if (Eq == "helm")  //przypisanie wartoœci zbroi
+	Character* player; //==================
+	if (Armor_name == "helm")  //przypisanie wartoœci zbroi
 	{
 		switch (player->GetProffesion()) 
 		{
@@ -34,7 +34,7 @@ void Armor::type_def()
 			durability_max = 1.7 + player->GetLevel.getLevel() * 0.3;
 		}
 	}
-	else if (Eq == "napiersnik")
+	else if (Armor_name == "napiersnik")
 	{
 		switch (player->GetProffesion())
 		{
@@ -60,7 +60,7 @@ void Armor::type_def()
 			durability_max =  2.5 +	player->GetLevel.getLevel() * 0.5;
 		}
 	}
-	else if (Eq == "buty")
+	else if (Armor_name == "buty")
 	{
 		switch (player->GetProffesion())
 		{
@@ -163,11 +163,11 @@ void Armor::damage_taken(int hp_cur)
 
 	if (durability_max * 0.25 < durability_cur && durability_cur < durability_max * 0.5)
 	{
-		std::cout << Eq << std::endl << "jest srednio uszkodzony";
+		std::cout << Armor_name << std::endl << "jest srednio uszkodzony";
 	}
 	else if (durability_max * 0.25 > durability_cur)
 	{
-		std::cout << Eq << std::endl << "jest powaznie uszkodzony";
+		std::cout << Armor_name << std::endl << "jest powaznie uszkodzony";
 	}
 }
 
@@ -176,12 +176,13 @@ float Armor::defending()
 	return durability_cur*0.01;
 }
 
+
 //--------------------
 
 void Equipment::give_statistics()
 {
 	srand(time(NULL));
-	if (name == "eliksir")
+	if (eq_name == "eliksir")
 	{
 		for (int number = 0; number != 1;)
 		{
@@ -252,71 +253,71 @@ void Equipment::give_statistics()
 
 void Equipment::usage()
 {
-	Character* player2;
-	if (name == "eliksir")
+	Character* player2; //=======================
+	if (eq_name == "eliksir")
 	{
 		usability = 0;
-		if (strength != 0)  		name = "eliksir Galow";
-		else if (endurance != 0)	name = "wywar z czerwonego byka";
-		else if (charisma != 0)		name = "retoryka w butelce";
-		else if (intelligence != 0)	name = "roztwor wronskianinu potasu";
-		else if (agility != 0)		name = "sok z gumijagod";
-		else if (luck != 0)			name = "wywar z totolotka";
+		if (strength != 0)  		eq_name = "eliksir Galow";
+		else if (endurance != 0)	eq_name = "wywar z czerwonego byka";
+		else if (charisma != 0)		eq_name = "retoryka w butelce";
+		else if (intelligence != 0)	eq_name = "roztwor wronskianinu potasu";
+		else if (agility != 0)		eq_name = "sok z gumijagod";
+		else if (luck != 0)			eq_name = "wywar z totolotka";
 	}
-	else if (name == "klucz")
+	else if (eq_name == "klucz")
 	{
 		usability = 0;
 		if () //skrzynia na mapie w odleg³oœci 1 kratki w pionie lub poziomie
 		{
-			//skrzynia = open; 
+			//skrzynia.close = open; 
 		}
 		
 	}
-	else if (name == "special")
+	else if (eq_name == "special")
 	{
 		usability = 1;
 		switch (player2->GetProffesion())
 		{
 		case PROFF_KNIGHT:
-			name = "bandana";
+			eq_name = "bandana";
 			strength = 2;
 			luck = -1;
 			break;
 		case PROFF_ARCHER:
-			name = "wkladka do butow";
+			eq_name = "wkladka do butow";
 			agility = 2;
 			charisma = -1;
 			break;
 		case PROFF_BARD:
-			name = "kostka do gitary";
+			eq_name = "kostka do gitary";
 			charisma = 2;
 			strength = -1;
 			break;
 		case PROFF_CLERIC:
-			name = "poœwiêcona figurka";
+			eq_name = "poœwiêcona figurka";
 			endurance = 1;
 			luck = 1;
 			intelligence = -1;
 			break;
 		case PROFF_DARK_KNIGHT:
-			name = "skaza przeszlosci";
+			eq_name = "skaza przeszlosci";
 			charisma = -1;
 			if (player2->GetLevel().getLevel() > 10) agility = -1;
 			strength = 2;
 			endurance = 1;
 			break;
 		case PROFF_MAGE:
-			name = "krucha maskotka na kostur";
+			eq_name = "krucha maskotka";
 			intelligence = 2;
 			agility = -1;
 			break;
 		default:
-			name = "kolczyk bez nadziei";
+			eq_name = "kolczyk bez nadziei";
 			endurance = 1;
 			charisma = -2;
 		}
 	}
-	else if (name == "ciasto")
+	else if (eq_name == "ciasto")
 	{
 		usability = 0;
 		endurance = 1;

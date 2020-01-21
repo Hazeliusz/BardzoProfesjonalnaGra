@@ -3,19 +3,21 @@
 #include "character.h"
 #include <iostream>
 #include <stdlib.h>
+#include "Square.h"
 
 Monster::Monster(std::string nazwa = "non", bool sex = 0, Statistics statystyki = Statistics(), Proffesion prof = PROFF_MONSTER, int name_dr) : Character(nazwa, sex, statystyki)
 {
-	Character* player; //!
-	name_give();
+	Character* player; //==================
+	name_give(1);
 	wylosuj_statytyki(player->GetLevel.getLevel());
 }
 
-void Monster::name_give()
+void Monster::name_give(int monster_number)
 {
 	srand(time(NULL));
+
 	name_draw = rand() % 2;
-	switch () //obszar mapki
+	switch  (monster_number)//obszar mapki
 	{
 	case 1: // to 1. kwadrat
 		if(name_draw==1)	name = "Skrzat";
@@ -68,71 +70,72 @@ void Monster::wyswietl_karte_postaci()
 	std::cout << std::endl << "Szczescie: \n" << luck;
 }
 
-void Monster::wylosuj_statytyki(int level)
+void Monster::wylosuj_statytyki(int monster_number)
 {
 	srand(time(NULL));
-	int i = level;
 
-	strength	= rand() % i + i;
-	endurance	= rand() % i + i;
-	intelligence= rand() % i + i;
-	agility		= rand() % i + i;
-	luck		= rand() % i + i;
+	strength	= rand() % monster_number + monster_number;
+	endurance	= rand() % monster_number + monster_number;
+	intelligence= rand() % monster_number + monster_number;
+	agility		= rand() % monster_number + monster_number;
+	luck		= rand() % monster_number + monster_number;
 
-	switch () //obszary mapy
+	switch (monster_number) //obszary mapy
 	{
+
 	case 1: case 2: //1. i 2. kwadrat
-		if (strength > 1.4 * i)			strength = 1.4 * i;
-		if (endurance > 1.4 * i)		endurance = 1.4 * i;
-		if (intelligence > 1.4 * i)		intelligence = 1.4 * i;
-		if (agility > 1.4 * i)			agility = 1.4 * i;
-		if (luck > 1.4 * i)				luck = 1.4 * i;
+		if (strength > 1.4 * monster_number)			strength = 1.4 * monster_number;
+		if (endurance > 1.4 * monster_number)		endurance = 1.4 * monster_number;
+		if (intelligence > 1.4 * monster_number)		intelligence = 1.4 * monster_number;
+		if (agility > 1.4 * monster_number)			agility = 1.4 * monster_number;
+		if (luck > 1.4 * monster_number)				luck = 1.4 * monster_number;
 		break;
 	case 3: case 4: //2.
-		if (strength > 1.6 * i)			strength = 1.6 * i;
-		else if (strength < 1.2 * i)	strength = 1.2 * i;
-		if (endurance > 1.6 * i)		endurance = 1.6 * i;
-		else if (endurance < 1.2 * i)	endurance = 1.2 * i;
-		if (intelligence > 1.6 * i)		intelligence = 1.6 * i;
-		else if (intelligence < 1.2 * i)intelligence = 1.2 * i;
-		if (agility > 1.6 * i)			agility = 1.6 * i;
-		else if (agility < 1.2 * i)		agility = 1.2 * i;
-		if (luck > 1.6 * i)				luck = 1.6 * i;
-		else if (luck < 1.2 * i)		luck = 1.2 * i;
+		if (strength > 1.6 * monster_number)			strength = 1.6 * monster_number;
+		else if (strength < 1.2 * monster_number)	strength = 1.2 * monster_number;
+		if (endurance > 1.6 * monster_number)		endurance = 1.6 * monster_number;
+		else if (endurance < 1.2 * monster_number)	endurance = 1.2 * monster_number;
+		if (intelligence > 1.6 * monster_number)		intelligence = 1.6 * monster_number;
+		else if (intelligence < 1.2 * monster_number)intelligence = 1.2 * monster_number;
+		if (agility > 1.6 * monster_number)			agility = 1.6 * monster_number;
+		else if (agility < 1.2 * monster_number)		agility = 1.2 * monster_number;
+		if (luck > 1.6 * monster_number)				luck = 1.6 * monster_number;
+		else if (luck < 1.2 * monster_number)		luck = 1.2 * monster_number;
 		break;
 	case 5: case 6:
-		if (strength > 1.8 * i)			strength = 1.8 * i;
-		else if (strength < 1.4 * i)	strength = 1.4 * i;
-		if (endurance > 1.8 * i)		endurance = 1.8 * i;
-		else if (endurance < 1.4 * i)	endurance = 1.4 * i;
-		if (intelligence > 1.8 * i)		intelligence = 1.8 * i;
-		else if (intelligence < 1.4 * i)intelligence = 1.4 * i;
-		if (agility > 1.8 * i)			agility = 1.8 * i;
-		else if (agility < 1.4 * i)		agility = 1.4 * i;
-		if (luck > 1.8 * i)				luck = 1.8 * i;
-		else if (luck < 1.4 * i)		luck = 1.4 * i;
+		if (strength > 1.8 * monster_number)			strength = 1.8 * monster_number;
+		else if (strength < 1.4 * monster_number)	strength = 1.4 * monster_number;
+		if (endurance > 1.8 * monster_number)		endurance = 1.8 * monster_number;
+		else if (endurance < 1.4 * monster_number)	endurance = 1.4 * monster_number;
+		if (intelligence > 1.8 * monster_number)		intelligence = 1.8 * monster_number;
+		else if (intelligence < 1.4 * monster_number)intelligence = 1.4 * monster_number;
+		if (agility > 1.8 * monster_number)			agility = 1.8 * monster_number;
+		else if (agility < 1.4 * monster_number)		agility = 1.4 * monster_number;
+		if (luck > 1.8 * monster_number)				luck = 1.8 * monster_number;
+		else if (luck < 1.4 * monster_number)		luck = 1.4 * monster_number;
 		break;
 	case 7: case 8:
-		if (strength > 2 * i)			strength = 2 * i;
-		else if (strength < 1.6 * i)	strength = 1.6 * i;
-		if (endurance > 2 * i)			endurance = 2 * i;
-		else if (endurance < 1.6 * i)	endurance = 1.6 * i;
-		if (intelligence > 2 * i)		intelligence = 2 * i;
-		else if (intelligence < 1.6 * i)intelligence = 1.6 * i;
-		if (agility > 2 * i)			agility = 2 * i;
-		else if (agility < 1.6 * i)		agility = 1.6 * i;
-		if (luck > 2 * i)				luck = 2 * i;
-		else if (luck < 1.6 * i)		luck = 1.6 * i;
+		if (strength > 2 * monster_number)			strength = 2 * monster_number;
+		else if (strength < 1.6 * monster_number)	strength = 1.6 * monster_number;
+		if (endurance > 2 * monster_number)			endurance = 2 * monster_number;
+		else if (endurance < 1.6 * monster_number)	endurance = 1.6 * monster_number;
+		if (intelligence > 2 * monster_number)		intelligence = 2 * monster_number;
+		else if (intelligence < 1.6 * monster_number)intelligence = 1.6 * monster_number;
+		if (agility > 2 * monster_number)			agility = 2 * monster_number;
+		else if (agility < 1.6 * monster_number)		agility = 1.6 * monster_number;
+		if (luck > 2 * monster_number)				luck = 2 * monster_number;
+		else if (luck < 1.6 * monster_number)		luck = 1.6 * monster_number;
 		break;
 	case 9:
-		strength += i;
-		endurance += i;
-		intelligence += i;
-		agility += i;
-		luck += i;
+		strength += monster_number;
+		endurance += monster_number;
+		intelligence += monster_number;
+		agility += monster_number;
+		luck += monster_number;
 		break;
 	default:
 		std::cout << "\nproblem w monster.bpp, welp\n";
 	}
 
+	
 }
