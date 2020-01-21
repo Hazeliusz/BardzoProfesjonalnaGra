@@ -65,6 +65,11 @@ void Square::move()
 				tab[b][a][y][x] = '-';
 				y--;
 			}
+			else if (tab[b][a][y - 1][x] == 'G')
+			{
+				tab[b][a][y][x] = '-';
+				y--;
+			}
 			else if (tab[b][a][y - 1][x] == '^')
 			{
 				tab[b][a][y][x] = '-';
