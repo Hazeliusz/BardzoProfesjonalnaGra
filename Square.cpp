@@ -38,6 +38,12 @@ Square::Square()
 	bufor = '-';
 }
 
+void Square::check()
+{
+	//tutaj bêdzie baza danych i bêdzie odpalaæ okreœlon¹ akcjê w zale¿noœci od wspó³rzêdnych
+	;
+}
+
 void Square::draw()
 {
 	system("cls");
@@ -56,15 +62,6 @@ void Square::draw()
 			x = x0;
 			break;
 		}
-	case 'N':
-		{
-			b = b0;
-			a = a0;
-			y = y0;
-			x = x0;
-			//odpalenie rozmowy z NPC w zale¿noœci od jego wspó³rzêdnych
-			break;
-		}
 		case 'G':
 		{
 			//dodanie z³ota
@@ -72,16 +69,16 @@ void Square::draw()
 		}
 		case 'I':
 		{
-			//dodanie przedmiotu w zale¿noœci od jego wspó³rzêdnych
+			check();
 			break;
 		}
-		case 'K': case 'Z': case 'C':
+		case 'K': case 'Z': case 'C': case 'N':
 		{
+			check();
 			b = b0;
 			a = a0;
 			y = y0;
 			x = x0;
-			//odpowiedni sklep w zale¿noœci od wspó³rzêdnych
 			break;
 		}
 		//case PRZECIWNIK, nie wiem czy daæ to w 1 case czy w 9; gdy wygrana to exp+ i break, jeœli ucieczka to wsp=wsp0
@@ -93,7 +90,7 @@ void Square::draw()
 	{
 		for (int j = 0; j < 15; j++)
 		{
-			std::cout << tab[b][a][i][j] ;
+			std::cout << tab[b][a][i][j] << " ";
 		}
 		std::cout << std::endl;
 	}
