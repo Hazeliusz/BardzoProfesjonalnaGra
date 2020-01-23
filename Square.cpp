@@ -40,8 +40,46 @@ Square::Square()
 
 void Square::check()
 {
-	//tutaj bêdzie baza danych i bêdzie odpalaæ okreœlon¹ akcjê w zale¿noœci od wspó³rzêdnych
-	;
+	/*if (b == 2 && a == 0 && y == 1 && x == 10)
+	{
+		std::cout << "Targowisko jest na polnocy!";
+	}*/
+	if (b == 0 && a == 0)
+	{
+
+	}
+	else if (b == 0 && a == 1)
+	{
+
+	}
+	else if (b == 0 && a == 2)
+	{
+
+	}
+	else if (b == 1 && a == 0)
+	{
+
+	}
+	else if (b == 1 && a == 1)
+	{
+
+	}
+	else if (b == 1 && a == 2)
+	{
+
+	}
+	else if (b == 2 && a == 0)
+	{
+
+	}
+	else if (b == 2 && a == 1)
+	{
+
+	}
+	else if (b == 2 && a == 2)
+	{
+
+	}
 }
 
 void Square::draw()
@@ -72,7 +110,7 @@ void Square::draw()
 			check();
 			break;
 		}
-		case 'K': case 'Z': case 'C': case 'N':
+		case 'K': case 'Z': case 'C': case 'N': case 'H':
 		{
 			check();
 			b = b0;
