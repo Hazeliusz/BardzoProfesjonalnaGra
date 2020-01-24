@@ -12,5 +12,6 @@ public:
 	void name_give(int monster_number);						//daje nazwê potwotkowi
 	void wyswietl_karte_postaci();							//wyœwietla kartê potwora
 	void wylosuj_statytyki(int monster_number);				//losowanie statystyk
+
 };
 //monster_number -> mapka

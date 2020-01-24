@@ -3,12 +3,13 @@
 #include "ekwipunek.h"
 #include "character.h"
 
+
 //87-43.5; 62-31; 53-26.5; 34-17; 25-12.5
 void Armor::type_def()
 {
 	srand(time(NULL));
 	Character* player; //==================
-	if (Armor_name == "He³m")  //przypisanie wartoœci zbroi
+	if (armor_name == "He³m")  //przypisanie wartoœci zbroi
 	{
 		switch (player->GetProffesion()) 
 		{
@@ -34,7 +35,7 @@ void Armor::type_def()
 			durability_max = 1.7 + player->GetLevel.getLevel() * 0.3;
 		}
 	}
-	else if (Armor_name == "Napierœnik")
+	else if (armor_name == "Napierœnik")
 	{
 		switch (player->GetProffesion())
 		{
@@ -60,7 +61,7 @@ void Armor::type_def()
 			durability_max =  2.5 +	player->GetLevel.getLevel() * 0.5;
 		}
 	}
-	else if (Armor_name == "Buty")
+	else if (armor_name == "Buty")
 	{
 		switch (player->GetProffesion())
 		{
@@ -171,11 +172,11 @@ void Armor::damage_taken(int hp_cur)
 
 	if (durability_max * 0.25 < durability_cur && durability_cur < durability_max * 0.5)
 	{
-		std::cout << Armor_name << std::endl << "jest srednio uszkodzony";
+		std::cout << armor_name << std::endl << "jest srednio uszkodzony";
 	}
 	else if (durability_max * 0.25 > durability_cur)
 	{
-		std::cout << Armor_name << std::endl << "jest powaznie uszkodzony";
+		std::cout << armor_name << std::endl << "jest powaznie uszkodzony";
 	}
 }
 
@@ -184,6 +185,34 @@ float Armor::defending()
 	return durability_cur*0.01;
 }
 
+void Armor::dress() //jeœli ma to tak dzia³aæ :v
+{
+	/*
+	Character* player;
+
+	if (ar_wear == 0)
+	{
+		player->steength += armor_stats[0];
+		player->endurance += armor_stats[1];
+		player->charisma += armor_stats[2];
+		player->intelligence += armor_stats[3];
+		player->agility += armor_stats[4];
+		player->luck += armor_stats[5];
+
+		ar_wear = 1;
+	}
+	else if (ar_wear == 1)
+	{
+		player->steength -= armor_stats[0];
+		player->endurance -= armor_stats[1];
+		player->charisma -= armor_stats[2];
+		player->intelligence -= armor_stats[3];
+		player->agility -= armor_stats[4];
+		player->luck -= armor_stats[5];
+
+		ar_wear = 0;
+	}*/
+}
 
 //------------------------------------------------------------------------------------------------//
 
@@ -351,25 +380,25 @@ void Weapon::weapon_statistics_name()
 		switch (player->GetProffesion())
 		{
 		case PROFF_KNIGHT:
-			weap_name = "Miecz";
+			we_name = "Miecz";
 			break;
 		case PROFF_ARCHER:
-			weap_name = "£uk";
+			we_name = "£uk";
 			break;
 		case PROFF_BARD:
-			weap_name = "Lutnia";
+			we_name = "Lutnia";
 			break;
 		case PROFF_CLERIC:
-			weap_name = "Ksiêga";
+			we_name = "Ksiêga";
 			break;
 		case PROFF_DARK_KNIGHT:
-			weap_name = "Maczuga";
+			we_name = "Maczuga";
 			break;
 		case PROFF_MAGE:
-			weap_name = "Kostur";
+			we_name = "Kostur";
 			break;
 		default:
-			weap_name = "Jojo";
+			we_name = "Jojo";
 			break;
 		}
 	}
@@ -378,25 +407,25 @@ void Weapon::weapon_statistics_name()
 		switch (player->GetProffesion())
 		{
 		case PROFF_KNIGHT:
-			weap_name = "Topór";
+			we_name = "Topór";
 			break;
 		case PROFF_ARCHER:
-			weap_name = "Kusza";
+			we_name = "Kusza";
 			break;
 		case PROFF_BARD:
-			weap_name = "Sztylet";
+			we_name = "Sztylet";
 			break;
 		case PROFF_CLERIC:
-			weap_name = "Kostur";
+			we_name = "Kostur";
 			break;
 		case PROFF_DARK_KNIGHT:
-			weap_name = "Miecz dwurêczny";
+			we_name = "Miecz dwurêczny";
 			break;
 		case PROFF_MAGE:
-			weap_name = "Ró¿d¿ka";
+			we_name = "Ró¿d¿ka";
 			break;
 		default:
-			weap_name = "Patyk";
+			we_name = "Patyk";
 			break;
 		}
 	}
@@ -429,4 +458,34 @@ float Weapon::dmg_counter()
 		return 1;
 		break;
 	}
+}
+
+void Weapon::carry()
+{
+	/*  to zale¿y od wersji
+	Character* player;
+
+	if (we_wear == 0)
+	{
+		player->steength += weapon_stats[0];
+		player->endurance += weapon_stats[1];
+		player->charisma += weapon_stats[2];
+		player->intelligence += weapon_stats[3];
+		player->agility += weapon_stats[4];
+		player->luck += weapon_stats[5];
+
+		we_wear = 1;
+	}
+	else if (we_wear == 1)
+	{
+		player->steength -= weapon_stats[0];
+		player->endurance -= weapon_stats[1];
+		player->charisma -= weapon_stats[2];
+		player->intelligence -= weapon_stats[3];
+		player->agility -= weapon_stats[4];
+		player->luck -= weapon_stats[5];
+
+		we_wear = 0;
+	} 
+	*/
 }
