@@ -1,12 +1,11 @@
-#include "NPC.h"
+#pragma once
 #include <iostream>
-#include "ekwipunek.h"
 #include "Square.h"
 #include <Windows.h>
+#include "NPC.h"
 
-void Non_Character::options()
+void Non_Character::options(Character* player)
 {
-	Character* player;
 
 	while (quit == 0)
 	{
@@ -25,29 +24,24 @@ void Non_Character::options()
 				//potrzebny plecak
 				break;
 			case 2: //historia //------------------------//
-				talk();
+				talk(player);
 			case 3: //nic lub sprzedarz, lub naprawa
 				if (npc_name == "Chemik Renagan")
 				{
 					std::cout << std::endl << "Podziêkujê, nie jestem tutaj, by kupowaæ, a by sprzedawac";
 					std::cout << std::endl << "A propos sprzedarzy, nie chcia³by pan czegos kupic?";
 				}
-				else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() != PROFF_BARD || player->GetSex() == false || player->charisma < 30))
+				else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() != PROFF_BARD || player->GetSex() == false || player->GetStats().getByEnum(Charisma) < 30))
 				{
 					std::cout << std::endl << "Nie potrzbujê teraz wiêkszej iloœci baga¿u.";
 				}
-				else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex() != false || player->charisma >= 30))
+				else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex() != false || player->GetStats().getByEnum(Charisma) >= 30))
 				{
 					std::cout << std::endl << "Nie dam rady odkupiæ tego od ciebie, przykro mi";
 				}
 				else if (npc_name == "Kowal Gregori" || npc_name == "Kowal Andrzej")
 				{
-					repair(); //naprawa
-				}
-				else if (npc_name == "Handlarz")
-				{
-					std::cout << std::endl << "Kupic zawsze moge, zawsze sie to pozniej odsprzeda";
-					sell(); //sprzedarz
+					repair(player); //naprawa
 				}
 				else if (npc_name == "Zbrojmistrz1" || npc_name == "Zbrojmistrz4" || npc_name == "Zbrojmistrz5" || npc_name == "Zbrojmistrz6")
 				{
@@ -70,14 +64,13 @@ void Non_Character::options()
 	quit = 0;
 }
 
-void Non_Character::buy()
+void Non_Character::buy(Character* player)
 {
-	Character* player;
 	bool agreement; // 0-nie, 1-tak;
 	int nr_choice;
 	int  seller; //seller - ma³y wspó³czynnik kosztów 
 
-	seller = 8 - player->charisma / 5;
+	seller = 8 - player->GetStats().getByEnum(Charisma) / 5;
 	
 
 	if (npc_type == 'C') //chemicy
@@ -94,19 +87,19 @@ void Non_Character::buy()
 		for (int i = 0; i < 6; i++)
 		{
 			potions[i].give_statistics();
-			potions[i].usage();
+			potions[i].usage(player);
 		}
 
 		if (npc_name == "Chemik Renagan")
 		{
 			std::cout << std::endl << "Aktualnie mam takie drobnostki na zbyciu. Jesteœ zainteresowany? Jesteœ, prawda? Prawda...";
 		}
-		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex() != false || player->charisma >= 15))// 15- jakaœ lczba, któr¹ trzeba doustaliæ
+		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex() != false || player->GetStats().getByEnum(Charisma) >= 15))// 15- jakaœ lczba, któr¹ trzeba doustaliæ
 		{
-			std::cout << std::endl << "Mie ma tego wiele, ale weŸ, co chcesz";
+			std::cout << std::endl << "Nie ma tego wiele, ale weŸ, co chcesz";
 			seller = 1;
 		}
-		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() != PROFF_BARD || player->GetSex() == false || player->charisma < 15))
+		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() != PROFF_BARD || player->GetSex() == false || player->GetStats().getByEnum(Charisma) < 15))
 		{
 			std::cout << std::endl << "Jak zwykle u mnie eliksiry najlepszej jakoœci. Patrz i wybieraj, czego tylko pragniesz.";
 			seller = 6;
@@ -134,7 +127,7 @@ void Non_Character::buy()
 		
 		if (nr_choice > 0 && nr_choice <= 6)
 		{
-			agreement = pay(potions[nr_choice - 1].eq_cost);
+			agreement = pay(potions[nr_choice - 1].eq_cost, player);
 			if (agreement == 1)
 			{
 				// danie do plecaka przedmiotu przedmiotu o tym numerze ------------------------------------------------------------------//
@@ -155,8 +148,8 @@ void Non_Character::buy()
 			for (int i = 0; i < 6; i++)
 			{
 				armory[i].armor_name = "He³m";
-				armory[i].type_def();
-				armory[i].type_stats();
+				armory[i].type_def(player);
+				armory[i].type_stats(player);
 			}
 
 			if (npc_name == "Zbrojmistrz1")
@@ -177,8 +170,8 @@ void Non_Character::buy()
 			for (int i = 0; i < 6; i++)
 			{
 				armory[i].armor_name = "Napierœnik";
-				armory[i].type_def();
-				armory[i].type_stats();
+				armory[i].type_def(player);
+				armory[i].type_stats(player);
 			}
 
 			if (npc_name == "Zbrojmistrz2")
@@ -199,8 +192,8 @@ void Non_Character::buy()
 			for (int i = 0; i < 6; i++)
 			{
 				armory[i].armor_name = "Buty";
-				armory[i].type_def();
-				armory[i].type_stats();
+				armory[i].type_def(player);
+				armory[i].type_stats(player);
 			}
 
 			if (npc_name == "Zbrojmistrz3")
@@ -240,7 +233,7 @@ void Non_Character::buy()
 		std::cin >> nr_choice;
 		if (nr_choice > 0 && nr_choice <= 6)
 		{
-			agreement = pay(armory[nr_choice - 1].ar_cost);
+			agreement = pay(armory[nr_choice - 1].ar_cost, player);
 			if (agreement == 1)
 			{
 				// danie do plecaka przedmiotu ------------------------------------------------------------------------//
@@ -265,7 +258,7 @@ void Non_Character::buy()
 		{
 			special_thing.eq_name = "ciasto";
 		}
-		special_thing.usage();
+		special_thing.usage(player);
 
 		std::cout << std::endl << "Jest to jedyna taka okazja, lepszej nie bêdzie!";
 		special_thing.eq_cost = 1001;
@@ -275,7 +268,7 @@ void Non_Character::buy()
 		std::cin >> nr_choice;
 		if (nr_choice == 1)
 		{
-			agreement = pay(special_thing.eq_cost);
+			agreement = pay(special_thing.eq_cost, player);
 			if (agreement == 1)
 			{
 				// danie do plecaka przedmiotu ------------------------------------------------------------------------//
@@ -293,7 +286,7 @@ void Non_Character::buy()
 		Weapon weaps[6];
 		for (int i = 0; i < 6; i++)
 		{
-			weaps[0].weapon_statistics_name();
+			weaps[0].weapon_statistics_name(player);
 		}
 
 		if (npc_name == "Kowal Gregori")
@@ -329,7 +322,7 @@ void Non_Character::buy()
 		std::cin >> nr_choice;
 		if (nr_choice > 0 && nr_choice <= 6)
 		{
-			agreement = pay(weaps[nr_choice - 1].we_cost);
+			agreement = pay(weaps[nr_choice - 1].we_cost, player);
 			if (agreement == 1)
 			{
 				// danie do plecaka przedmiotu ------------------------------------------------------------------------//
@@ -344,43 +337,14 @@ void Non_Character::buy()
 	//potrzebny plecak
 }
 
-void Non_Character::sell()
-{
-	Character* player;
-	bool sell_more = 1;
-	int nr_choice;
-	int  seller;
-	seller = 8 - player->charisma / 7;
 
-	std::cout << std::endl << "Có¿ takiego chcia³yœ mi oodaæ?";
-	while(sell_more == 1)
-	{
-		//pokazanie przedmiotów z plecaka -------------------------------------------------------------------//
-
-		std::cin >> nr_choice;
-		if (nr_choice > 0 && nr_choice < ileœtam) //maksymalna objêtoœæ plecaka +1 ----------------------------------------------//
-		{
-			// zabranie z plecaka przedmiotu ------------------------------------------------------------------------//
-			gold += 6 * (statystyki_przedmiotu - seller);
-		}
-		else
-		{
-			std::cout << "czyli jednak rozmyœli³ siê Pan?";
-		}
-
-		std::cout << "Chcia³byœ oddaæ coœ jeszcze? (1 - tak, 0 - nie)";
-		std::cin >> sell_more;
-	}
-	//potrzebny  plecak
-}
-
-void Non_Character::repair()
+void Non_Character::repair(Character* player)
 {
 	int przelicznik_ceny = 1, choice_armor;
 	float rep_cost;
 	Armor thing1; //-------------------------------------------------|| odwo³ywaæ siê powinno do za³o¿onej czêœci zbroi, nie wiem, jak zrobiæ
 	if (1 - thing1.defending() > 0)
-		rep_cost = przelicznik_ceny* 100 * (1 - thing1.defending()) - przelicznik_ceny * log10(1 - thing1.defending);
+		rep_cost = przelicznik_ceny* 100 * (1 - thing1.defending()) - przelicznik_ceny * log10(1 - thing1.defending());
 	else
 		rep_cost = przelicznik_ceny * (1 - thing1.defending()) + przelicznik_ceny;
 		
@@ -393,7 +357,7 @@ void Non_Character::repair()
 	{
 	case 1:  //dla helmu ------------------------------------------|| aktualnie ni ma ró¿nicy. Trzeba zrobiæ, by wybiera³o jeden z przedmiotów
 		std::cout << rep_cost;
-		if (pay(rep_cost) == 1)
+		if (pay(rep_cost, player) == 1)
 		{
 			thing1.durability_cur = thing1.durability_max;
 			break;
@@ -401,7 +365,7 @@ void Non_Character::repair()
 		else break;
 	case 2://dla Napierœnika
 		std::cout << rep_cost;
-		if (pay(rep_cost) == 1)
+		if (pay(rep_cost, player) == 1)
 		{
 			thing1.durability_cur = thing1.durability_max;
 			break;
@@ -409,7 +373,7 @@ void Non_Character::repair()
 		else break;
 	case 3: //dla Butów
 		std::cout << rep_cost;
-		if (pay(rep_cost) == 1)
+		if (pay(rep_cost, player) == 1)
 		{
 			thing1.durability_cur = thing1.durability_max;
 			break;
@@ -422,7 +386,7 @@ void Non_Character::repair()
 
 }
 
-bool Non_Character::pay(int cost)
+bool Non_Character::pay(int cost, Character* player)
 {
 	char paying_choice = 'o';
 	bool number = 0;
@@ -438,14 +402,14 @@ bool Non_Character::pay(int cost)
 	switch (paying_choice)
 	{
 	case 'y':
-		if (gold < cost) //potrzebny gold
+		if (player->getGold() < cost)
 		{
 			std::cout << std::endl << "Chyba nie masz czym zap³aciæ. Wróæ, gdy uzbierasz nieco drobnych";
 			return 0;
 		}
 		else
 		{
-			gold -= cost;  //orygina³ golda potrzbny, by go zmieniaæ!
+			player->lostGold(cost);  //orygina³ golda potrzbny, by go zmieniaæ!
 			return 1;
 		}
 	case 'n':
@@ -454,9 +418,8 @@ bool Non_Character::pay(int cost)
 	}
 }
 
-void Non_Character::opening_talk(char npc_world[3][3][15][15]) //zrobiæ dialog w zale¿noœci od p³ci bohatera
+void Non_Character::opening_talk(char npc_world[3][3][15][15], Character* player) //zrobiæ dialog w zale¿noœci od p³ci bohatera
 {
-	Character* player;
 
 	if (first_time == 1)
 	{
@@ -606,7 +569,7 @@ void Non_Character::opening_talk(char npc_world[3][3][15][15]) //zrobiæ dialog w
 			Sleep(500);
 			std::cout << std::endl << "Porozmawiajmy wiêc o interesach.";
 		}
-		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() != PROFF_BARD || player->GetSex() == false || player->charisma < 30))
+		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() != PROFF_BARD || player->GetSex() == false || player->GetStats().getByEnum(Charisma) < 30))
 		{
 			std::cout << std::endl << "To ponownie Pan...";
 			Sleep(1250);
@@ -615,7 +578,7 @@ void Non_Character::opening_talk(char npc_world[3][3][15][15]) //zrobiæ dialog w
 			std::cout << std::endl << "Byle szybko, zajêta jestem, nie widaæ?";
 			Sleep(500);
 		}
-		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex() != false || player->charisma >= 30))
+		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex() != false || player->GetStats().getByEnum(Charisma) >= 30))
 		{
 			std::cout << std::endl << "Witam ponownie! Osobiœcie - spodziewa³am siê, ¿e jeszcze ciê zobaczê,";
 			Sleep(400);
@@ -687,10 +650,9 @@ void Non_Character::opening_talk(char npc_world[3][3][15][15]) //zrobiæ dialog w
 
 }
 
-void Non_Character::talk()
+void Non_Character::talk(Character* player)
 {
-	Character* player;
-	if (player->charisma < 25)
+	if (player->GetStats().getByEnum(Charisma) < 25)
 	{
 		if (npc_name == "Chemik Renagan")
 		{
@@ -744,7 +706,7 @@ void Non_Character::talk()
 
 		}
 	}
-	else if(player->charisma >= 25)
+	else if(player->GetStats().getByEnum(Charisma) >= 25)
 	{
 		if (npc_name == "Chemik Renagan")
 		{

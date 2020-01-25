@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
-#include "ekwipunek.h"
 #include "Square.h"
+#include "ekwipunek.h"
 
 class Non_Character
 {
@@ -22,11 +22,10 @@ public:
 	}
 
 
-	void options();									//opcje do wyboru
-	void buy();										//kupno
-	void sell();									//sprzedarz
-	void repair();									//naprawa zbroi
-	bool pay(int cost);								//zaplata
-	void opening_talk(char npc_world[3][3][15][15]);//gadka wstêpna
-	void talk();									//info jakieœ
+	void options(Character* player);									//opcje do wyboru
+	void buy(Character* player);					//kupno
+	void repair(Character* player);					//naprawa zbroi
+	bool pay(int cost, Character* player);			//zaplata
+	void opening_talk(char npc_world[3][3][15][15], Character* player);//gadka wstêpna
+	void talk(Character* player);									//info jakieœ
 };

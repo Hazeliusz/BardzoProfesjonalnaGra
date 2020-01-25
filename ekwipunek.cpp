@@ -1,38 +1,37 @@
+#pragma once
 #include <iostream>
 #include <stdlib.h>
 #include "ekwipunek.h"
-#include "character.h"
 
 
 //87-43.5; 62-31; 53-26.5; 34-17; 25-12.5
-void Armor::type_def()
+void Armor::type_def(Character* player)
 {
 	srand(time(NULL));
-	Character* player;
 	if (armor_name == "He³m")  //przypisanie wartoœci zbroi
 	{
 		switch (player->GetProffesion()) 
 		{
 		case PROFF_KNIGHT:		//maks 29
-			durability_max = 9.0 + player->GetLevel.getLevel() * 1;
+			durability_max = 9.0 + player->GetLevel() * 1;
 			break;
 		case PROFF_ARCHER:		//21.3
-			durability_max = 7.3 + player->GetLevel.getLevel() * 0.7;
+			durability_max = 7.3 + player->GetLevel() * 0.7;
 			break;
 		case PROFF_BARD:		//18.3
-			durability_max = 4.3 + player->GetLevel.getLevel() * 0.7;
+			durability_max = 4.3 + player->GetLevel() * 0.7;
 			break;
 		case PROFF_CLERIC:		//10.7
-			durability_max = 4.7 + player->GetLevel.getLevel() * 0.3;
+			durability_max = 4.7 + player->GetLevel() * 0.3;
 			break;
 		case PROFF_DARK_KNIGHT:	//29
-			durability_max = 9.0 + player->GetLevel.getLevel() * 1;
+			durability_max = 9.0 + player->GetLevel() * 1;
 			break;
 		case PROFF_MAGE:		//10.7
-			durability_max = 4.7 + player->GetLevel.getLevel() * 0.3;
+			durability_max = 4.7 + player->GetLevel() * 0.3;
 			break;
 		default:				//7.7
-			durability_max = 1.7 + player->GetLevel.getLevel() * 0.3;
+			durability_max = 1.7 + player->GetLevel() * 0.3;
 		}
 	}
 	else if (armor_name == "Napierœnik")
@@ -40,25 +39,25 @@ void Armor::type_def()
 		switch (player->GetProffesion())
 		{
 		case PROFF_KNIGHT:		//maks 43.5
-			durability_max = 13.5 + player->GetLevel.getLevel() * 1.5;
+			durability_max = 13.5 + player->GetLevel() * 1.5;
 			break;
 		case PROFF_ARCHER:		//29.1
-			durability_max = 11.1 +	player->GetLevel.getLevel() * 0.9;
+			durability_max = 11.1 +	player->GetLevel() * 0.9;
 			break;
 		case PROFF_BARD:		//24.6
-			durability_max =  6.6 +	player->GetLevel.getLevel() * 0.9;
+			durability_max =  6.6 +	player->GetLevel() * 0.9;
 			break;
 		case PROFF_CLERIC:		//17
-			durability_max =  7.0 +	player->GetLevel.getLevel() * 0.5;
+			durability_max =  7.0 +	player->GetLevel() * 0.5;
 			break;
 		case PROFF_DARK_KNIGHT:	//43.5
-			durability_max = 13.5 + player->GetLevel.getLevel() * 1.5;
+			durability_max = 13.5 + player->GetLevel() * 1.5;
 			break;
 		case PROFF_MAGE:		//17
-			durability_max =  7.0 +	player->GetLevel.getLevel() * 0.5;
+			durability_max =  7.0 +	player->GetLevel() * 0.5;
 			break;
 		default:				//12.5
-			durability_max =  2.5 +	player->GetLevel.getLevel() * 0.5;
+			durability_max =  2.5 +	player->GetLevel() * 0.5;
 		}
 	}
 	else if (armor_name == "Buty")
@@ -66,25 +65,25 @@ void Armor::type_def()
 		switch (player->GetProffesion())
 		{
 		case PROFF_KNIGHT:		//maks 14.5
-			durability_max = 4.5 + player->GetLevel.getLevel() * 0.5;
+			durability_max = 4.5 + player->GetLevel() * 0.5;
 			break;
 		case PROFF_ARCHER:		//11.6
-			durability_max = 3.6 + player->GetLevel.getLevel() * 0.4;
+			durability_max = 3.6 + player->GetLevel() * 0.4;
 			break;
 		case PROFF_BARD:		//10.1
-			durability_max = 2.1 + player->GetLevel.getLevel() * 0.4;
+			durability_max = 2.1 + player->GetLevel() * 0.4;
 			break;
 		case PROFF_CLERIC:		//6.3
-			durability_max = 2.3 + player->GetLevel.getLevel() * 0.2;
+			durability_max = 2.3 + player->GetLevel() * 0.2;
 			break;
 		case PROFF_DARK_KNIGHT:	//14.5
-			durability_max = 4.5 + player->GetLevel.getLevel() * 0.5;
+			durability_max = 4.5 + player->GetLevel() * 0.5;
 			break;
 		case PROFF_MAGE:		//6.3
-			durability_max = 2.3 + player->GetLevel.getLevel() * 0.2;
+			durability_max = 2.3 + player->GetLevel() * 0.2;
 			break;
 		default:				//4.8
-			durability_max = 0.8 + player->GetLevel.getLevel() * 0.2;
+			durability_max = 0.8 + player->GetLevel() * 0.2;
 		}
 	}
 	else
@@ -97,9 +96,8 @@ void Armor::type_def()
 
 }
 
-void Armor::type_stats()
+void Armor::type_stats(Character* player)
 {
-	Character* player;
 	switch (player->GetProffesion())
 	{
 	case PROFF_KNIGHT:
@@ -161,10 +159,9 @@ void Armor::type_stats()
 	}
 }
 
-void Armor::damage_taken(int hp_cur)
+void Armor::damage_taken(int hp_cur, Character* player)
 {
-	Character * player;
-	durability_cur = durability_cur - (durability_cur*hp_cur)/ (player->endurance*10); //hp_cur - po walce? endurance gracza po³¹czony z endurance wszystkich czêœci zbroi 
+	durability_cur = durability_cur - (durability_cur*hp_cur)/ (player->GetStats().getByEnum(Endurance)*10); //hp_cur - po walce? endurance gracza po³¹czony z endurance wszystkich czêœci zbroi 
 	if (durability_cur <= 0)
 	{
 		durability_cur = 1;
@@ -274,9 +271,8 @@ void Equipment::give_statistics()
 	}
 }
 
-void Equipment::usage()
+void Equipment::usage(Character* player)
 {
-	Character* player;
 	if (eq_name == "eliksir")
 	{
 		usability = 1;
@@ -363,13 +359,12 @@ void Equipment::disappear()
 
 //---------------------------------------------------------------------------------------------------
 
-void Weapon::weapon_statistics_name()
+void Weapon::weapon_statistics_name(Character* player)
 {
 	srand(time_t(NULL));
 
 	Armor stats_base;
-	Character* player;
-	stats_base.type_stats();
+	stats_base.type_stats(player);
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -433,9 +428,8 @@ void Weapon::weapon_statistics_name()
 	}
 }
 
-float Weapon::dmg_counter()
+float Weapon::dmg_counter(Character* player)
 {
-	Character* player;
 	switch (player->GetProffesion())
 	{
 	case PROFF_KNIGHT:
