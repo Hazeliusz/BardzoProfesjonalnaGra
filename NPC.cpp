@@ -21,10 +21,10 @@ void Non_Character::options()
 			std::cin >> choice;
 			switch (choice)
 			{
-			case 1: // sklep //-------------------------
+			case 1: // sklep //-------------------------//
 				//potrzebny plecak
 				break;
-			case 2: //historia //------------------------
+			case 2: //historia //------------------------//
 				talk();
 			case 3: //nic lub sprzedarz, lub naprawa
 				if (npc_name == "Chemik Renagan")
@@ -42,7 +42,7 @@ void Non_Character::options()
 				}
 				else if (npc_name == "Kowal Gregori" || npc_name == "Kowal Andrzej")
 				{
-					repair();
+					repair(); //naprawa
 				}
 				else if (npc_name == "Handlarz")
 				{
@@ -75,7 +75,7 @@ void Non_Character::buy()
 	Character* player;
 	bool agreement; // 0-nie, 1-tak;
 	int nr_choice;
-	int  seller = 0; //seller - wspó³czynnik zale¿ny od sprzedawcy i charyzmy
+	int  seller = 0; //seller - ma³y wspó³czynnik kosztów 
 
 	seller = 8 - player->charisma / 5;
 	
@@ -137,7 +137,7 @@ void Non_Character::buy()
 			agreement = pay(potions[nr_choice - 1].eq_cost);
 			if (agreement == 1)
 			{
-				// danie do plecaka przedmiotu tego numeru ------------------------------------------------------------------//
+				// danie do plecaka przedmiotu przedmiotu o tym numerze ------------------------------------------------------------------//
 
 			}
 		}
@@ -341,7 +341,7 @@ void Non_Character::buy()
 			std::cout << std::endl << "I po co to wyci¹ga³em?!";
 		}
 	}
-	//potrzebny plecak1
+	//potrzebny plecak
 }
 
 void Non_Character::sell()
@@ -401,7 +401,6 @@ bool Non_Character::pay(int cost)
 {
 	char paying_choice = 'o';
 	bool number = 0;
-	Armor thing2; //========================
 
 	std::cout << std::endl << "Placisz? (y/n)";
 	while (paying_choice != 'y' && paying_choice != 'n')
@@ -416,7 +415,7 @@ bool Non_Character::pay(int cost)
 	case 'y':
 		if (gold < cost) //potrzebny gold
 		{
-			std::cout << std::endl << "Chyba nie masz czym zaplacic. Wroc, gdy uzbierasz nieco drobnych";
+			std::cout << std::endl << "Chyba nie masz czym zap³aciæ. Wróæ, gdy uzbierasz nieco drobnych";
 			return 0;
 		}
 		else

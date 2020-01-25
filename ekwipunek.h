@@ -43,7 +43,7 @@ public:
 	void type_stats();							//w zale¿noœci od wybranej klasy inne staty
 	void damage_taken(int hp_cur);				//zmiana durability przedmiotu po walce (czym wiêcej hp wziê³o, tym bardziej siê psuje)
 	float defending();							//system ochrony przed dmg w zale¿noœci od iloœci def w zbroi
-	void dress();
+	void dress();								//wp³ywanie na staty bohatera
 
 	friend void Non_Character::repair();
 	friend void Weapon::weapon_statistics_name();
@@ -59,9 +59,10 @@ class Equipment
 	int buffs;
 	int eq_stats[6];							// 0-str, 1-end, 2-char, 3-int, 4-agi, 5-lck
 	int eq_cost;
+	int eq_time;								//czas dzia³ania eliksiru/specjalnego przedmiotu na bohatera (tura to 1 walka z przeciwnikiem) //---------------------------------------------------//
 
 public:
-	Equipment (std::string naming = "nothing", bool usb = 0, bool usd = 0, int buf = 1, int s=0, int c = 0)
+	Equipment (std::string naming = "nothing", bool usb = 0, bool usd = 0, int buf = 1, int s=0, int c = 0, int t = 3)
 	{
 		for (int i = 0; i < 6; i++)
 		{
@@ -72,6 +73,7 @@ public:
 		used = usd;
 		buffs = buf;
 		eq_cost = c;
+		eq_time = t;
 	}
 
 
@@ -106,7 +108,7 @@ public:
 
 	void weapon_statistics_name();				//daje staty i nazwê
 	float dmg_counter();						//mno¿nik do zadawannego dmg
-	void carry();
+	void carry();								//wp³ywanie na staty bohatera
 
 	friend void Non_Character::buy();
 };

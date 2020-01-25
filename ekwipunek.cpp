@@ -8,7 +8,7 @@
 void Armor::type_def()
 {
 	srand(time(NULL));
-	Character* player; //==================
+	Character* player;
 	if (armor_name == "He³m")  //przypisanie wartoœci zbroi
 	{
 		switch (player->GetProffesion()) 
@@ -164,7 +164,7 @@ void Armor::type_stats()
 void Armor::damage_taken(int hp_cur)
 {
 	Character * player;
-	durability_cur = durability_cur - (durability_cur*hp_cur)/ (player->endurance*10); //hp_cur - po walce? endurence gracza
+	durability_cur = durability_cur - (durability_cur*hp_cur)/ (player->endurance*10); //hp_cur - po walce? endurance gracza po³¹czony z endurance wszystkich czêœci zbroi 
 	if (durability_cur <= 0)
 	{
 		durability_cur = 1;
@@ -185,7 +185,7 @@ float Armor::defending()
 	return durability_cur*0.01;
 }
 
-void Armor::dress() //jeœli ma to tak dzia³aæ :v
+void Armor::dress() //jeœli ma to tak dzia³aæ :v ------------------------------------------------------------------------//
 {
 	/*
 	Character* player;
@@ -214,7 +214,7 @@ void Armor::dress() //jeœli ma to tak dzia³aæ :v
 	}*/
 }
 
-//------------------------------------------------------------------------------------------------//
+//------------------------------------------------------------------------------------------------
 
 void Equipment::give_statistics()
 {
@@ -276,7 +276,7 @@ void Equipment::give_statistics()
 
 void Equipment::usage()
 {
-	Character* player; //=======================
+	Character* player;
 	if (eq_name == "eliksir")
 	{
 		usability = 1;
@@ -330,11 +330,13 @@ void Equipment::usage()
 			eq_stats[1] = 1;
 			eq_stats[2] = -2;
 		}
+		eq_time = 500;
 	}
 	else if (eq_name == "ciasto")
 	{
 		usability = 1;
 		eq_stats[1] = 1;
+		eq_time = 500;
 	}
 }
 
@@ -343,7 +345,7 @@ void Equipment::take_buff()
 	if (used == 0)
 	{
 		Character* player;
-		//wp³ywanie na staty bohatera;
+		//wp³ywanie na staty bohatera;------------------------------------------------------------------------//
 		if (usability == 1) used = 1;
 		disappear();
 	}
@@ -359,7 +361,7 @@ void Equipment::disappear()
 		//znikanie z plecaka;
 }
 
-//---------------------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------------
 
 void Weapon::weapon_statistics_name()
 {
@@ -460,7 +462,7 @@ float Weapon::dmg_counter()
 	}
 }
 
-void Weapon::carry()
+void Weapon::carry() //---------------------------------------------------------------------------------------------//
 {
 	/*  to zale¿y od wersji
 	Character* player;
