@@ -75,7 +75,7 @@ void Non_Character::buy()
 	Character* player;
 	bool agreement; // 0-nie, 1-tak;
 	int nr_choice;
-	int  seller = 0; //seller - ma³y wspó³czynnik kosztów 
+	int  seller; //seller - ma³y wspó³czynnik kosztów 
 
 	seller = 8 - player->charisma / 5;
 	
@@ -346,6 +346,31 @@ void Non_Character::buy()
 
 void Non_Character::sell()
 {
+	Character* player;
+	bool sell_more = 1;
+	int nr_choice;
+	int  seller;
+	seller = 8 - player->charisma / 7;
+
+	std::cout << std::endl << "Có¿ takiego chcia³yœ mi oodaæ?";
+	while(sell_more == 1)
+	{
+		//pokazanie przedmiotów z plecaka -------------------------------------------------------------------//
+
+		std::cin >> nr_choice;
+		if (nr_choice > 0 && nr_choice < ileœtam) //maksymalna objêtoœæ plecaka +1 ----------------------------------------------//
+		{
+			// zabranie z plecaka przedmiotu ------------------------------------------------------------------------//
+			gold += 6 * (statystyki_przedmiotu - seller);
+		}
+		else
+		{
+			std::cout << "czyli jednak rozmyœli³ siê Pan?";
+		}
+
+		std::cout << "Chcia³byœ oddaæ coœ jeszcze? (1 - tak, 0 - nie)";
+		std::cin >> sell_more;
+	}
 	//potrzebny  plecak
 }
 
