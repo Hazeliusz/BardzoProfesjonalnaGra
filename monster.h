@@ -6,13 +6,12 @@
 
 class Monster : public Character, public Statistics
 {
-	int name_draw;
-
 public:
-	Monster(std::string nazwa, bool sex, Statistics statystyki = Statistics(), Proffesion CharClass = PROFF_MONSTER, int name_dr);// p³eæ moze byæ u¿ywana w celu okreœlenia poprawnej formy
+	Monster(std::string nazwa, bool sexy, Statistics statystyki, Proffesion CharClass);// p³eæ moze byæ u¿ywana w celu okreœlenia poprawnej formy
 
 	void name_give(int monster_number);						//daje nazwê potwotkowi
 	void wyswietl_karte_postaci();							//wyœwietla kartê potwora
 	void wylosuj_statytyki(int monster_number);				//losowanie statystyk
+
 };
 //monster_number -> mapka
