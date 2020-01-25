@@ -6,8 +6,13 @@
 #include <cstdlib>
 #include <map>
 #include <fstream>
+#include <vector>
+#include "ekwipunek.h"
 
  class Character;
+ class Weapon;
+ class Armor;
+ class Equipment;
 
 typedef std::map<std::string, int> bufor;
 typedef void(*skill)(Character* user, Character* target, bufor& bf);
@@ -41,6 +46,10 @@ protected:
 	Statistics special;
 	Level lvl;
 	int gold;
+	int weapon_size = 1;
+	std::vector<Weapon> weapon_eq;
+	std::vector<Armor> armor_eq;
+	std::vector<Equipment> equipment_eq;
 
 public:
 	Character(std::string name, bool sex, Statistics statystyki = Statistics(), int lvls = 1);
@@ -95,13 +104,13 @@ public:
 	virtual void randomizeStatistics() = 0;
 	void writeStatistics();
 	void addSkillAt5();
-	//void addSkillAt10();
-	//void addSkillAt20();
 	int getGold();
 	void addGold(int added);
 	void lostGold(int lost);
-	/*void zapisz_do_pliku();
-	void odczytaj_z_pliku();*/ 
+	void displayInventory();
+	void addWeapon(Weapon added);
+	void addArmor(Armor added);
+	void addEquipment(Equipment added);
 };
 
 class Knight : public Character {

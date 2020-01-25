@@ -1,3 +1,4 @@
+#pragma once
 #include "character.h"
 #include <stdlib.h>
 #include <iostream>
@@ -69,31 +70,31 @@ void Character::checkLevelUp() {
 			std::cin >> choice;
 			switch (choice) {
 			case 1:
-				this->special.advanceStatsByEnum(Strength);
+				this->special.advanceStatsByEnum(Strength, 1);
 				i--;
 				break;
 			case 2:
-				this->special.advanceStatsByEnum(Perception);
+				this->special.advanceStatsByEnum(Perception, 1);
 				i--;
 				break;
 			case 3:
-				this->special.advanceStatsByEnum(Endurance);
+				this->special.advanceStatsByEnum(Endurance, 1);
 				i--;
 				break;
 			case 4:
-				this->special.advanceStatsByEnum(Charisma);
+				this->special.advanceStatsByEnum(Charisma, 1);
 				i--;
 				break;
 			case 5:
-				this->special.advanceStatsByEnum(Intelligence);
+				this->special.advanceStatsByEnum(Intelligence, 1);
 				i--;
 				break;
 			case 6:
-				this->special.advanceStatsByEnum(Agility);
+				this->special.advanceStatsByEnum(Agility, 1);
 				i--;
 				break;
 			case 7:
-				this->special.advanceStatsByEnum(Luck);
+				this->special.advanceStatsByEnum(Luck, 1);
 				i--;
 				break;
 			default:
@@ -125,6 +126,34 @@ void Character::lostGold(int lost) {
 
 void Character::addSkillAt5() {
 
+}
+
+void Character::displayInventory(){
+	std::cout << "Bronie: " << std::endl;
+	for (int i = 0; i < weapon_eq.size(); i++) {
+		std::cout << i + 1 << ". " << weapon_eq[i].we_name << " ma " << weapon_eq[i].dmg_counter(this) << " DMG." << std::endl;
+	}
+	std::cout << "Czêœci zbroi: " << std::endl;
+	for (int i = 0; i < armor_eq.size(); i++) {
+		std::cout << i + 1 << ". " << armor_eq[i].armor_name << " ma wspó³czynnik pancerza na poziomie " << armor_eq[i].def << std::endl;
+		std::cout << "Jej wytrzyma³oœæ to obecnie " << armor_eq[i].durability_cur << "/" << armor_eq[i].durability_max << std::endl;
+	}
+	/*std::cout << "Przedmioty jednorazowy: " << std::endl;
+	for (int i = 0; i < equipment_eq.size(); i++) {
+		std::cout << i + 1 << ". " << equipment_eq[i].eq_name << 
+	}*/
+}
+
+void Character::addWeapon(Weapon added) {
+	weapon_eq.push_back(added);
+}
+
+void Character::addArmor(Armor added) {
+	armor_eq.push_back(added);
+}
+
+void Character::addEquipment(Equipment added) {
+	equipment_eq.push_back(added);
 }
 
 Character::Character(std::string name, bool sex, Statistics stats, int lvls) {

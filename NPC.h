@@ -3,6 +3,8 @@
 #include "Square.h"
 #include "ekwipunek.h"
 
+class Character;
+
 class Non_Character
 {
 	std::string npc_name;
