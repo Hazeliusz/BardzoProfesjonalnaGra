@@ -131,7 +131,8 @@ void Non_Character::buy()
 		}
 		std::cout << std::endl << "To który z eliksirów chcia³byœ kupiæ? ('6' - nie kupujê)" << std::endl;
 		std::cin >> nr_choice;
-		if (nr_choice > -1 && nr_choice < 6)
+		
+		if (nr_choice > 0 && nr_choice <= 6)
 		{
 			agreement = pay(potions[nr_choice - 1].eq_cost);
 			if (agreement == 1)
@@ -237,7 +238,7 @@ void Non_Character::buy()
 		}
 		std::cout << std::endl << "Co kupujesz? ('6' - nie kupujê)" << std::endl;
 		std::cin >> nr_choice;
-		if (nr_choice > -1 && nr_choice < 6)
+		if (nr_choice > 0 && nr_choice <= 6)
 		{
 			agreement = pay(armory[nr_choice - 1].ar_cost);
 			if (agreement == 1)
@@ -326,7 +327,7 @@ void Non_Character::buy()
 
 		std::cout << std::endl << "Kupujesz coœ? ('6' - nie kupujê)" << std::endl;
 		std::cin >> nr_choice;
-		if (nr_choice > -1 && nr_choice < 6)
+		if (nr_choice > 0 && nr_choice <= 6)
 		{
 			agreement = pay(weaps[nr_choice - 1].we_cost);
 			if (agreement == 1)
