@@ -101,13 +101,26 @@ void Character::checkLevelUp() {
 			}
 			if (lvl.getLevel() == 5)
 				addSkillAt5();
-			if (lvl.getLevel() == 10)
+			/*if (lvl.getLevel() == 10)
 				addSkillAt10();
 			if (lvl.getLevel() == 20)
-				addSkillAt20();
+				addSkillAt20();*/
 
 		}
 	}
+
+}
+
+int Character::getGold() {
+	return gold;
+}
+
+void Character::addGold(int added) {
+	this->gold += added;
+}
+
+void Character::lostGold(int lost) {
+	this->gold -= lost;
 }
 
 void Character::addSkillAt5() {

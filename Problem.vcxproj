@@ -111,13 +111,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character.cpp" />
+    <ClCompile Include="ekwipunek.cpp" />
     <ClCompile Include="monster.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Square.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
+    <ClInclude Include="ekwipunek.h" />
     <ClInclude Include="Interactions.h" />
     <ClInclude Include="monster.h" />
+    <ClInclude Include="NPC.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="statistics.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -40,6 +40,8 @@ protected:
 	bool sex; //true - kobieta, false - mezczyzna
 	Statistics special;
 	Level lvl;
+	int gold;
+
 public:
 	Character(std::string name, bool sex, Statistics statystyki = Statistics(), int lvls = 1);
 	int hp;
@@ -93,8 +95,11 @@ public:
 	virtual void randomizeStatistics() = 0;
 	void writeStatistics();
 	void addSkillAt5();
-	void addSkillAt10();
-	void addSkillAt20();
+	//void addSkillAt10();
+	//void addSkillAt20();
+	int getGold();
+	void addGold(int added);
+	void lostGold(int lost);
 	/*void zapisz_do_pliku();
 	void odczytaj_z_pliku();*/ 
 };
