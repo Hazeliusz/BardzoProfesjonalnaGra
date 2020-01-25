@@ -4,7 +4,7 @@ X K - - - - - X X N - - X G X   X X X X X X X X X X X X X - X   X G 7 - - - 8 X 
 X - - - - - - X X - - - X G X   X - 3 2 - 4 - - 1 - 4 - 3 - X   X 7 - - - - X X 7 7 X X X 8 X
 X Z - - - - X X X X - X X G X   X 2 - 3 - - - - - 2 - - - 5 X   X - - - - - X X - - - X - - X
 X - - - - - - - - - - - - - X   X 9 X X X X X 8 X X X 8 X X X   X - 8 - X X - - - - - X - - X
-X - - - X - - - - - - - - - X   X G G G X 7 - - - 7 X - X N X   X - - - X X - - - - 4 - - - X
+X H - - X - - - - - - - - - X   X G G G X 7 - - - 7 X - X N X   X - - - X X - - - - 4 - - - X
 X X X X X - - - - - - - - - X   X G G G X 1 G 1 G 1 X 3 X 8 X   X - - - - - 8 - - - - - - - X
 X X X X X - - - - X X N - - X   X G G G X G 1 G 1 G X - 1 - X   X 2 2 X - - - - - - X X X - X
 X - N - X - - - X X X X - - X   X G G G X 1 - 1 - 1 X - 2 1 X   X - - - - - - - - 8 I N X - X
