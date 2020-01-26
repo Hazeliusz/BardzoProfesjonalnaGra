@@ -1,12 +1,17 @@
+#pragma once
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
 #include <Windows.h>
 #include "Square.h"
 #include <conio.h>
+#include "Interactions.h"
 
-Square::Square()
+
+
+Square::Square(Character* player)
 {
+	this->player = player;
 	std::fstream plik;
 	plik.open("Whole.txt", std::ios::in);
 	if (plik.good() == false)
@@ -351,7 +356,7 @@ void Square::draw()
 		}
 		case 'G':
 		{
-			//dodanie z³ota
+			player->addGold(200);
 			break;
 		}
 		case 'I':
@@ -368,7 +373,13 @@ void Square::draw()
 			x = x0;
 			break;
 		}
-		//case PRZECIWNIK, nie wiem czy daæ to w 1 case czy w 9; gdy wygrana to exp+ i break, jeœli ucieczka to wsp=wsp0
+		case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
+			int monster_type = bufor - '0';
+			Monster *monster = new Monster(monster_type);
+			CharactersInteractions *interact = new CharactersInteractions(player, monster);
+			int result = interact->MonsterFight();
+			delete interact;
+			delete monster;
 		//case '!': specjalna instrukcja do walki z bossem
 	}
 
@@ -393,33 +404,44 @@ void Square::menu()
 	{
 	case 1:
 	{
-
+		player->displayInventory();
+		system("pause");
 		break;
 	}
 	case 2:
 	{
-
+		player->drawCharacterCard();
+		system("pause");
 		break;
 	}
 	case 3:
 	{
+		player->EquipWeapon();
+		system("pause");
 		break;
 	}
 	case 4:
 	{
-
+		player->EquipHelmet();
+		system("pause");
 		break;
 	}
 	case 5:
 	{
+		player->EquipArmor();
+		system("pause");
 		break;
 	}
 	case 6:
 	{
+		player->EquipBoots();
+		system("pause");
 		break;
 	}
 	case 7:
 	{
+		player->useEquipment();
+		system("pause");
 		break;
 	}
 	}

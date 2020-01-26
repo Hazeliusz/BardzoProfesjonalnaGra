@@ -3,6 +3,9 @@
 #include "monster.h"
 #include <vector>
 
+class Character;
+class Monster;
+
 class CharactersInteractions //zelentjuniorikij
 {
 private:
