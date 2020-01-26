@@ -53,29 +53,29 @@ class Statistics
 			agility = a;
 			luck = l;
 		}
-		void advanceStatsByEnum(int enumStat) {
+		void advanceStatsByEnum(int enumStat, int number) {
 			switch (enumStat)
 			{
 			case Strength:
-				this->strength++;
+				this->strength += number;
 				break;
 			case Perception:
-				perception++;
+				perception += number;
 				break;
 			case Endurance:
-				endurance++;
+				endurance += number;
 				break;
 			case Charisma:
-				charisma++;
+				charisma += number;
 				break;
 			case Intelligence:
-				intelligence++;
+				intelligence += number;
 				break;
 			case Agility:
-				agility++;
+				agility += number;
 				break;
 			case Luck:
-				luck++;
+				luck += number;
 				break;
 			}
 		}

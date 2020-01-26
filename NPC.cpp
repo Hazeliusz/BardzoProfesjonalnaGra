@@ -9,13 +9,13 @@ void Non_Character::options(Character* player)
 
 	while (quit == 0)
 	{
-		if (npc_name != "Wiesniak")
+		if (npc_name != "Wieœniak")
 		{
-			std::cout << std::endl << "'1' - sklep";
-			std::cout << std::endl << "'2' - rozmowa";
-			if (npc_name == "Kowal")		std::cout << std::endl << "'3' - naprawa zbroi";
-			else							std::cout << std::endl << "'3' - sprzedarz";
-			std::cout << std::endl << "'4' - wyjscie" << std::endl;
+			std::cout << "'1' - sklep" << std::endl;
+			std::cout << "'2' - rozmowa" << std::endl;
+			if (npc_name == "Kowal")		std::cout << "'3' - naprawa zbroi" << std::endl;
+			else							std::cout << "'3' - sprzedarz" << std::endl;
+			std::cout << std::endl << "'4' - wyjœcie" << std::endl;
 
 			std::cin >> choice;
 			switch (choice)
@@ -28,36 +28,36 @@ void Non_Character::options(Character* player)
 			case 3: //nic lub sprzedarz, lub naprawa
 				if (npc_name == "Chemik Renagan")
 				{
-					std::cout << std::endl << "Podziêkujê, nie jestem tutaj, by kupowaæ, a by sprzedawac";
-					std::cout << std::endl << "A propos sprzedarzy, nie chcia³by pan czegos kupic?";
+					std::cout << "Podziêkujê, nie jestem tutaj, by kupowaæ, a by sprzedawac" << std::endl;
+					std::cout << "A propos sprzedarzy, nie chcia³by pan czegos kupic?" << std::endl;
 				}
 				else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() != PROFF_BARD || player->GetSex() == false || player->GetStats().getByEnum(Charisma) < 30))
 				{
-					std::cout << std::endl << "Nie potrzbujê teraz wiêkszej iloœci baga¿u.";
+					std::cout << "Nie potrzebujê teraz wiêkszej iloœci baga¿u." << std::endl;
 				}
 				else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex() != false || player->GetStats().getByEnum(Charisma) >= 30))
 				{
-					std::cout << std::endl << "Nie dam rady odkupiæ tego od ciebie, przykro mi";
+					std::cout << "Nie dam rady odkupiæ tego od ciebie, przykro mi" << std::endl;
 				}
 				else if (npc_name == "Kowal Gregori" || npc_name == "Kowal Andrzej")
 				{
 					repair(player); //naprawa
 				}
-				else if (npc_name == "Zbrojmistrz1" || npc_name == "Zbrojmistrz4" || npc_name == "Zbrojmistrz5" || npc_name == "Zbrojmistrz6")
+				else if (npc_name == "Gerwalt" || npc_name == "Oktis" || npc_name == "Zbrojmistrz5" || npc_name == "Zbrojmistrz6")
 				{
-					std::cout << std::endl << "Nie kupujê œmieci";
+					std::cout << "Nie kupujê œmieci" << std::endl;
 				}
 				else if (npc_name == "Zbrojmistrz2" || npc_name == "Zbrojmistrz3")
 				{
-					std::cout << std::endl << "Nie.";
+					std::cout << "Nie." << std::endl;
 				}
-				else std::cout << std::endl << "nie...";
+				else std::cout << "nie..." << std::endl;
 				break;
 			case 4:
 				quit = 1;
 				break;
 			default:
-				std::cout << std::endl << "Nie ma takiej opcji";
+				std::cout << "Nie ma takiej opcji." << std::endl;
 			}
 		}
 	}
@@ -76,12 +76,12 @@ void Non_Character::buy(Character* player)
 	if (npc_type == 'C') //chemicy
 	{
 		Equipment potions[6];
-		potions[0].eq_name == "eliksir Galow";
-		potions[1].eq_name == "wywar z czerwonego byka";
-		potions[2].eq_name == "retoryka w butelce";
-		potions[3].eq_name == "roztwor wroñskianu potasu";
-		potions[4].eq_name == "sok z gumijagod";
-		potions[5].eq_name == "wywar z totolotka";
+		potions[0].eq_name == "Eliksir Galow";
+		potions[1].eq_name == "Wywar z czerwonego byka";
+		potions[2].eq_name == "Retoryka w butelce";
+		potions[3].eq_name == "Roztwor wroñskianu potasu";
+		potions[4].eq_name == "Sok z gumijagod";
+		potions[5].eq_name == "Wywar z totolotka";
 
 
 		for (int i = 0; i < 6; i++)
@@ -92,21 +92,21 @@ void Non_Character::buy(Character* player)
 
 		if (npc_name == "Chemik Renagan")
 		{
-			std::cout << std::endl << "Aktualnie mam takie drobnostki na zbyciu. Jesteœ zainteresowany? Jesteœ, prawda? Prawda...";
+			std::cout << "Aktualnie mam takie drobnostki na zbyciu. Jesteœ " << (player->GetSex() ? "zainteresowana" : "zainteresowany") <<"? Jesteœ, prawda? Prawda..." << std::endl;
 		}
 		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex() != false || player->GetStats().getByEnum(Charisma) >= 15))// 15- jakaœ lczba, któr¹ trzeba doustaliæ
 		{
-			std::cout << std::endl << "Nie ma tego wiele, ale weŸ, co chcesz";
+			std::cout << "Nie ma tego wiele, ale weŸ, co chcesz" << std::endl;
 			seller = 1;
 		}
 		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() != PROFF_BARD || player->GetSex() == false || player->GetStats().getByEnum(Charisma) < 15))
 		{
-			std::cout << std::endl << "Jak zwykle u mnie eliksiry najlepszej jakoœci. Patrz i wybieraj, czego tylko pragniesz.";
+			std::cout << "Jak zwykle u mnie eliksiry najlepszej jakoœci. Patrz i wybieraj, czego tylko pragniesz." << std::endl;
 			seller = 6;
 		}
 		else
 		{
-			std::cout << std::endl << "Tylko niczego nie zbij.";
+			std::cout << "Tylko niczego nie zbij." << std::endl;
 		}
 
 
@@ -117,12 +117,11 @@ void Non_Character::buy(Character* player)
 
 		for (int i = 0; i < 6; i += 2) //wypisywanie
 		{
-			std::cout << std::endl << "nazwa:      " << i + 1 << ". " << potions[i].eq_name << "\t\t\t\t" << i+2 << potions[i + 1].eq_name;
-			std::cout << std::endl << "statystyka?:" << potions[i].eq_stats[i] << "\t\t\t\t" << potions[i + 1].eq_stats[i + 1];
-			std::cout << std::endl << "koszt:      " << potions[i].eq_cost     << "\t\t\t\t" << potions[i + 1].eq_cost;
-			std::cout << std::endl;
+			std::cout << "nazwa:      " << i + 1 << ". " << potions[i].eq_name << "\t\t\t\t" << i+2 << potions[i + 1].eq_name << std::endl;
+			std::cout << "statystyka?:" << potions[i].eq_stats[i] << "\t\t\t\t" << potions[i + 1].eq_stats[i + 1] << std::endl;
+			std::cout << "koszt:      " << potions[i].eq_cost     << "\t\t\t\t" << potions[i + 1].eq_cost << std::endl;
 		}
-		std::cout << std::endl << "To który z eliksirów chcia³byœ kupiæ? ('6' - nie kupujê)" << std::endl;
+		std::cout << "To który z eliksirów " << (player->GetSex() ? "chcia³abyœ" : "chcia³byœ") << " kupiæ? ('6' - nie kupujê)" << std::endl;
 		std::cin >> nr_choice;
 		
 		if (nr_choice > 0 && nr_choice <= 6)
@@ -130,19 +129,18 @@ void Non_Character::buy(Character* player)
 			agreement = pay(potions[nr_choice - 1].eq_cost, player);
 			if (agreement == 1)
 			{
-				// danie do plecaka przedmiotu przedmiotu o tym numerze ------------------------------------------------------------------//
-
+				player->addEquipment(potions[nr_choice - 1]);
 			}
 		}
 		else
 		{
-			std::cout << std::endl << "eh...";
+			std::cout << "Eh..." << std::endl;
 		}
 	}
 	else if (npc_type == 'Z') //zbrojmistrzowie
 	{
 		Armor armory[6];
-		if (npc_name == "Zbrojmistrz1" || npc_name == "Zbrojmistrz4")
+		if (npc_name == "Gerwalt" || npc_name == "Oktis")
 		{
 			
 			for (int i = 0; i < 6; i++)
@@ -152,17 +150,17 @@ void Non_Character::buy(Character* player)
 				armory[i].type_stats(player);
 			}
 
-			if (npc_name == "Zbrojmistrz1")
+			if (npc_name == "Gerwalt")
 			{
-				std::cout << std::endl << "W mojej ofercie aktualnie znajduj¹ siê tylko takie przedmioty";
+				std::cout << "W mojej ofercie aktualnie znajduj¹ siê tylko takie przedmioty" << std::endl;
 			}
-			else if (npc_name == "Zbrojmistrz4")
+			else if (npc_name == "Oktis")
 			{
-				std::cout << std::endl << "Takie skarbeñki tu mamy. Na pewno któryœ ci siê spodoba!";
+				std::cout << "Takie skarbeñki tu mamy. Na pewno któryœ ci siê spodoba!" << std::endl;
 			}
 			else
 			{
-				std::cout << std::endl << "Tylko nie zniszcz.";
+				std::cout << "Tylko nie zniszcz." << std::endl;
 			}
 		}
 		else if (npc_name == "Zbrojmistrz2" || npc_name == "Zbrojmistrz5")
@@ -176,15 +174,15 @@ void Non_Character::buy(Character* player)
 
 			if (npc_name == "Zbrojmistrz2")
 			{
-				std::cout << std::endl << "...";
+				std::cout << "..." << std::endl;
 			}
 			else if (npc_name == "Zbrojmistrz5")
 			{
-				std::cout << std::endl << "Takie skarbeñki tu mamy. Na pewno któryœ ci siê spodoba!";
+				std::cout << "Takie skarbeñki tu mamy. Na pewno któryœ ci siê spodoba!" << std::endl;
 			}
 			else
 			{
-				std::cout << std::endl << "Tylko nie zniszcz.";
+				std::cout << "Tylko nie zniszcz." << std::endl;
 			}
 		}
 		else if (npc_name == "Zbrojmistrz3" || npc_name == "Zbrojmistrz6")
@@ -198,17 +196,17 @@ void Non_Character::buy(Character* player)
 
 			if (npc_name == "Zbrojmistrz3")
 			{
-				std::cout << std::endl << "...To, to proszê chwilkê zaczekaæ, za chwilkê przyniosê wszystko, co mam.";
+				std::cout << "...To, to proszê chwilkê zaczekaæ, za chwilkê przyniosê wszystko, co mam." << std::endl;
 				Sleep(3000);
-				std::cout << std::endl << "Proszê...";
+				std::cout << "Proszê..." << std::endl;
 			}
 			else if (npc_name == "Zbrojmistrz6")
 			{
-				std::cout << std::endl << "Takie skarbeñki tu mamy. Na pewno któryœ ci siê spodoba!";
+				std::cout << "Takie skarbeñki tu mamy. Na pewno któryœ ci siê spodoba!" << std::endl;
 			}
 			else
 			{
-				std::cout << std::endl << "Tylko nie zniszcz.";
+				std::cout << "Tylko nie zniszcz." << std::endl;
 			}
 		}
 
@@ -219,17 +217,16 @@ void Non_Character::buy(Character* player)
 
 		for (int i = 0; i < 6; i += 2) //wypisywanie nazwy
 		{
-			std::cout << std::endl << "nazwa:        " << i + 1 << ". " << armory[i].armor_name << "\t\t\t\t" << armory[i + 1].armor_name;
-			std::cout << std::endl << "si³a:         " << armory[i].armor_stats[0] << "\t\t\t\t" << armory[i + 1].armor_stats[0];
-			std::cout << std::endl << "wytrzyma³oœæ: " << armory[i].armor_stats[1] << "\t\t\t\t" << armory[i + 1].armor_stats[1];
-			std::cout << std::endl << "charyzma:     " << armory[i].armor_stats[2] << "\t\t\t\t" << armory[i + 1].armor_stats[2];
-			std::cout << std::endl << "inteligencja: " << armory[i].armor_stats[3] << "\t\t\t\t" << armory[i + 1].armor_stats[3];
-			std::cout << std::endl << "zwinnoœæ:     " << armory[i].armor_stats[4] << "\t\t\t\t" << armory[i + 1].armor_stats[4];
-			std::cout << std::endl << "szczêœcie:    " << armory[i].armor_stats[5] << "\t\t\t\t" << armory[i + 1].armor_stats[5];
-			std::cout << std::endl << "koszt:        " << armory[i].ar_cost        << "\t\t\t\t" << armory[i + 1].ar_cost;
-			std::cout << std::endl;
+			std::cout << "Nazwa:        " << i + 1 << ". " << armory[i].armor_name << "\t\t\t\t" << armory[i + 1].armor_name << std::endl;
+			std::cout << "Si³a:         " << armory[i].armor_stats[0] << "\t\t\t\t" << armory[i + 1].armor_stats[0] << std::endl;
+			std::cout << "Wytrzyma³oœæ: " << armory[i].armor_stats[1] << "\t\t\t\t" << armory[i + 1].armor_stats[1] << std::endl;
+			std::cout << "Charyzma:     " << armory[i].armor_stats[2] << "\t\t\t\t" << armory[i + 1].armor_stats[2] << std::endl;
+			std::cout << "Inteligencja: " << armory[i].armor_stats[3] << "\t\t\t\t" << armory[i + 1].armor_stats[3] << std::endl;
+			std::cout << "Zwinnoœæ:     " << armory[i].armor_stats[4] << "\t\t\t\t" << armory[i + 1].armor_stats[4] << std::endl;
+			std::cout << "Szczêœcie:    " << armory[i].armor_stats[5] << "\t\t\t\t" << armory[i + 1].armor_stats[5] << std::endl;
+			std::cout << "Koszt:        " << armory[i].ar_cost        << "\t\t\t\t" << armory[i + 1].ar_cost << std::endl;
 		}
-		std::cout << std::endl << "Co kupujesz? ('6' - nie kupujê)" << std::endl;
+		std::cout << "Co kupujesz? ('6' - nie kupujê)" << std::endl;
 		std::cin >> nr_choice;
 		if (nr_choice > 0 && nr_choice <= 6)
 		{
@@ -242,7 +239,7 @@ void Non_Character::buy(Character* player)
 		}
 		else
 		{
-			std::cout << std::endl << "...";
+			std::cout << "..." << std::endl;
 		}
 	}
 	else if (npc_type == 'H') //handlarz
@@ -260,11 +257,11 @@ void Non_Character::buy(Character* player)
 		}
 		special_thing.usage(player);
 
-		std::cout << std::endl << "Jest to jedyna taka okazja, lepszej nie bêdzie!";
+		std::cout << "Jest to jedyna taka okazja, lepszej nie bêdzie!" << std::endl;
 		special_thing.eq_cost = 1001;
-		std::cout << std::endl << "nazwa: " << special_thing.eq_name;
-		std::cout << std::endl << "koszt: " << special_thing.eq_cost;
-		std::cout << std::endl << "Kupujesz? ('1'-tak, reszta - nie)";
+		std::cout << "Nazwa: " << special_thing.eq_name << std::endl;
+		std::cout << "Koszt: " << special_thing.eq_cost << std::endl;
+		std::cout << "Kupujesz? ('1'-tak, reszta - nie)" << std::endl;
 		std::cin >> nr_choice;
 		if (nr_choice == 1)
 		{
@@ -278,7 +275,7 @@ void Non_Character::buy(Character* player)
 		}
 		else
 		{
-			std::cout << std::endl << "Nie martw siê, bêdzie to na ciebie czekaæ a¿ kiedyœ kupisz.";
+			std::cout << "Nie martw siê, bêdzie to na ciebie czekaæ, a¿ kiedyœ kupisz." << std::endl;
 		}
 	}
 	else if (npc_type == 'K') //kowal
@@ -291,11 +288,11 @@ void Non_Character::buy(Character* player)
 
 		if (npc_name == "Kowal Gregori")
 		{
-			std::cout << std::endl << "Wygl¹dasz jak " << player->GetProffesion() << ". Masz, takie rzeczy s¹ dla takich jak ty.";
+			std::cout << "Wygl¹dasz jak " << player->GetProffesionName() << ". Masz, takie rzeczy s¹ dla takich jak ty." << std::endl;
 		}
 		else if (npc_name == "Kowal Andrzej")
 		{
-			std::cout << std::endl << "Tyœ jest ten, no... " << player->GetProffesion() << "! To dla ciebie.";
+			std::cout << "Tyœ jest ten, no... " << player->GetProffesionName() << "! To dla ciebie." << std::endl;
 		}
 	
 		for (int i = 0; i < 6; i++) //koszt
@@ -305,20 +302,19 @@ void Non_Character::buy(Character* player)
 
 		for (int i = 0; i < 6; i+=2) //wypisanie
 		{
-			std::cout << std::endl << "nazwa:        " << i + 1 << ". " << weaps[i].we_name << "\t\t\t\t" << weaps[i + 1].we_name;
-			std::cout << std::endl << "si³a:         " << weaps[i].weapon_stats[0] << "\t\t\t\t" << weaps[i + 1].weapon_stats[0];
-			std::cout << std::endl << "wytrzyma³oœæ: " << weaps[i].weapon_stats[1] << "\t\t\t\t" << weaps[i + 1].weapon_stats[1];
-			std::cout << std::endl << "charyzma:     " << weaps[i].weapon_stats[2] << "\t\t\t\t" << weaps[i + 1].weapon_stats[2];
-			std::cout << std::endl << "inteligencja: " << weaps[i].weapon_stats[3] << "\t\t\t\t" << weaps[i + 1].weapon_stats[3];
-			std::cout << std::endl << "zwinnoœæ:     " << weaps[i].weapon_stats[4] << "\t\t\t\t" << weaps[i + 1].weapon_stats[4];
-			std::cout << std::endl << "szczêœcie:    " << weaps[i].weapon_stats[5] << "\t\t\t\t" << weaps[i + 1].weapon_stats[05];
-			std::cout << std::endl << "koszt:        " << weaps[i].we_cost		   << "\t\t\t\t" << weaps[i + 1].we_cost;
-			std::cout << std::endl;
+			std::cout << "Nazwa:        " << i + 1 << ". " << weaps[i].we_name << "\t\t\t\t" << weaps[i + 1].we_name << std::endl;
+			std::cout << "Si³a:         " << weaps[i].weapon_stats[0] << "\t\t\t\t" << weaps[i + 1].weapon_stats[0] << std::endl;
+			std::cout << "Wytrzyma³oœæ: " << weaps[i].weapon_stats[1] << "\t\t\t\t" << weaps[i + 1].weapon_stats[1] << std::endl;
+			std::cout << "Charyzma:     " << weaps[i].weapon_stats[2] << "\t\t\t\t" << weaps[i + 1].weapon_stats[2] << std::endl;
+			std::cout << "Inteligencja: " << weaps[i].weapon_stats[3] << "\t\t\t\t" << weaps[i + 1].weapon_stats[3] << std::endl;
+			std::cout << "Zwinnoœæ:     " << weaps[i].weapon_stats[4] << "\t\t\t\t" << weaps[i + 1].weapon_stats[4] << std::endl;
+			std::cout << "Szczêœcie:    " << weaps[i].weapon_stats[5] << "\t\t\t\t" << weaps[i + 1].weapon_stats[5] << std::endl;
+			std::cout << "Koszt:        " << weaps[i].we_cost		   << "\t\t\t\t" << weaps[i + 1].we_cost << std::endl;
 
 
 		}
 
-		std::cout << std::endl << "Kupujesz coœ? ('6' - nie kupujê)" << std::endl;
+		std::cout << "Kupujesz coœ? ('6' - nie kupujê)" << std::endl;
 		std::cin >> nr_choice;
 		if (nr_choice > 0 && nr_choice <= 6)
 		{
@@ -331,7 +327,7 @@ void Non_Character::buy(Character* player)
 		}
 		else
 		{
-			std::cout << std::endl << "I po co to wyci¹ga³em?!";
+			std::cout << "I po co to wyci¹ga³em?!" << std::endl;
 		}
 	}
 	//potrzebny plecak
@@ -348,9 +344,9 @@ void Non_Character::repair(Character* player)
 	else
 		rep_cost = przelicznik_ceny * (1 - thing1.defending()) + przelicznik_ceny;
 		
-	std::cout << std::endl << "1. Helm";
-	std::cout << std::endl << "2. Napiersnik";
-	std::cout << std::endl << "3. Buty";
+	std::cout << "1. Helm" << std::endl;
+	std::cout << "2. Napiersnik" << std::endl;
+	std::cout << "3. Buty" << std::endl;
 	std::cin >> choice_armor;
 	std::cout << "Koszt naprawy to: ";
 	switch (choice_armor)
@@ -391,10 +387,10 @@ bool Non_Character::pay(int cost, Character* player)
 	char paying_choice = 'o';
 	bool number = 0;
 
-	std::cout << std::endl << "Placisz? (y/n)";
+	std::cout << "Placisz? (y/n)" << std::endl;
 	while (paying_choice != 'y' && paying_choice != 'n')
 	{
-		if (number == 1) std::cout << std::endl << "To znaczy tak, czy nie? Nie rozumiem... (y/n)";
+		if (number == 1) std::cout << "To znaczy tak, czy nie? Nie rozumiem... (y/n)" << std::endl;
 		std::cin >> paying_choice;
 		number = 1;
 	}
@@ -404,7 +400,7 @@ bool Non_Character::pay(int cost, Character* player)
 	case 'y':
 		if (player->getGold() < cost)
 		{
-			std::cout << std::endl << "Chyba nie masz czym zap³aciæ. Wróæ, gdy uzbierasz nieco drobnych";
+			std::cout << "Chyba nie masz czym zap³aciæ. Wróæ, gdy uzbierasz nieco drobnych" << std::endl;
 			return 0;
 		}
 		else
@@ -413,7 +409,7 @@ bool Non_Character::pay(int cost, Character* player)
 			return 1;
 		}
 	case 'n':
-		std::cout << std::endl << "No có¿...";
+		std::cout << "No có¿..." << std::endl;
 		return 0;
 	}
 }
@@ -425,133 +421,133 @@ void Non_Character::opening_talk(char npc_world[3][3][15][15], Character* player
 	{
 		if (npc_name == "Chemik Renagan")
 		{
-			std::cout << std::endl << "Witam, witam! Pan tu chyba nowy? Nienowy? No nowy Pan tu, nie inaczej!";
+			std::cout << "Witam, witam! Pan tu chyba nowy? Nienowy? No nowy Pan tu, nie inaczej!" << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "A czego Pan potrzebuje? Zió³ek? Broni? Nie? No oczywiscie, ¿e nie!";
+			std::cout << "A czego Pan potrzebuje? Zió³ek? Broni? Nie? No oczywiscie, ¿e nie!" << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "Nie po to pan przyszed³ akurat do mnie. Czy jednak nie? oczywiœcie!";
+			std::cout << "Nie po to pan przyszed³ akurat do mnie. Czy jednak nie? oczywiœcie!" << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "Oczywiœcie, ¿e Pan chcia³ przyjœæ tutaj, w moje progi. Oczywiœcie... ";
+			std::cout << "Oczywiœcie, ¿e Pan chcia³ przyjœæ tutaj, w moje progi. Oczywiœcie... " << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "To jak, o czym chcia³by Pan ze mn¹ porozmawiaæ?";
+			std::cout << "To jak, o czym chcia³by Pan ze mn¹ porozmawiaæ?" << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() != PROFF_BARD || player->GetSex() == false))
 		{
-			std::cout << std::endl << ".";
-			Sleep(1000);
 			std::cout << ".";
 			Sleep(1000);
 			std::cout << ".";
 			Sleep(1000);
-			std::cout << std::endl << "Dzieñ dobry.";
-			Sleep(750);
-			std::cout << std::endl << "Przyjezdny widzê, niekt tendy nie przeje¿d¿a. Tego jestem pewna.";
-			Sleep(750);
-			std::cout << std::endl << "Wola³abym, by Pan szybko kupi³ pan szybko to, co chce i odszed³. Nie mam czasu, muszê siê pakowaæ...";
+			std::cout << "." << std::endl;
 			Sleep(1000);
-			std::cout << std::endl << "Poza tym wygl¹da pan doœæ... nieprzyjaŸnie";
+			std::cout << "Dzieñ dobry." << std::endl;
+			Sleep(750);
+			std::cout << "Przyjezdny widzê, niekt tendy nie przeje¿d¿a. Tego jestem pewna." << std::endl;
+			Sleep(750);
+			std::cout << "Wola³abym, by Pan szybko kupi³ pan szybko to, co chce i odszed³. Nie mam czasu, muszê siê pakowaæ..." << std::endl;
+			Sleep(1000);
+			std::cout << "Poza tym wygl¹da pan doœæ... nieprzyjaŸnie" << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex() != false))
 		{
-			std::cout << std::endl << "Ah... dzieñ dobry. Nazywam siê Beatrycze, ale wiêkszoœæ ludzi mo¿e mi mówiæ Beti";
+			std::cout << "Ah... dzieñ dobry. Nazywam siê Beatrycze, ale wiêkszoœæ ludzi mo¿e mi mówiæ Betty" << std::endl;
 			Sleep(500);
-			std::cout << std::endl << "Oczywiœcie równie¿ i ty mo¿esz mnie tak nazywaæ, jeœli tylko wejdziesz do mojego sklepiku.";
+			std::cout << "Oczywiœcie, równie¿ i ty mo¿esz mnie tak nazywaæ, jeœli tylko wejdziesz do mojego sklepiku." << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "Usi¹dziemy w spokojnym zau³ku, z dala od pojêkiwañ potworów.";
+			std::cout  << "Usi¹dziemy w spokojnym zau³ku, z dala od pojêkiwañ potworów." << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "Porozmawiamy sobie przy herbatce.";
+			std::cout << "Porozmawiamy sobie przy herbatce." << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "Proszê, nie zwracaj wiêkszej uwagi na ba³agan, w³aœnie siê pakujê.";
+			std::cout << "Proszê, nie zwracaj wiêkszej uwagi na ba³agan, w³aœnie siê pakujê." << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "To miejsce staje siê gorsze z dnia na dzieñ, czujê, ¿e muszê wyjechaæ.";
+			std::cout << "To miejsce staje siê gorsze z dnia na dzieñ, czujê, ¿e muszê wyjechaæ." << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "A tak poza tym...";
+			std::cout << "A tak poza tym..." << std::endl;
 			Sleep(500);
-			std::cout << std::endl << "zosta³o mi jeszcze kilkanaœcie eliksirów. Mogê ci je odsprzedaæ za ni¿sz¹ cenê.";
+			std::cout << "zosta³o mi jeszcze kilkanaœcie eliksirów. Mogê ci je odsprzedaæ za ni¿sz¹ cenê." << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Kowal Gregori")
 		{
-			std::cout << std::endl << "Czego?";
+			std::cout << "Czego?" << std::endl;
 			Sleep(300);
-			std::cout << std::endl << "...";
+			std::cout << "..." << std::endl;
 			Sleep(1250);
-			std::cout << std::endl << "Jeœli chcesz broñ, to trzeba by³o gadaæ!";
+			std::cout << "Jeœli chcesz broñ, to trzeba by³o gadaæ!" << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "*pod nosem* Ah, ci aroganccy poszukiwacze guzów i nieszczêœcia";
+			std::cout << "*pod nosem* Ah, ci aroganccy poszukiwacze guzów i nieszczêœcia" << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Kowal Andrzej")
 		{
-			std::cout << std::endl << "Czego?!";
+			std::cout << "Czego?!" << std::endl;
 			Sleep(800);
-			std::cout << std::endl << "Nie przeszkadzaæ, zajêty jestem!";
+			std::cout << "Nie przeszkadzaæ, zajêty jestem!" << std::endl;
 			Sleep(700);
-			std::cout << std::endl << "A, chcesz naprawiæ zbrojê. To dawaj!";
+			std::cout << "A, chcesz naprawiæ zbrojê. To dawaj!" << std::endl;
 			Sleep(500);
-			std::cout << std::endl << "...";
+			std::cout << "..." << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Handlarz")
 		{
-			std::cout << std::endl << "Oh, witam przybysza. Sk¹d Pan przyby³?";
+			std::cout << "Oh, witam przybysza. Sk¹d Pan przyby³?" << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "Na pewno z daleka, taka cera nie bierze siê z nik¹d.";
+			std::cout << "Na pewno z daleka, taka cera nie bierze siê z nik¹d." << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "Có¿ takiego robi Pan w naszych skromnych, aktualnie doœæ nieprzyjemnych progach?";
+			std::cout << "Có¿ takiego robi Pan w naszych skromnych, aktualnie doœæ nieprzyjemnych progach?" << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "Mo¿e chcia³by pan byæ naszym wybawc¹ i zniszczyæ te okropne stwory, szwêdaj¹ce siê wszêdzie po okolicy?";
+			std::cout << "Mo¿e chcia³by pan byæ naszym wybawc¹ i zniszczyæ te okropne stwory, szwêdaj¹ce siê wszêdzie po okolicy?" << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "Wiem, co takiej osobie jak Pan mo¿e siê przydaæ, proszê za mn¹ do sklepu!";
+			std::cout << "Wiem, co takiej osobie jak Pan mo¿e siê przydaæ, proszê za mn¹ do sklepu!" << std::endl;
 			Sleep(600);
 		}
-		else if (npc_name == "Zbrojmistrz1")
+		else if (npc_name == "Gerwalt")
 		{
-			std::cout << std::endl << "O, klient! Zapraszam! Nieczêsto zdarza mi siê ostatnio mieæ kogokolwiek,";
-			std::cout << std::endl << "dlatego mam doœæ du¿o produków na zbyciu.";
+			std::cout << "O, klient! Zapraszam! Nieczêsto zdarza mi siê ostatnio mieæ kogokolwiek," << std::endl;
+			std::cout << "dlatego mam doœæ du¿o produków na zbyciu." << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "Do wyboru do koloru, wed³ug uznania i preferencji.";
+			std::cout << "Do wyboru do koloru, wed³ug uznania i preferencji." << std::endl;
 			Sleep(1000);
 		}
 		else if (npc_name == "Zbrojmistrz2")
 		{
-			std::cout << std::endl << "...";
+			std::cout << "..." << std::endl;
 			Sleep(700);
-			std::cout << std::endl << "...";
+			std::cout << "..." << std::endl;
 			Sleep(500);
-			std::cout << std::endl << "...";
+			std::cout << "..." << std::endl;
 			Sleep(300);
 		}
 		else if (npc_name == "Zbrojmistrz3")
 		{
-			std::cout << std::endl << "Co?";
+			std::cout << "Co?" << std::endl;
 			Sleep(500);
-			std::cout << std::endl << "A tak, tak... dzieñ dobry.";
+			std::cout << "A tak, tak... dzieñ dobry." << std::endl;
 			Sleep(500);
-			std::cout << std::endl << "W czym mogê pomóc?";
+			std::cout << "W czym mogê pomóc?" << std::endl;
 			Sleep(500);
 		}
-		else if (npc_name == "Zbrojmistrz4") 
+		else if (npc_name == "Oktis") 
 		{
-			std::cout << std::endl << "Czaaaapki, kapelusze, he³mym, bereeetyyy!";
+			std::cout << "Czaaaapki, kapelusze, he³mym, bereeetyyy!" << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "Ceny niskie i coœ na g³owê, same zleeetyyy!";
+			std::cout << "Ceny niskie i coœ na g³owê, same zleeetyyy!" << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Zbrojmistrz5") 
 		{
-			std::cout << std::endl << "Bluuuzy, kurtki, zbrooooje!";
+			std::cout << "Bluuuzy, kurtki, zbrooooje!" << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "Mam tu wszyyystkie modne stroje!";
+			std::cout << "Mam tu wszyyystkie modne stroje!" << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Zbrojmistrz6") 
 		{
-			std::cout << std::endl << "Stopy go³e, có¿ pomo¿e?";
+			std::cout << "Stopy go³e, có¿ pomo¿e?" << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "A me butki! A to mo¿e!";
+			std::cout << "A me butki! A to mo¿e!" << std::endl;
 			Sleep(500);
 		}
 
@@ -561,90 +557,90 @@ void Non_Character::opening_talk(char npc_world[3][3][15][15], Character* player
 	{
 		if (npc_name == "Chemik Renagan")
 		{
-			std::cout << std::endl << "Witam ponownie! Jak tam sie korzysta³o z moich wyrobów? Dobrze?";
+			std::cout << "Witam ponownie! Jak tam sie korzysta³o z moich wyrobów? Dobrze?" << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "No oczywiœcie, ¿e Dobrze! Wybornie! To jak, przyszedl Pan po wiecej, prawda?";
+			std::cout << "No oczywiœcie, ¿e Dobrze! Wybornie! To jak, przyszedl Pan po wiecej, prawda?" << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "Jak¿e by inaczej! Nieinaczej? No oczywiœcie...";
+			std::cout << "Jak¿e by inaczej! Nieinaczej? No oczywiœcie..." << std::endl;
 			Sleep(500);
-			std::cout << std::endl << "Porozmawiajmy wiêc o interesach.";
+			std::cout << "Porozmawiajmy wiêc o interesach." << std::endl;
 		}
 		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() != PROFF_BARD || player->GetSex() == false || player->GetStats().getByEnum(Charisma) < 30))
 		{
-			std::cout << std::endl << "To ponownie Pan...";
+			std::cout << "To ponownie Pan..." << std::endl;
 			Sleep(1250);
-			std::cout << std::endl << "Proszê wejœæ i wzi¹æ to, co jest Panu potrzebne.";
+			std::cout << "Proszê wejœæ i wzi¹æ to, co jest Panu potrzebne." << std::endl;
 			Sleep(500);
-			std::cout << std::endl << "Byle szybko, zajêta jestem, nie widaæ?";
+			std::cout << "Byle szybko, zajêta jestem, nie widaæ?" << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex() != false || player->GetStats().getByEnum(Charisma) >= 30))
 		{
-			std::cout << std::endl << "Witam ponownie! Osobiœcie - spodziewa³am siê, ¿e jeszcze ciê zobaczê,";
+			std::cout << "Witam ponownie! Osobiœcie - spodziewa³am siê, ¿e jeszcze ciê zobaczê," << std::endl;
 			Sleep(400);
-			std::cout << std::endl << "ale, dziêki Bogu, uda³o ci siê prze¿yæ w tym okropnym miejscu.";
+			std::cout << "ale, dziêki Bogu, uda³o ci siê prze¿yæ w tym okropnym miejscu." << std::endl;
 			Sleep(700);
-			std::cout << std::endl << "Proszê, wejdŸ, jeszze nieskoñczy³am siê pakowaæ, wiêc mo¿esz siê rozgoœciæ.";
+			std::cout << "Proszê, wejdŸ, jeszze nie skoñczy³am siê pakowaæ, wiêc mo¿esz siê rozgoœciæ." << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Kowal Gregori" || npc_name == "Kowal Andrzej")
 		{
-			std::cout << std::endl << "A, to ty..." << std::endl << "Popatrz se i mów, czego chcesz.";
+			std::cout << "A, to ty..." << std::endl << "Popatrz se i mów, czego chcesz." << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Handlarz")
 		{
-			std::cout << std::endl << "Dzieñ dobry, co tym razem chcia³by Pan kupiæ? Osobiœcie poleci³bym ciasto.";
+			std::cout << "Dzieñ dobry, co tym razem chcia³by Pan kupiæ? Osobiœcie poleci³bym ciasto." << std::endl;
 			Sleep(500);
 		}
-		else if (npc_name == "Zbrojmistrz1")
+		else if (npc_name == "Gerwalt")
 		{
-			std::cout << std::endl << "Zapraszam!...";
+			std::cout << "Zapraszam!..." << std::endl;
 			Sleep(1000);
-			std::cout << std::endl << "Kojarzê Pana i cieszê siê, ¿e jest Pan zainteresowany moimi ofertami!";
+			std::cout << "Kojarzê Pana i cieszê siê, ¿e jest Pan zainteresowany moimi ofertami!" << std::endl;
 			Sleep(500);
-			std::cout << std::endl << "S³ucham, czego Pan szuka? W czym mogê pomóc?";
+			std::cout << "S³ucham, czego Pan szuka? W czym mogê pomóc?" << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Zbrojmistrz2") 
 		{
-			std::cout << std::endl << "...";
+			std::cout << "..." << std::endl;
 			Sleep(1000);
 		}
 		else if (npc_name == "Zbrojmistrz3") 
 		{
-			std::cout << std::endl << "...";
+			std::cout << "..." << std::endl;
 			Sleep(500);
-			std::cout << std::endl << "o... witam ponownie, nie zauwa¿y³em Pana.";
+			std::cout << "o... witam ponownie, nie zauwa¿y³em Pana." << std::endl;
 			Sleep(900);
-			std::cout << std::endl << "W czym pomóc?";
+			std::cout << "W czym pomóc?" << std::endl;
 			Sleep(500);
 		}
-		else if (npc_name == "Zbrojmistrz4")
+		else if (npc_name == "Oktis")
 		{
-			std::cout << std::endl << "Czaaaapki, kapelusze, he³mym, bereeetyyy!";
+			std::cout << "Czaaaapki, kapelusze, he³mym, bereeetyyy!" << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "Ceny niskie, coœ na g³owê - same zleeetyyy!";
+			std::cout << "Ceny niskie, coœ na g³owê - same zleeetyyy!" << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Zbrojmistrz5") 
 		{
-			std::cout << std::endl << "Bluuuzy, kurtki, zbrooooje!";
+			std::cout << "Bluuuzy, kurtki, zbrooooje!" << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "Mam tu wszyyystkie modne stroje!";
+			std::cout << "Mam tu wszyyystkie modne stroje!" << std::endl;
 			Sleep(500);
 		}
 		else if (npc_name == "Zbrojmistrz6")
 		{
-			std::cout << std::endl << "Stopy go³e - có¿ pomo¿e?";
+			std::cout << "Stopy go³e - có¿ pomo¿e?" << std::endl;
 			Sleep(600);
-			std::cout << std::endl << "A me butki! A to mo¿e!";
+			std::cout << "A me butki! A to mo¿e!" << std::endl;
 			Sleep(500);
 		}
 	}
 	else
 	{
-		std::cout << std::endl << "Popsuted dzieñ dobry.";
+		std::cout << "Popsuted dzieñ dobry." << std::endl;
 		Sleep(300);
 	}
 
@@ -678,22 +674,22 @@ void Non_Character::talk(Character* player)
 		{
 
 		}
-		else if (npc_name == "Zbrojmistrz1")
+		else if (npc_name == "Gerwalt")
 		{
 
 		}
 		else if (npc_name == "Zbrojmistrz2")
 		{
-			std::cout << std::endl << "...";
+			std::cout << "..." << std::endl;
 			Sleep(1000);
-			std::cout << std::endl << "Nie.";
+			std::cout << "Nie." << std::endl;
 			Sleep(1000);
 		}
 		else if (npc_name == "Zbrojmistrz3")
 		{
 
 		}
-		else if (npc_name == "Zbrojmistrz4")
+		else if (npc_name == "Oktis")
 		{
 
 		}
@@ -732,22 +728,22 @@ void Non_Character::talk(Character* player)
 		{
 
 		}
-		else if (npc_name == "Zbrojmistrz1")
+		else if (npc_name == "Gerwalt")
 		{
 
 		}
 		else if (npc_name == "Zbrojmistrz2")
 		{
-			std::cout << std::endl << "...";
+			std::cout << "..." << std::endl;
 			Sleep(1000);
-			std::cout << std::endl << "Nie.";
+			std::cout << "Nie." << std::endl;
 			Sleep(1000);
 		}
 		else if (npc_name == "Zbrojmistrz3")
 		{
 
 		}
-		else if (npc_name == "Zbrojmistrz4")
+		else if (npc_name == "Oktis")
 		{
 
 		}

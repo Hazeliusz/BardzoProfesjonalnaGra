@@ -182,34 +182,6 @@ float Armor::defending()
 	return durability_cur*0.01;
 }
 
-void Armor::dress() //jeœli ma to tak dzia³aæ :v ------------------------------------------------------------------------//
-{
-	/*
-	Character* player;
-
-	if (ar_wear == 0)
-	{
-		player->steength += armor_stats[0];
-		player->endurance += armor_stats[1];
-		player->charisma += armor_stats[2];
-		player->intelligence += armor_stats[3];
-		player->agility += armor_stats[4];
-		player->luck += armor_stats[5];
-
-		ar_wear = 1;
-	}
-	else if (ar_wear == 1)
-	{
-		player->steength -= armor_stats[0];
-		player->endurance -= armor_stats[1];
-		player->charisma -= armor_stats[2];
-		player->intelligence -= armor_stats[3];
-		player->agility -= armor_stats[4];
-		player->luck -= armor_stats[5];
-
-		ar_wear = 0;
-	}*/
-}
 
 //------------------------------------------------------------------------------------------------
 
@@ -275,7 +247,6 @@ void Equipment::usage(Character* player)
 {
 	if (eq_name == "eliksir")
 	{
-		usability = 1;
 		if (eq_stats[0] != 0)  		eq_name = "eliksir Galów";
 		else if (eq_stats[1] != 0)	eq_name = "wywar z czerwonego byka";
 		else if (eq_stats[2] != 0)	eq_name = "retoryka w butelce";
@@ -285,7 +256,6 @@ void Equipment::usage(Character* player)
 	}
 	else if (eq_name == "special")
 	{
-		usability = 0;
 		switch (player->GetProffesion())
 		{
 		case PROFF_KNIGHT:
@@ -326,36 +296,23 @@ void Equipment::usage(Character* player)
 			eq_stats[1] = 1;
 			eq_stats[2] = -2;
 		}
-		eq_time = 500;
 	}
 	else if (eq_name == "ciasto")
 	{
-		usability = 1;
 		eq_stats[1] = 1;
-		eq_time = 500;
 	}
 }
 
-void Equipment::take_buff()
+void Equipment::take_buff(Statistics* staty)
 {
-	if (used == 0)
-	{
-		Character* player;
-		//wp³ywanie na staty bohatera;------------------------------------------------------------------------//
-		if (usability == 1) used = 1;
-		disappear();
-	}
-	else
-	{
-		std::cout << "\nprzedmiot jest zuzyty, nie nadaje sie juz do niczego\n";
-		disappear();
-	}
+		staty->advanceStatsByEnum(Strength, eq_stats[0]);
+		staty->advanceStatsByEnum(Endurance, eq_stats[1]);
+		staty->advanceStatsByEnum(Charisma, eq_stats[2]);
+		staty->advanceStatsByEnum(Intelligence, eq_stats[3]);
+		staty->advanceStatsByEnum(Agility, eq_stats[4]);
+		staty->advanceStatsByEnum(Luck, eq_stats[5]);
 }
 
-void Equipment::disappear()
-{
-		//znikanie z plecaka;
-}
 
 //---------------------------------------------------------------------------------------------------
 
@@ -399,7 +356,7 @@ void Weapon::weapon_statistics_name(Character* player)
 			break;
 		}
 	}
-	else if (draw = 3)
+	else if (draw == 3)
 	{
 		switch (player->GetProffesion())
 		{
@@ -454,34 +411,4 @@ float Weapon::dmg_counter(Character* player)
 		return 1;
 		break;
 	}
-}
-
-void Weapon::carry() //---------------------------------------------------------------------------------------------//
-{
-	/*  to zale¿y od wersji
-	Character* player;
-
-	if (we_wear == 0)
-	{
-		player->steength += weapon_stats[0];
-		player->endurance += weapon_stats[1];
-		player->charisma += weapon_stats[2];
-		player->intelligence += weapon_stats[3];
-		player->agility += weapon_stats[4];
-		player->luck += weapon_stats[5];
-
-		we_wear = 1;
-	}
-	else if (we_wear == 1)
-	{
-		player->steength -= weapon_stats[0];
-		player->endurance -= weapon_stats[1];
-		player->charisma -= weapon_stats[2];
-		player->intelligence -= weapon_stats[3];
-		player->agility -= weapon_stats[4];
-		player->luck -= weapon_stats[5];
-
-		we_wear = 0;
-	} 
-	*/
 }
