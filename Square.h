@@ -2,6 +2,8 @@
 #include <iostream>
 #include "character.h"
 
+class Character;
+
 class Square
 {
 public:
