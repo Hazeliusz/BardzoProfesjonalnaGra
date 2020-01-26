@@ -4,6 +4,8 @@
 #include <Windows.h>
 #include "Square.h"
 #include <conio.h>
+#include "ekwipunek.h"
+#include "character.h"
 
 Square::Square()
 {
@@ -38,8 +40,9 @@ Square::Square()
 	bufor = '-';
 }
 
-void Square::check()
+void Square::check(Character* player)
 {
+
 	if (b == 0 && a == 0) //lewy górny róg ,,du¿ej'' mapy
 	{
 		if (x == 2 && y == 1) //Chemik
@@ -105,9 +108,11 @@ void Square::check()
 	}
 	else if (b == 0 && a == 1) //zamek
 	{
-		if (x == 3 && y == 13) //przedmiot przy wejœciu
+		if (x == 3 && y == 13) //przedmiot przy wejœciu 7
 		{
-
+			Armor deffender7_3;
+			deffender7_3.type_def(player);
+			deffender7_3.type_stats(player);
 		}
 		else if (x == 1 && y == 11) //NPC za zgraj¹ potworów 6 (na dole)
 		{
@@ -127,14 +132,18 @@ void Square::check()
 		}*/
 		else if (x == 1 && y == 1) //Lustro Grizzalidu, KONIEC GRY!
 		{
-
+			system("cls");
+			std::cout << "Koniec gry.";
+			//--------------------------------------------------------------------------------------------------------------//
 		}
 	}
 	else if (b == 0 && a == 2) //prawy górny róg ,,du¿ej'' mapy
 	{
-		if (x == 10 && y == 9) //przedmiot obok NPC
+		if (x == 10 && y == 9) //przedmiot obok NPC 8
 		{
-
+			Armor deffender8_1;
+			deffender8_1.type_def(player);
+			deffender8_1.type_stats(player);
 		}
 		else if (x == 11 && y == 9) //NPC jedyny tutaj
 		{
@@ -144,7 +153,8 @@ void Square::check()
 		}
 		else if (x == 7 && y == 1) //przedmiot za dwoma potworami 8
 		{
-
+			Weapon attacker8;
+			attacker8.weapon_statistics_name(player);
 		}
 	}
 	else if (b == 1 && a == 0) //czêœæ na pó³noc od startu
@@ -157,11 +167,15 @@ void Square::check()
 		}
 		else if (x == 5 && y == 6) //przedmiot za dwoma potworami 4
 		{
-
+			Armor deffender4_2;
+			deffender4_2.type_def(player);
+			deffender4_2.type_stats(player);
 		}
 	 else if (x == 7 && y == 5) //przedmiot za dwoma potworami 5
 		{
-
+			Armor deffender5;
+			deffender5.type_def(player);
+			deffender5.type_stats(player);
 		}
 	 else if (x == 5 && y == 3) //NPC w górnej czêœci
 		{
@@ -174,15 +188,19 @@ void Square::check()
 	{
 		if (x == 3 && y == 13) //przedmiot otoczony potworami 7
 		{
-
+			Armor deffender7_1;
+			deffender7_1.type_def(player);
+			deffender7_1.type_stats(player);
 		}
 		else if (x == 1 && y == 7) //przedmiot za zgraj¹ potworów 6
 		{
-
+			Armor deffender6;
+			deffender6.type_def(player);
+			deffender6.type_stats(player);
 		}
 		else if (x == 7 && y == 3) //przedmiot za potworem 7
 		{
-
+			Equipment potion7 = { "eliskir", player };
 		}
 		else if (x == 6 && y == 6) //NPC jedyny tutaj
 		{
@@ -195,7 +213,9 @@ void Square::check()
 	{
 		if (x == 13 && y == 11) //przedmiot za zgraj¹ potworów 7
 		{
-
+			Armor deffender7_2;
+			deffender7_2.type_def(player);
+			deffender7_2.type_stats(player);
 		}
 		else if (x == 7 && y == 2) //NPC jedyny tutaj
 		{
@@ -212,27 +232,38 @@ void Square::check()
 			Sleep(10000);
 			system("cls");
 		}
-		else if (x == 1 && y == 10) //pierwsza broñ
+		else if (x == 1 && y == 10) //pierwsza broñ w.w
 		{
-
+			Weapon attacker_w;
+			attacker_w.weapon_statistics_name(player);
 		}
-		else if (x == 1 && y == 4) //przedmiot przy lewej granicy
+		else if (x == 1 && y == 4) //przedmiot przy lewej granicy 1
 		{
-
+			Armor deffender1_1;
+			deffender1_1.type_def(player);
+			deffender1_1.type_stats(player);
 		}
 		else if (x == 3 && y == 9) //przedmiot we wnêce za ,,1''
 		{
-
+			Armor deffender1_2;
+			deffender1_2.type_def(player);
+			deffender1_2.type_stats(player);
 		}
-		else if (x == 11 && y == 10) //przedmiot w prawym dolnym rogu
+		else if (x == 11 && y == 10) //przedmiot w prawym dolnym rogu 2
 		{
-
+			Armor deffender2;
+			deffender2.type_def(player);
+			deffender2.type_stats(player);
 		}
 		else if (x == 10 && y == 1) //NPC w prawym górnym rogu
 		{
 			std::cout << "Pamiêtam, ¿e jak by³em ma³y, w Borknagarze w ogóle nie by³o potworów... \nNie wiem co siê sta³o, ale pewnego dnia, to by³o z 200 lat temu, \nmnisi z klasztoru przestali siê pokazywaæ... \nPewnie potwory dopad³y i ich...\n";
 			Sleep(10000);
 			system("cls");
+		}
+		else if (x == 10 && y == 7) // za 3
+		{
+			Equipment potion3 = { "eliskir", player };
 		}
 	}
 	else if (b == 2 && a == 1) //wioska
@@ -302,36 +333,40 @@ void Square::check()
 	}
 	else if (b == 2 && a == 2) //prawy dolny róg ,,du¿ej'' mapy
 	{
-	if (x == 13 && y == 13) //prawy dolny róg
+		if (x == 13 && y == 13) //prawy dolny róg 5
 		{
-
+			Equipment potion5 = { "eliskir", player };
 		}
-	else if (x == 8 && y == 11) //przedmiot otoczony potworami 3 na dole
-	{
-
-	}
-	else if (x == 5 && y == 9) //przedmiot za zgraj¹ potworów 2
-	{
-
-	}
-	else if (x == 4 && y == 5) //NPC za potworem 4 (jedyny tutaj)
-	{
-		std::cout << "Dziêkujê za ocalenie mi ¿ycia!\nChowa³em siê przed tym potworem kilka godzin!\nJak wchodzi³em do tej jaskini, to go tutaj nie by³o!\n";
-		Sleep(10000);
-		system("cls");
-	}
-	else if (x == 7 && y == 9) //przedmiot za dwoma potworami 4
-	{
-
-	}
-	else if (x == 11 && y == 5) //przedmiot za potworem 6
-	{
-
-	}
+		else if (x == 8 && y == 11) //przedmiot otoczony potworami 3 na dole
+		{
+			Weapon attacker1;
+			attacker1.weapon_statistics_name(player);
+		}
+		else if (x == 5 && y == 9) //przedmiot za zgraj¹ potworów 2
+		{
+			Equipment potion2 = { "eliskir", player };
+		}
+		else if (x == 4 && y == 5) //NPC za potworem 4 (jedyny tutaj)
+		{
+			std::cout << "Dziêkujê za ocalenie mi ¿ycia!\nChowa³em siê przed tym potworem kilka godzin!\nJak wchodzi³em do tej jaskini, to go tutaj nie by³o!\n";
+			Sleep(10000);
+			system("cls");
+		}
+		else if (x == 7 && y == 9) //przedmiot za dwoma potworami 4
+		{
+			Armor deffender4_1;
+			deffender4_1.type_def(player);
+			deffender4_1.type_stats(player);
+		}
+		else if (x == 11 && y == 5) //przedmiot za potworem 6
+		{
+			Weapon attacker6;
+			attacker6.weapon_statistics_name(player);
+		}
 	}
 }
 
-void Square::draw()
+void Square::draw(Character* player)
 {
 	system("cls");
 	
@@ -356,12 +391,12 @@ void Square::draw()
 		}
 		case 'I':
 		{
-			check();
+			check(player);
 			break;
 		}
 		case 'K': case 'Z': case 'C': case 'N': case 'H':
 		{
-			check();
+			check(player);
 			b = b0;
 			a = a0;
 			y = y0;
