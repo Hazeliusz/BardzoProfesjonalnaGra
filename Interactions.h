@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "character.h"
 #include "monster.h"
 #include <vector>
 

@@ -155,6 +155,7 @@ void Character::displayInventory(){
 			std::cout << equipment_eq[i].eq_stats[5] << " szczêœcia.";
 		std::cout << std::endl;
 	}
+	std::cout << "Z³oto: " << this->getGold() << std::endl;
 }
 
 void Character::addWeapon(Weapon added) {

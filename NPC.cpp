@@ -127,7 +127,7 @@ void Non_Character::buy(Character* player)
 		if (nr_choice > 0 && nr_choice <= 6)
 		{
 			agreement = pay(potions[nr_choice - 1].eq_cost, player);
-			if (agreement == 1)
+			if (agreement == true)
 			{
 				player->addEquipment(potions[nr_choice - 1]);
 			}
@@ -244,10 +244,10 @@ void Non_Character::buy(Character* player)
 	}
 	else if (npc_type == 'H') //handlarz
 	{
-		bool not_cake=1;
+		bool not_cake= true;
 		Equipment special_thing;
 
-		if (not_cake = 1)
+		if (not_cake = true)
 		{
 			special_thing.eq_name = "special";
 		}
@@ -266,11 +266,11 @@ void Non_Character::buy(Character* player)
 		if (nr_choice == 1)
 		{
 			agreement = pay(special_thing.eq_cost, player);
-			if (agreement == 1)
+			if (agreement == true)
 			{
 				// danie do plecaka przedmiotu ------------------------------------------------------------------------//
 
-				not_cake = 0;
+				not_cake = false;
 			}
 		}
 		else
@@ -319,7 +319,7 @@ void Non_Character::buy(Character* player)
 		if (nr_choice > 0 && nr_choice <= 6)
 		{
 			agreement = pay(weaps[nr_choice - 1].we_cost, player);
-			if (agreement == 1)
+			if (agreement == true)
 			{
 				// danie do plecaka przedmiotu ------------------------------------------------------------------------//
 
@@ -385,14 +385,14 @@ void Non_Character::repair(Character* player)
 bool Non_Character::pay(int cost, Character* player)
 {
 	char paying_choice = 'o';
-	bool number = 0;
+	bool number = false;
 
 	std::cout << "Placisz? (y/n)" << std::endl;
 	while (paying_choice != 'y' && paying_choice != 'n')
 	{
 		if (number == 1) std::cout << "To znaczy tak, czy nie? Nie rozumiem... (y/n)" << std::endl;
 		std::cin >> paying_choice;
-		number = 1;
+		number = true;
 	}
 
 	switch (paying_choice)
@@ -401,23 +401,23 @@ bool Non_Character::pay(int cost, Character* player)
 		if (player->getGold() < cost)
 		{
 			std::cout << "Chyba nie masz czym zap³aciæ. Wróæ, gdy uzbierasz nieco drobnych" << std::endl;
-			return 0;
+			return false;
 		}
 		else
 		{
 			player->lostGold(cost);  //orygina³ golda potrzbny, by go zmieniaæ!
-			return 1;
+			return true;
 		}
 	case 'n':
 		std::cout << "No có¿..." << std::endl;
-		return 0;
+		return false;
 	}
 }
 
 void Non_Character::opening_talk(char npc_world[3][3][15][15], Character* player) //zrobiæ dialog w zale¿noœci od p³ci bohatera
 {
 
-	if (first_time == 1)
+	if (first_time == true)
 	{
 		if (npc_name == "Chemik Renagan")
 		{
@@ -551,9 +551,9 @@ void Non_Character::opening_talk(char npc_world[3][3][15][15], Character* player
 			Sleep(500);
 		}
 
-		first_time = 0;
+		first_time = false;
 	}
-	else if (first_time == 0)
+	else if (first_time == false)
 	{
 		if (npc_name == "Chemik Renagan")
 		{

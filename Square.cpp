@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include "Square.h"
 #include <conio.h>
+#include "Interactions.h"
 
 
 
@@ -372,8 +373,9 @@ void Square::draw()
 			x = x0;
 			break;
 		}
-		case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
-			Monster *monster = new Monster(bufor);
+		case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
+			int monster_type = bufor - '0';
+			Monster *monster = new Monster(monster_type);
 			CharactersInteractions *interact = new CharactersInteractions(player, monster);
 			int result = interact->MonsterFight();
 			delete interact;

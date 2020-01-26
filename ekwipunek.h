@@ -1,10 +1,9 @@
 #pragma once
 #include <iostream>
 #include <stdlib.h>
-#include "character.h"
 #include "NPC.h"
 
-
+class Character;
 
 //------------------------------------
 
@@ -44,7 +43,7 @@ public:
 	int weapon_stats[6];						// 0-str, 1-end, 2-char, 3-int, 4-agi, 5-lck
 	int we_cost;
 
-	Weapon(std::string w_name = "stick", int stats = 0, bool w = 0, int c = 0)
+	Weapon(std::string w_name = "stick", int stats = 0, bool w = false, int c = 0)
 	{
 		we_wear = w;
 		we_name = w_name;
@@ -71,7 +70,7 @@ public:
 
 	int armor_stats[6];							// 0-str, 1-end, 2-char, 3-int, 4-agi, 5-lck
 //------------!!!
-	Armor(float dur_m = 10, float dur_c = 10, int defen = 1, std::string eq = "none", int s = 0, bool w = 0, int c = 0)
+	Armor(float dur_m = 10, float dur_c = 10, int defen = 1, std::string eq = "none", int s = 0, bool w = false, int c = 0)
 	{
 		srand(time_t(NULL));
 		for (int i = 0; i < 6; i++)

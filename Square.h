@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
+#include "character.h"
 #include "monster.h"
+
 
 class Character;
 
