@@ -1,8 +1,10 @@
 #pragma once
 #include <stdlib.h>
-#include "statistics.h"
 #include <string>
 #include "character.h"
+
+class Character;
+
 
 class Monster : public Character
 {

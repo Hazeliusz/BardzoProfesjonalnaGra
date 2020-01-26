@@ -1,6 +1,7 @@
+#pragma once
 #include <iostream>
-#include "character.h"
-#include "Interactions.h"
+#include "Square.h"
+
 
 void main() {
 	setlocale(LC_ALL, "polish");
@@ -93,11 +94,11 @@ void main() {
 	delete chosen_profession;
 	player->randomizeStatistics();
 	player->drawCharacterCard();
-	Character* monster = new Monster(4);
-	CharactersInteractions* interact = new CharactersInteractions(player, monster);
-	interact->MonsterFight();
-	player->drawCharacterCard();
-	
+	Square world(player);
+	while (true) {
+		world.draw();
+		world.move();
+	}
 
 	system("pause");
 }
