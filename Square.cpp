@@ -112,7 +112,10 @@ void Square::check()
 	{
 		if (x == 3 && y == 13) //przedmiot przy wejœciu
 		{
-
+			Armor deffender7_3;
+			deffender7_3.type_def(player);
+			deffender7_3.type_stats(player);
+			player->addArmor(deffender7_3);
 		}
 		else if (x == 1 && y == 11) //NPC za zgraj¹ potworów 6 (na dole)
 		{
@@ -132,14 +135,18 @@ void Square::check()
 		}*/
 		else if (x == 1 && y == 1) //Lustro Grizzalidu, KONIEC GRY!
 		{
-
+			system("cls");
+			std::cout << "Koniec gry.";
 		}
 	}
 	else if (b == 0 && a == 2) //prawy górny róg ,,du¿ej'' mapy
 	{
 		if (x == 10 && y == 9) //przedmiot obok NPC
 		{
-
+			Armor deffender8_1;
+			deffender8_1.type_def(player);
+			deffender8_1.type_stats(player);
+			player->addArmor(deffender8_1);
 		}
 		else if (x == 11 && y == 9) //NPC jedyny tutaj
 		{
@@ -149,7 +156,9 @@ void Square::check()
 		}
 		else if (x == 7 && y == 1) //przedmiot za dwoma potworami 8
 		{
-
+			Weapon attacker8;
+			attacker8.weapon_statistics_name(player);
+			player->addWeapon(attacker8);
 		}
 	}
 	else if (b == 1 && a == 0) //czêœæ na pó³noc od startu
@@ -162,11 +171,17 @@ void Square::check()
 		}
 		else if (x == 5 && y == 6) //przedmiot za dwoma potworami 4
 		{
-
+			Armor deffender4_2;
+			deffender4_2.type_def(player);
+			deffender4_2.type_stats(player);
+			player->addArmor(deffender4_2);
 		}
 	 else if (x == 7 && y == 5) //przedmiot za dwoma potworami 5
 		{
-
+			Armor deffender5;
+			deffender5.type_def(player);
+			deffender5.type_stats(player);
+			player->addArmor(deffender5);
 		}
 	 else if (x == 5 && y == 3) //NPC w górnej czêœci
 		{
@@ -179,15 +194,22 @@ void Square::check()
 	{
 		if (x == 3 && y == 13) //przedmiot otoczony potworami 7
 		{
-
+			Armor deffender7_1;
+			deffender7_1.type_def(player);
+			deffender7_1.type_stats(player);
+			player->addArmor(deffender7_1);
 		}
 		else if (x == 1 && y == 7) //przedmiot za zgraj¹ potworów 6
 		{
-
+			Armor deffender6;
+			deffender6.type_def(player);
+			deffender6.type_stats(player);
+			player->addArmor(deffender6);
 		}
 		else if (x == 7 && y == 3) //przedmiot za potworem 7
 		{
-
+			Equipment potion7(player, 0, "eliksir");
+			player->addEquipment(potion7);
 		}
 		else if (x == 6 && y == 6) //NPC jedyny tutaj
 		{
@@ -200,7 +222,10 @@ void Square::check()
 	{
 		if (x == 13 && y == 11) //przedmiot za zgraj¹ potworów 7
 		{
-
+			Armor deffender7_2;
+			deffender7_2.type_def(player);
+			deffender7_2.type_stats(player);
+			player->addArmor(deffender7_2);
 		}
 		else if (x == 7 && y == 2) //NPC jedyny tutaj
 		{
@@ -219,25 +244,41 @@ void Square::check()
 		}
 		else if (x == 1 && y == 10) //pierwsza broñ
 		{
-
+			Weapon attacker_w;
+			attacker_w.weapon_statistics_name(player);
+			player->addWeapon(attacker_w);
 		}
 		else if (x == 1 && y == 4) //przedmiot przy lewej granicy
 		{
-
+			Armor deffender1_1;
+			deffender1_1.type_def(player);
+			deffender1_1.type_stats(player);
+			player->addArmor(deffender1_1);
 		}
 		else if (x == 3 && y == 9) //przedmiot we wnêce za ,,1''
 		{
-
+			Armor deffender1_2;
+			deffender1_2.type_def(player);
+			deffender1_2.type_stats(player);
+			player->addArmor(deffender1_2);
 		}
 		else if (x == 11 && y == 10) //przedmiot w prawym dolnym rogu
 		{
-
+			Armor deffender2;
+			deffender2.type_def(player);
+			deffender2.type_stats(player);
+			player->addArmor(deffender2);
 		}
 		else if (x == 10 && y == 1) //NPC w prawym górnym rogu
 		{
 			std::cout << "Pamiêtam, ¿e jak by³em ma³y, w Borknagarze w ogóle nie by³o potworów... \nNie wiem co siê sta³o, ale pewnego dnia, to by³o z 200 lat temu, \nmnisi z klasztoru przestali siê pokazywaæ... \nPewnie potwory dopad³y i ich...\n";
 			Sleep(10000);
 			system("cls");
+		}
+		else if (x == 10 && y == 7) // za 3
+		{
+			Equipment potion3(player, 0,  "eliksir");
+			player->addEquipment(potion3);
 		}
 	}
 	else if (b == 2 && a == 1) //wioska
@@ -308,16 +349,20 @@ void Square::check()
 	else if (b == 2 && a == 2) //prawy dolny róg ,,du¿ej'' mapy
 	{
 	if (x == 13 && y == 13) //prawy dolny róg
-		{
-
-		}
+	{
+		Equipment potion5(player, 0, "eliksir");
+		player->addEquipment(potion5);
+	}
 	else if (x == 8 && y == 11) //przedmiot otoczony potworami 3 na dole
 	{
-
+		Weapon attacker1;
+		attacker1.weapon_statistics_name(player);
+		player->addWeapon(attacker1);
 	}
 	else if (x == 5 && y == 9) //przedmiot za zgraj¹ potworów 2
 	{
-
+		Equipment potion2(player, 0, "eliksir");
+		player->addEquipment(potion2);
 	}
 	else if (x == 4 && y == 5) //NPC za potworem 4 (jedyny tutaj)
 	{
@@ -327,11 +372,16 @@ void Square::check()
 	}
 	else if (x == 7 && y == 9) //przedmiot za dwoma potworami 4
 	{
-
+		Armor deffender4_1;
+		deffender4_1.type_def(player);
+		deffender4_1.type_stats(player);
+		player->addArmor(deffender4_1);
 	}
 	else if (x == 11 && y == 5) //przedmiot za potworem 6
 	{
-
+		Weapon attacker6;
+		attacker6.weapon_statistics_name(player);
+		player->addWeapon(attacker6);
 	}
 	}
 }
