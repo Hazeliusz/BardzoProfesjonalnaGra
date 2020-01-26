@@ -384,6 +384,48 @@ void Square::draw()
 	}
 }
 
+void Square::menu()
+{
+	int choice;
+	std::cout << "1.Poka¿ ekwipunek \n2.Wyœwietl kartê \n3.Za³ó¿ broñ \n4.Za³ó¿ he³m \n5.Za³ó¿ zbrojê \n6.Za³ó¿ buty \n7.U¿yj przedmiot jednorazowy\n";
+	std::cin >> choice;
+	switch (choice)
+	{
+	case 1:
+	{
+
+		break;
+	}
+	case 2:
+	{
+
+		break;
+	}
+	case 3:
+	{
+		break;
+	}
+	case 4:
+	{
+
+		break;
+	}
+	case 5:
+	{
+		break;
+	}
+	case 6:
+	{
+		break;
+	}
+	case 7:
+	{
+		break;
+	}
+	}
+
+}
+
 void Square::move()
 {
 	char arrow;
@@ -391,7 +433,7 @@ void Square::move()
 
 	switch (arrow)
 	{
-	case 'w':
+	case 'w': case 'W':
 	{
 		if (tab[b][a][y - 1][x] == '^')
 		{
@@ -416,7 +458,7 @@ void Square::move()
 		}
 		break;
 	}
-	case 'a':
+	case 'a': case 'A':
 	{
 		if (tab[b][a][y][x-1] == '<')
 		{
@@ -441,7 +483,7 @@ void Square::move()
 		}
 		break;
 	}
-	case 'd':
+	case 'd': case 'D':
 	{
 		if (tab[b][a][y][x + 1] == '>')
 		{
@@ -466,7 +508,7 @@ void Square::move()
 		}
 		break;
 	}
-	case 's':
+	case 's': case 'S':
 	{
 		if (tab[b][a][y + 1][x] == 'v')
 		{
@@ -490,6 +532,10 @@ void Square::move()
 			y++;
 		}
 		break;
+	}
+	case 'm': case 'M':
+	{
+		menu();
 	}
 	default:
 	{
