@@ -6,6 +6,7 @@
 #include <conio.h>
 #include "ekwipunek.h"
 #include "character.h"
+#include "NPC.h"
 
 Square::Square()
 {
@@ -47,27 +48,39 @@ void Square::check(Character* player)
 	{
 		if (x == 2 && y == 1) //Chemik
 		{
-
+			Non_Character character1 = {1, "Chemik Renagan", 'C'};
+			character1.opening_talk(player);
+			character1.options(player);
 		}
 		else if (x == 4 && y == 1) //Zbrojomistrz 1
 		{
-
+			Non_Character character2 = {1, "Gerwalt", 'Z' };
+			character2.opening_talk(player);
+			character2.options(player);
 		}
 		else if (x == 6 && y == 1) //Zbrojomistrz 2
 		{
-
+			Non_Character character3 = { 1, "Zbrojmistrz2", 'Z' };
+			character3.opening_talk(player);
+			character3.options(player);
 		}
 		else if (x == 1 && y == 2) //Kowal
 		{
-
+			Non_Character character4 = { 1, "Kowal Gregori", 'K' };
+			character4.opening_talk(player);
+			character4.options(player);
 		}
 		else if (x == 1 && y == 4) //Zbrojomistrz 3
 		{
-
+			Non_Character character5 = { 1, "Zbrojmistrz3", 'Z' };
+			character5.opening_talk(player);
+			character5.options(player);
 		}
 		else if (x == 1 && y == 6) //Handlarz
 		{
-
+			Non_Character character6 = { 1, "Handlarz", 'H' };
+			character6.opening_talk(player);
+			character6.options(player);
 		}
 		else if (x == 1 && y == 11) //NPC 1 w domku 1
 		{
@@ -270,23 +283,33 @@ void Square::check(Character* player)
 	{
 		if (x == 1 && y == 13) //Zbrojomistrz 4
 		{
-
+			Non_Character character7 = { 1, "Oktis", 'Z' };
+			character7.opening_talk(player);
+			character7.options(player);
 		}
 		else if (x == 2 && y == 13) //Zbrojomistrz 5
 		{
-
+			Non_Character character8 = { 1, "Zbrojmistrz5", 'Z' };
+			character8.opening_talk(player);
+			character8.options(player);
 		}
 		else if (x == 3 && y == 13) //Zbrojomistrz 6
 		{
-
+			Non_Character character9 = { 1, "Zet", 'Z' };
+			character9.opening_talk(player);
+			character9.options(player);
 		}
 		else if (x == 3 && y == 2) //Chemik
 		{
-
+			Non_Character character10 = { 1, "Chemik Beatrycze", 'C' };
+			character10.opening_talk(player);
+			character10.options(player);
 		}
 		else if (x == 5 && y == 1) //Kowal
 		{
-
+			Non_Character character11 = { 1, "Kowal Andrzej", 'K' };
+			character11.opening_talk(player);
+			character11.options(player);
 		}
 		else if (x == 10 && y == 13) //NPC przy dolnej granicy
 		{
