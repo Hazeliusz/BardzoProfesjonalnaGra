@@ -46,7 +46,10 @@ protected:
 	Statistics special;
 	Level lvl;
 	int gold;
-	int weapon_size = 1;
+	int weapon_dmg;
+	int helmet_arm;
+	int armor_arm;
+	int boots_arm;
 	std::vector<Weapon> weapon_eq;
 	std::vector<Armor> armor_eq;
 	std::vector<Equipment> equipment_eq;
@@ -111,6 +114,12 @@ public:
 	void addWeapon(Weapon added);
 	void addArmor(Armor added);
 	void addEquipment(Equipment added);
+	void useEquipment();
+	void EquipWeapon();
+	void EquipHelmet();
+	void EquipArmor();
+	void EquipBoots();
+	int getArmorDef();
 };
 
 class Knight : public Character {

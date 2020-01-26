@@ -138,10 +138,23 @@ void Character::displayInventory(){
 		std::cout << i + 1 << ". " << armor_eq[i].armor_name << " ma wspó³czynnik pancerza na poziomie " << armor_eq[i].def << std::endl;
 		std::cout << "Jej wytrzyma³oœæ to obecnie " << armor_eq[i].durability_cur << "/" << armor_eq[i].durability_max << std::endl;
 	}
-	/*std::cout << "Przedmioty jednorazowy: " << std::endl;
+	std::cout << "Przedmioty jednorazowy: " << std::endl;
 	for (int i = 0; i < equipment_eq.size(); i++) {
-		std::cout << i + 1 << ". " << equipment_eq[i].eq_name << 
-	}*/
+		std::cout << i + 1 << ". " << equipment_eq[i].eq_name << " dodaje: ";
+		if (equipment_eq[i].eq_stats[0] != 0)
+			std::cout << equipment_eq[i].eq_stats[0] << " si³y.";
+		if(equipment_eq[i].eq_stats[1] != 0)
+			std::cout << equipment_eq[i].eq_stats[1] << " wytrzyma³oœci.";
+		if (equipment_eq[i].eq_stats[2] != 0)
+			std::cout << equipment_eq[i].eq_stats[2] << " charyzmy.";
+		if (equipment_eq[i].eq_stats[3] != 0)
+			std::cout << equipment_eq[i].eq_stats[3] << " inteligencji.";
+		if (equipment_eq[i].eq_stats[4] != 0)
+			std::cout << equipment_eq[i].eq_stats[4] << " zrêcznoœci.";
+		if (equipment_eq[i].eq_stats[5] != 0)
+			std::cout << equipment_eq[i].eq_stats[5] << " szczêœcia.";
+		std::cout << std::endl;
+	}
 }
 
 void Character::addWeapon(Weapon added) {
@@ -156,23 +169,140 @@ void Character::addEquipment(Equipment added) {
 	equipment_eq.push_back(added);
 }
 
+void Character::useEquipment() {
+	std::cout << "Dostêpne przedmioty jednorazowe: " << std::endl;
+	for (int i = 0; i < equipment_eq.size(); i++) {
+		std::cout << i + 1 << ". " << equipment_eq[i].eq_name << " dodaje: ";
+		if (equipment_eq[i].eq_stats[0] != 0)
+			std::cout << equipment_eq[i].eq_stats[0] << " si³y.";
+		if (equipment_eq[i].eq_stats[1] != 0)
+			std::cout << equipment_eq[i].eq_stats[1] << " wytrzyma³oœci.";
+		if (equipment_eq[i].eq_stats[2] != 0)
+			std::cout << equipment_eq[i].eq_stats[2] << " charyzmy.";
+		if (equipment_eq[i].eq_stats[3] != 0)
+			std::cout << equipment_eq[i].eq_stats[3] << " inteligencji.";
+		if (equipment_eq[i].eq_stats[4] != 0)
+			std::cout << equipment_eq[i].eq_stats[4] << " zrêcznoœci.";
+		if (equipment_eq[i].eq_stats[5] != 0)
+			std::cout << equipment_eq[i].eq_stats[5] << " szczêœcia.";
+		std::cout << std::endl;
+	}
+	std::cout << "Który przedmiot chcesz u¿yæ? Podaj odpowiedni numer." << std::endl;
+	int indeks = 0;
+	std::cin >> indeks;
+	if (indeks > equipment_eq.size() || indeks < 0) {
+		std::cout << "Niepoprawny wybór!" << std::endl;
+	}
+	else {
+		equipment_eq[indeks].take_buff(&this->special);
+		equipment_eq.erase(equipment_eq.begin() + indeks);
+	}
+}
+
+void Character::EquipWeapon() {
+	int previous_dmg = weapon_dmg;
+	weapon_dmg = 0;
+	std::cout << "Dostêpne bronie: " << std::endl;
+	for (int i = 0; i < weapon_eq.size(); i++) {
+		std::cout << i + 1 << ". " << weapon_eq[i].we_name << " ma " << weapon_eq[i].dmg_counter(this) << " DMG." << std::endl;
+	}
+	std::cout << "Któr¹ broñ chcesz za³o¿yæ? Podaj numer." << std::endl;
+	int choice;
+	std::cin >> choice;
+	if (choice < 0 || choice > weapon_eq.size()) {
+		std::cout << "Niepoprawny wybór!" << std::endl;
+		weapon_dmg = previous_dmg;
+	}
+	else {
+		weapon_dmg = weapon_eq[choice].dmg_counter(this);
+	}
+}
+
+void Character::EquipHelmet() {
+	int previous_helmet_arm = helmet_arm;
+	helmet_arm = 0;
+	std::cout << "Dostêpne czêœci zbroi: " << std::endl;
+	for (int i = 0; i < armor_eq.size(); i++) {
+		std::cout << i + 1 << ". " << armor_eq[i].armor_name << " ma wspó³czynnik pancerza na poziomie " << armor_eq[i].def << std::endl;
+		std::cout << "Jej wytrzyma³oœæ to obecnie " << armor_eq[i].durability_cur << "/" << armor_eq[i].durability_max << std::endl;
+	}
+	std::cout << "Wybierz odpowiedni numer." << std::endl;
+	int choice;
+	std::cin >> choice;
+	if (choice < 0 || choice > armor_eq.size() || armor_eq[choice].armor_name!= "He³m") {
+		std::cout << "Niepoprawny wybór!" << std::endl;
+		helmet_arm = previous_helmet_arm;
+	}
+	else {
+		helmet_arm = armor_eq[choice].def;
+	}
+}
+
+void Character::EquipBoots() {
+	int previous_boots_arm = boots_arm;
+	boots_arm = 0;
+	std::cout << "Dostêpne czêœci zbroi: " << std::endl;
+	for (int i = 0; i < armor_eq.size(); i++) {
+		std::cout << i + 1 << ". " << armor_eq[i].armor_name << " ma wspó³czynnik pancerza na poziomie " << armor_eq[i].def << std::endl;
+		std::cout << "Jej wytrzyma³oœæ to obecnie " << armor_eq[i].durability_cur << "/" << armor_eq[i].durability_max << std::endl;
+	}
+	std::cout << "Wybierz odpowiedni numer." << std::endl;
+	int choice;
+	std::cin >> choice;
+	if (choice < 0 || choice > armor_eq.size() || armor_eq[choice].armor_name != "Buty") {
+		std::cout << "Niepoprawny wybór!" << std::endl;
+		boots_arm = previous_boots_arm;
+	}
+	else {
+		boots_arm = armor_eq[choice].def;
+	}
+}
+
+void Character::EquipArmor() {
+	int previous_armor_arm = armor_arm;
+	armor_arm = 0;
+	std::cout << "Dostêpne czêœci zbroi: " << std::endl;
+	for (int i = 0; i < armor_eq.size(); i++) {
+		std::cout << i + 1 << ". " << armor_eq[i].armor_name << " ma wspó³czynnik pancerza na poziomie " << armor_eq[i].def << std::endl;
+		std::cout << "Jej wytrzyma³oœæ to obecnie " << armor_eq[i].durability_cur << "/" << armor_eq[i].durability_max << std::endl;
+	}
+	std::cout << "Wybierz odpowiedni numer." << std::endl;
+	int choice;
+	std::cin >> choice;
+	if (choice < 0 || choice > armor_eq.size() || armor_eq[choice].armor_name != "He³m") {
+		std::cout << "Niepoprawny wybór!" << std::endl;
+		armor_arm = previous_armor_arm;
+	}
+	else {
+		armor_arm = armor_eq[choice].def;
+	}
+}
+
+int Character::getArmorDef() {
+	return this->armor_arm + this->helmet_arm + this->boots_arm;
+}
+
 Character::Character(std::string name, bool sex, Statistics stats, int lvls) {
 	this->name = name;
 	this->sex = sex;
 	this->special = stats;
 	skills["Atak fizyczny"] = [](Character* character1, Character* character2, bufor& bf) {
 		int dmg = character1->GetStats().getByEnum(Strength) * 0.5 +
-			rand() % character1->GetStats().getByEnum(Luck);
+			rand() % character1->GetStats().getByEnum(Luck) + character1->weapon_dmg;
 		character2->hp -= dmg;
 		std::cout << character2->GetName() << " oberwal za " << dmg << " HP." << std::endl;
 	};
 	skills["Atak magiczny"] = [](Character* character1, Character* character2, bufor& bf) {
 		int dmg = character1->GetStats().getByEnum(Intelligence) * 0.5 +
-			rand() % character1->GetStats().getByEnum(Luck);
+			rand() % character1->GetStats().getByEnum(Luck) + character1->weapon_dmg;
 		character2->hp -= dmg;
 		std::cout << character2->GetName() << " zostal zaatakowany magicznie za " << dmg << " HP." << std::endl;
 	};
 	this->lvl.setLevel(lvls);
+	weapon_dmg = 0;
+	helmet_arm = 0;
+	armor_arm = 0;
+	boots_arm = 0;
 }
 
 void Character::writeStatistics() {

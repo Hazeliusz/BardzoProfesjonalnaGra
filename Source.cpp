@@ -93,7 +93,10 @@ void main() {
 	delete chosen_profession;
 	player->randomizeStatistics();
 	player->drawCharacterCard();
-
+	Character* monster = new Monster(4);
+	CharactersInteractions* interact = new CharactersInteractions(player, monster);
+	interact->MonsterFight();
+	player->drawCharacterCard();
 	
 
 	system("pause");
