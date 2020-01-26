@@ -13,4 +13,5 @@ public:
 	void draw(); //rysuje tê 1/9 mapy, w której znajduje siê gracz
 	void move(); //poruszanie siê postaci
 	void check(); //baza danych z unikalnymi przedmiotami na mapie; TA FUNKCJA WAS INTERESUJE
+	void menu(); //menu
 };
