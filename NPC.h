@@ -15,7 +15,7 @@ class Non_Character
 
 
 public:
-	Non_Character(std::string n = "wiesniak", char npc_type = 'C', bool first = 0, char type = 'N', short int cho = 0, bool end_talk = 0)
+	Non_Character(std::string n = "wiesniak", char npc_type = 'C', bool first = true, char type = 'N', short int cho = 0, bool end_talk = 0)
 	{
 		first_time = first;
 		choice = cho;

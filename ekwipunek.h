@@ -14,7 +14,7 @@ public:
 	int eq_stats[6];							// 0-str, 1-end, 2-char, 3-int, 4-agi, 5-lck
 	int eq_cost;
 
-	Equipment (Character* player = nullptr, int c = 0, std::string naming = "nothing")
+	Equipment (Character* player = nullptr, int c = 0, std::string naming = "eliksir")
 	{
 		for (int i = 0; i < 6; i++)
 		{
@@ -72,7 +72,6 @@ public:
 //------------!!!
 	Armor(float dur_m = 10, float dur_c = 10, int defen = 1, std::string eq = "none", int s = 0, bool w = false, int c = 0)
 	{
-		srand(time_t(NULL));
 		for (int i = 0; i < 6; i++)
 		{
 			armor_stats[i] = s;

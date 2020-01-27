@@ -50,31 +50,37 @@ void Square::check()
 		if (x == 2 && y == 1) //Chemik
 		{
 			Non_Character beatrycze("Chemik Beatrycze", 'C');
+			beatrycze.opening_talk(player);
 			beatrycze.options(player);
 		}
 		else if (x == 4 && y == 1) //Zbrojomistrz 1
 		{
 			Non_Character gerwalt("Gerwalt", 'Z');
+			gerwalt.opening_talk(player);
 			gerwalt.options(player);
 		}
 		else if (x == 6 && y == 1) //Zbrojomistrz 2
 		{
 			Non_Character zbrojmistrz2("Zbrojmistrz2", 'Z');
+			zbrojmistrz2.opening_talk(player);
 			zbrojmistrz2.options(player);
 		}
 		else if (x == 1 && y == 2) //Kowal
 		{
 			Non_Character grigori("Kowal Gregori", 'K');
+			grigori.opening_talk(player);
 			grigori.options(player);
 		}
 		else if (x == 1 && y == 4) //Zbrojomistrz 3
 		{
 			Non_Character zbrojmistrz3("Zbrojmistrz3", 'Z');
+			zbrojmistrz3.opening_talk(player);
 			zbrojmistrz3.options(player);
 		}
 		else if (x == 1 && y == 6) //Handlarz
 		{
 			Non_Character handlarz("Handlarz", 'H');
+			handlarz.opening_talk(player);
 			handlarz.options(player);
 		}
 		else if (x == 1 && y == 11) //NPC 1 w domku 1
@@ -292,26 +298,31 @@ void Square::check()
 		if (x == 1 && y == 13) //Zbrojomistrz 4
 		{
 			Non_Character oktis("Oktis", 'Z');
+			oktis.opening_talk(player);
 			oktis.options(player);
 		}
 		else if (x == 2 && y == 13) //Zbrojomistrz 5
 		{
 			Non_Character zbrojmistrz5("Zbrojmistrz5", 'Z');
+			zbrojmistrz5.opening_talk(player);
 			zbrojmistrz5.options(player);
 		}
 		else if (x == 3 && y == 13) //Zbrojomistrz 6
 		{
 			Non_Character zbrojmistrz6("Zbrojmistrz6", 'Z');
+			zbrojmistrz6.opening_talk(player);
 			zbrojmistrz6.options(player);
 		}
 		else if (x == 3 && y == 2) //Chemik
 		{
 			Non_Character renagan("Chemik Renagan", 'C');
+			renagan.opening_talk(player);
 			renagan.options(player);
 		}
 		else if (x == 5 && y == 1) //Kowal
 		{
 			Non_Character andrzej("Kowal Andrzej", 'K');
+			andrzej.opening_talk(player);
 			andrzej.options(player);
 		}
 		else if (x == 10 && y == 13) //NPC przy dolnej granicy

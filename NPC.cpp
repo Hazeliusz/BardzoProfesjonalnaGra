@@ -11,6 +11,7 @@ void Non_Character::options(Character* player)
 	short int quit = 0;
 	while (quit == 0)
 	{
+		system("cls");
 		if (npc_name != "Wieœniak")
 		{
 			std::cout << "'1' - sklep" << std::endl;
@@ -19,7 +20,7 @@ void Non_Character::options(Character* player)
 				std::cout << "'3' - naprawa zbroi" << std::endl;
 			else
 				std::cout << "'3' - sprzedarz" << std::endl;
-			std::cout << std::endl << "'4' - wyjœcie" << std::endl;
+			std::cout <<  "'4' - wyjœcie" << std::endl;
 
 			std::cin >> choice;
 			switch (choice)
@@ -81,10 +82,10 @@ void Non_Character::buy(Character* player)
 	seller = 8 - player->GetStats().getByEnum(Charisma) / 5;
 	
 
-	if (this->npc_type == 'C') //chemicy
+	if (npc_name == "Chemik Renagan" || npc_name == "Chemik Beatrycze") //chemicy
 	{
 		Equipment potions[6];
-		potions[0].eq_name == "Eliksir Galow";
+		potions[0].eq_name == "eliksir";
 		potions[1].eq_name == "Wywar z czerwonego byka";
 		potions[2].eq_name == "Retoryka w butelce";
 		potions[3].eq_name == "Roztwor wroñskianu potasu";
@@ -124,13 +125,13 @@ void Non_Character::buy(Character* player)
 				+ potions[i].eq_stats[4] + potions[i].eq_stats[5] + seller);
 		}
 
-		for (int i = 0; i < 6; i += 2) //wypisywanie
+		for (int i = 0; i < 6; i ++) //wypisywanie
 		{
-			std::cout << "nazwa:      " << i + 1 << ". " << potions[i].eq_name << "\t\t\t\t" << i+2 << potions[i + 1].eq_name << std::endl;
-			std::cout << "statystyka?:" << potions[i].eq_stats[i] << "\t\t\t\t" << potions[i + 1].eq_stats[i + 1] << std::endl;
-			std::cout << "koszt:      " << potions[i].eq_cost     << "\t\t\t\t" << potions[i + 1].eq_cost << std::endl;
+			std::cout << "nazwa:      " << i + 1 << ". " << potions[i].eq_name << std::endl;
+			std::cout << "statystyka?:" << potions[i].eq_stats[i] << std::endl;
+			std::cout << "koszt:      " << potions[i].eq_cost << std::endl;
 		}
-		std::cout << "To który z eliksirów " << (player->GetSex() ? "chcia³abyœ" : "chcia³byœ") << " kupiæ? ('6' - nie kupujê)" << std::endl;
+		std::cout << "To który z eliksirów " << (player->GetSex() ? "chcia³abyœ" : "chcia³byœ") << " kupiæ? ('7' - nie kupujê)" << std::endl;
 		std::cin >> nr_choice;
 		
 		if (nr_choice > 0 && nr_choice <= 6)
@@ -146,7 +147,7 @@ void Non_Character::buy(Character* player)
 			std::cout << "Eh..." << std::endl;
 		}
 	}
-	else if (npc_type == 'Z') //zbrojmistrzowie
+	else if (npc_name == "Gerwalt" || npc_name == "Oktis" || npc_name == "Zbrojmistrz2" || npc_name == "Zbrojmistrz5" || npc_name == "Zbrojmistrz3" || npc_name == "Zet") //zbrojmistrzowie
 	{
 		Armor armory[6];
 		if (npc_name == "Gerwalt" || npc_name == "Oktis")
@@ -224,18 +225,18 @@ void Non_Character::buy(Character* player)
 			armory[i].ar_cost = 10 * (armory[i].armor_stats[0] + armory[i].armor_stats[1] + armory[i].armor_stats[2] + armory[i].armor_stats[3] + armory[i].armor_stats[4] + armory[i].armor_stats[5] + seller);
 		}
 
-		for (int i = 0; i < 6; i += 2) //wypisywanie nazwy
+		for (int i = 0; i < 6; i++) //wypisywanie nazwy
 		{
-			std::cout << "Nazwa:        " << i + 1 << ". " << armory[i].armor_name << "\t\t\t\t" << armory[i + 1].armor_name << std::endl;
-			std::cout << "Si³a:         " << armory[i].armor_stats[0] << "\t\t\t\t" << armory[i + 1].armor_stats[0] << std::endl;
-			std::cout << "Wytrzyma³oœæ: " << armory[i].armor_stats[1] << "\t\t\t\t" << armory[i + 1].armor_stats[1] << std::endl;
-			std::cout << "Charyzma:     " << armory[i].armor_stats[2] << "\t\t\t\t" << armory[i + 1].armor_stats[2] << std::endl;
-			std::cout << "Inteligencja: " << armory[i].armor_stats[3] << "\t\t\t\t" << armory[i + 1].armor_stats[3] << std::endl;
-			std::cout << "Zwinnoœæ:     " << armory[i].armor_stats[4] << "\t\t\t\t" << armory[i + 1].armor_stats[4] << std::endl;
-			std::cout << "Szczêœcie:    " << armory[i].armor_stats[5] << "\t\t\t\t" << armory[i + 1].armor_stats[5] << std::endl;
-			std::cout << "Koszt:        " << armory[i].ar_cost        << "\t\t\t\t" << armory[i + 1].ar_cost << std::endl;
+			std::cout << "Nazwa:        " << i + 1 << ". " << armory[i].armor_name;
+			std::cout << "Si³a:         " << armory[i].armor_stats[0] << std::endl;
+			std::cout << "Wytrzyma³oœæ: " << armory[i].armor_stats[1] << std::endl;
+			std::cout << "Charyzma:     " << armory[i].armor_stats[2] << std::endl;
+			std::cout << "Inteligencja: " << armory[i].armor_stats[3] << std::endl;
+			std::cout << "Zwinnoœæ:     " << armory[i].armor_stats[4] << std::endl;
+			std::cout << "Szczêœcie:    " << armory[i].armor_stats[5] << std::endl;
+			std::cout << "Koszt:        " << armory[i].ar_cost        << std::endl;
 		}
-		std::cout << "Co kupujesz? ('6' - nie kupujê)" << std::endl;
+		std::cout << "Co kupujesz? ('7' - nie kupujê)" << std::endl;
 		std::cin >> nr_choice;
 		if (nr_choice > 0 && nr_choice <= 6)
 		{
@@ -251,12 +252,12 @@ void Non_Character::buy(Character* player)
 			std::cout << "..." << std::endl;
 		}
 	}
-	else if (npc_type == 'H') //handlarz
+	else if (npc_name == "Handlarz") //handlarz
 	{
 		bool not_cake= true;
-		Equipment special_thing;
+		Equipment special_thing = {player};
 
-		if (not_cake = true)
+		if (not_cake == true)
 		{
 			special_thing.eq_name = "special";
 		}
@@ -287,12 +288,12 @@ void Non_Character::buy(Character* player)
 			std::cout << "Nie martw siê, bêdzie to na ciebie czekaæ, a¿ kiedyœ kupisz." << std::endl;
 		}
 	}
-	else if (npc_type == 'K') //kowal
+	else if (npc_name == "Kowal Gregori" || npc_name == "Kowal Andrzej") //kowal
 	{
 		Weapon weaps[6];
 		for (int i = 0; i < 6; i++)
 		{
-			weaps[0].weapon_statistics_name(player);
+			weaps[i].weapon_statistics_name(player);
 		}
 
 		if (npc_name == "Kowal Gregori")
@@ -309,21 +310,21 @@ void Non_Character::buy(Character* player)
 			weaps[i].we_cost = 10 * (weaps[i].weapon_stats[0] + weaps[i].weapon_stats[1] + weaps[i].weapon_stats[2] + weaps[i].weapon_stats[3] + weaps[i].weapon_stats[4] + weaps[i].weapon_stats[5] + seller);
 		}
 
-		for (int i = 0; i < 6; i+=2) //wypisanie
+		for (int i = 0; i < 6; i++) //wypisanie
 		{
-			std::cout << "Nazwa:        " << i + 1 << ". " << weaps[i].we_name << "\t\t\t\t" << weaps[i + 1].we_name << std::endl;
-			std::cout << "Si³a:         " << weaps[i].weapon_stats[0] << "\t\t\t\t" << weaps[i + 1].weapon_stats[0] << std::endl;
-			std::cout << "Wytrzyma³oœæ: " << weaps[i].weapon_stats[1] << "\t\t\t\t" << weaps[i + 1].weapon_stats[1] << std::endl;
-			std::cout << "Charyzma:     " << weaps[i].weapon_stats[2] << "\t\t\t\t" << weaps[i + 1].weapon_stats[2] << std::endl;
-			std::cout << "Inteligencja: " << weaps[i].weapon_stats[3] << "\t\t\t\t" << weaps[i + 1].weapon_stats[3] << std::endl;
-			std::cout << "Zwinnoœæ:     " << weaps[i].weapon_stats[4] << "\t\t\t\t" << weaps[i + 1].weapon_stats[4] << std::endl;
-			std::cout << "Szczêœcie:    " << weaps[i].weapon_stats[5] << "\t\t\t\t" << weaps[i + 1].weapon_stats[5] << std::endl;
-			std::cout << "Koszt:        " << weaps[i].we_cost		   << "\t\t\t\t" << weaps[i + 1].we_cost << std::endl;
+			std::cout << "Nazwa:        " << i + 1 << ". " << weaps[i].we_name << std::endl;
+			std::cout << "Si³a:         " << weaps[i].weapon_stats[0] << std::endl;
+			std::cout << "Wytrzyma³oœæ: " << weaps[i].weapon_stats[1] << std::endl;
+			std::cout << "Charyzma:     " << weaps[i].weapon_stats[2] << std::endl;
+			std::cout << "Inteligencja: " << weaps[i].weapon_stats[3] << std::endl;
+			std::cout << "Zwinnoœæ:     " << weaps[i].weapon_stats[4] << std::endl;
+			std::cout << "Szczêœcie:    " << weaps[i].weapon_stats[5] << std::endl;
+			std::cout << "Koszt:        " << weaps[i].we_cost << std::endl;
 
 
 		}
 
-		std::cout << "Kupujesz coœ? ('6' - nie kupujê)" << std::endl;
+		std::cout << "Kupujesz coœ? ('7' - nie kupujê)" << std::endl;
 		std::cin >> nr_choice;
 		if (nr_choice > 0 && nr_choice <= 6)
 		{
@@ -338,6 +339,10 @@ void Non_Character::buy(Character* player)
 		{
 			std::cout << "I po co to wyci¹ga³em?!" << std::endl;
 		}
+	}
+	else
+	{
+	std::cout << "no nie pyka ten Pykachu*";
 	}
 	//potrzebny plecak
 }
@@ -425,7 +430,6 @@ bool Non_Character::pay(int cost, Character* player)
 
 void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci od p³ci bohatera
 {
-
 	if (first_time == true)
 	{
 		if (npc_name == "Chemik Renagan")
@@ -441,6 +445,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(400);
 			std::cout << "To jak, o czym " << (player->GetSex() ? "chcia³aby Pani" : "chcia³bym Pan") << " ze mn¹ porozmawiaæ?" << std::endl;
 			Sleep(500);
+			system("PAUSE");
 		}
 		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() != PROFF_BARD || !player->GetSex()))
 		{
@@ -458,6 +463,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(1000);
 			std::cout << "Poza tym wygl¹da pan doœæ... nieprzyjaŸnie" << std::endl;
 			Sleep(500);
+			system("PAUSE");
 		}
 		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex()))
 		{
@@ -477,6 +483,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(500);
 			std::cout << "zosta³o mi jeszcze kilkanaœcie eliksirów. Mogê ci je odsprzedaæ za ni¿sz¹ cenê." << std::endl;
 			Sleep(500);
+			system("PAUSE");
 		}
 		else if (npc_name == "Kowal Gregori")
 		{
@@ -488,6 +495,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(400);
 			std::cout << "*pod nosem* Ah, ci aroganccy poszukiwacze guzów i nieszczêœcia" << std::endl;
 			Sleep(500);
+			system("PAUSE");
 		}
 		else if (npc_name == "Kowal Andrzej")
 		{
@@ -499,6 +507,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(500);
 			std::cout << "..." << std::endl;
 			Sleep(500);
+			system("PAUSE");
 		}
 		else if (npc_name == "Handlarz")
 		{
@@ -512,6 +521,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(400);
 			std::cout << "Wiem, co takiej osobie jak " << (player->GetSex() ? "Pani" : "Pan") << " mo¿e siê przydaæ, proszê za mn¹ do sklepu!" << std::endl;
 			Sleep(600);
+			system("PAUSE");
 		}
 		else if (npc_name == "Gerwalt")
 		{
@@ -520,6 +530,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(600);
 			std::cout << "Do wyboru do koloru, wed³ug uznania i preferencji." << std::endl;
 			Sleep(1000);
+			system("PAUSE");
 		}
 		else if (npc_name == "Zbrojmistrz2")
 		{
@@ -529,6 +540,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(500);
 			std::cout << "..." << std::endl;
 			Sleep(300);
+			system("PAUSE");
 		}
 		else if (npc_name == "Zbrojmistrz3")
 		{
@@ -538,6 +550,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(500);
 			std::cout << "W czym mogê pomóc?" << std::endl;
 			Sleep(500);
+			system("PAUSE");
 		}
 		else if (npc_name == "Oktis") 
 		{
@@ -545,6 +558,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(600);
 			std::cout << "Ceny niskie i coœ na g³owê, same zleeetyyy!" << std::endl;
 			Sleep(500);
+			system("PAUSE");
 		}
 		else if (npc_name == "Zbrojmistrz5") 
 		{
@@ -552,6 +566,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(600);
 			std::cout << "Mam tu wszyyystkie modne stroje!" << std::endl;
 			Sleep(500);
+			system("PAUSE");
 		}
 		else if (npc_name == "Zbrojmistrz6") 
 		{
@@ -559,6 +574,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			Sleep(600);
 			std::cout << "A me butki! A to mo¿e!" << std::endl;
 			Sleep(500);
+			system("PAUSE");
 		}
 
 		first_time = false;
@@ -648,6 +664,7 @@ void Non_Character::opening_talk(Character* player) //zrobiæ dialog w zale¿noœci
 			std::cout << "A me butki! A to mo¿e!" << std::endl;
 			Sleep(500);
 		}
+		system("PAUSE");
 	}
 	else
 	{

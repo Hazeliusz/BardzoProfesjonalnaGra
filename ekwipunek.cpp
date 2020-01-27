@@ -4,10 +4,10 @@
 #include "ekwipunek.h"
 
 
+
 //87-43.5; 62-31; 53-26.5; 34-17; 25-12.5
 void Armor::type_def(Character* player)
 {
-	srand(time(NULL));
 	if (armor_name == "He³m")  //przypisanie wartoœci zbroi
 	{
 		switch (player->GetProffesion()) 
@@ -187,7 +187,6 @@ float Armor::defending()
 
 void Equipment::give_statistics()
 {
-	srand(time(NULL));
 	if (eq_name == "eliksir")
 	{
 		for (int number = 0; number != 1; 0)
@@ -217,27 +216,27 @@ void Equipment::give_statistics()
 			if (eq_stats[i] == 1)			eq_stats[i] = rand() % 5 + 1;
 		}
 	}
-	else if (eq_name == "eliksir Galów")
+	else if (eq_name == "Eliksir Galów")
 	{
 		eq_stats[0] = rand() % 5 + 1;
 	}
-	else if (eq_name == "wywar z czerwonego byka")
+	else if (eq_name == "Wywar z czerwonego byka")
 	{
 		eq_stats[1] = rand() % 5 + 1;
 	}
-	else if (eq_name == "retoryka w butelce")
+	else if (eq_name == "Retoryka w butelce")
 	{
 		eq_stats[2] = rand() % 5 + 1;
 	}
-	else if (eq_name == "roztwor wronskianinu potasu")
+	else if (eq_name == "Roztwor wronskianinu potasu")
 	{
 		eq_stats[3] = rand() % 5 + 1;
 	}
-	else if (eq_name == "sok z gumijagód")
+	else if (eq_name == "Sok z gumijagód")
 	{
 		eq_stats[4] = rand() % 5 + 1;
 	}
-	else if (eq_name == "wywar z totolotka")
+	else if (eq_name == "Wywar z totolotka")
 	{
 		eq_stats[5] = rand() % 5 + 1;
 	}
@@ -247,12 +246,12 @@ void Equipment::usage(Character* player)
 {
 	if (eq_name == "eliksir")
 	{
-		if (eq_stats[0] != 0)  		eq_name = "eliksir Galów";
-		else if (eq_stats[1] != 0)	eq_name = "wywar z czerwonego byka";
-		else if (eq_stats[2] != 0)	eq_name = "retoryka w butelce";
-		else if (eq_stats[3] != 0)	eq_name = "roztwór wronskianu potasu";
-		else if (eq_stats[4] != 0)	eq_name = "sok z gumijagód";
-		else if (eq_stats[5] != 0)	eq_name = "wywar z totolotka";
+		if (eq_stats[0] != 0)  		eq_name = "Eliksir Galów";
+		else if (eq_stats[1] != 0)	eq_name = "Wywar z czerwonego byka";
+		else if (eq_stats[2] != 0)	eq_name = "Retoryka w butelce";
+		else if (eq_stats[3] != 0)	eq_name = "Roztwór wronskianu potasu";
+		else if (eq_stats[4] != 0)	eq_name = "Sok z gumijagód";
+		else if (eq_stats[5] != 0)	eq_name = "Wywar z totolotka";
 	}
 	else if (eq_name == "special")
 	{
@@ -318,7 +317,6 @@ void Equipment::take_buff(Statistics* staty)
 
 void Weapon::weapon_statistics_name(Character* player)
 {
-	srand(time_t(NULL));
 
 	Armor stats_base;
 	stats_base.type_stats(player);
