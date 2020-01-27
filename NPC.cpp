@@ -86,11 +86,11 @@ void Non_Character::buy(Character* player)
 	{
 		Equipment potions[6];
 		potions[0].eq_name == "eliksir";
-		potions[1].eq_name == "Wywar z czerwonego byka";
-		potions[2].eq_name == "Retoryka w butelce";
-		potions[3].eq_name == "Roztwor wroñskianu potasu";
-		potions[4].eq_name == "Sok z gumijagod";
-		potions[5].eq_name == "Wywar z totolotka";
+		potions[1].eq_name == "eliksir";
+		potions[2].eq_name == "eliksir";
+		potions[3].eq_name == "eliksir";
+		potions[4].eq_name == "eliksir";
+		potions[5].eq_name == "eliksir";
 
 
 		for (int i = 0; i < 6; i++)
@@ -101,7 +101,7 @@ void Non_Character::buy(Character* player)
 
 		if (npc_name == "Chemik Renagan")
 		{
-			std::cout << "Aktualnie mam takie drobnostki na zbyciu. Jesteœ " << (player->GetSex() ? "zainteresowana" : "zainteresowany") <<"? Jesteœ, prawda? Prawda..." << std::endl;
+			std::cout << "Aktualnie mam takie drobnostki na zbyciu. Jesteœ " << (player->GetSex() ? "zainteresowana" : "zainteresowany") << "? Jesteœ, prawda? Prawda..." << std::endl;
 		}
 		else if (npc_name == "Chemik Beatrycze" && (player->GetProffesion() == PROFF_BARD || player->GetSex() != false || player->GetStats().getByEnum(Charisma) >= 15))// 15- jakaœ lczba, któr¹ trzeba doustaliæ
 		{
@@ -125,10 +125,16 @@ void Non_Character::buy(Character* player)
 				+ potions[i].eq_stats[4] + potions[i].eq_stats[5] + seller);
 		}
 
-		for (int i = 0; i < 6; i ++) //wypisywanie
+		for (int i = 0; i < 6; i++) //wypisywanie
 		{
 			std::cout << "nazwa:      " << i + 1 << ". " << potions[i].eq_name << std::endl;
-			std::cout << "statystyka?:" << potions[i].eq_stats[i] << std::endl;
+			for (int j = 0; j < 6; j++)
+			{
+				if (potions[i].eq_stats[j] != 0)
+				{
+					std::cout << "statystyka?:" << potions[i].eq_stats[j] << std::endl;
+				}
+			}
 			std::cout << "koszt:      " << potions[i].eq_cost << std::endl;
 		}
 		std::cout << "To który z eliksirów " << (player->GetSex() ? "chcia³abyœ" : "chcia³byœ") << " kupiæ? ('7' - nie kupujê)" << std::endl;
