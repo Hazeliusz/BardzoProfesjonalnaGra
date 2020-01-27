@@ -49,31 +49,37 @@ void Square::check()
 	{
 		if (x == 2 && y == 1) //Chemik
 		{
-
+			Non_Character beatrycze("Chemik Beatrycze", 'C');
+			beatrycze.options(player);
 		}
 		else if (x == 4 && y == 1) //Zbrojomistrz 1
 		{
-
+			Non_Character gerwalt("Gerwalt", 'Z');
+			gerwalt.options(player);
 		}
 		else if (x == 6 && y == 1) //Zbrojomistrz 2
 		{
-
+			Non_Character zbrojmistrz2("Zbrojmistrz2", 'Z');
+			zbrojmistrz2.options(player);
 		}
 		else if (x == 1 && y == 2) //Kowal
 		{
-
+			Non_Character grigori("Kowal Gregori", 'K');
+			grigori.options(player);
 		}
 		else if (x == 1 && y == 4) //Zbrojomistrz 3
 		{
-
+			Non_Character zbrojmistrz3("Zbrojmistrz3", 'Z');
+			zbrojmistrz3.options(player);
 		}
 		else if (x == 1 && y == 6) //Handlarz
 		{
-
+			Non_Character handlarz("Handlarz", 'H');
+			handlarz.options(player);
 		}
 		else if (x == 1 && y == 11) //NPC 1 w domku 1
 		{
-			std::cout << "Jesteœ kolejnym ze znamieniem Utriona?! Tfu!\n.\nMasz szczêœcie, jednego ju¿ wyrzuciliœmy!\n";
+			std::cout << "Jesteœ kolejnym ze znamieniem Utriona?! Tfu!\nMasz szczêœcie, jednego ju¿ wyrzuciliœmy!\n";
 			Sleep(10000);
 			system("cls");
 		}
@@ -285,23 +291,28 @@ void Square::check()
 	{
 		if (x == 1 && y == 13) //Zbrojomistrz 4
 		{
-
+			Non_Character oktis("Oktis", 'Z');
+			oktis.options(player);
 		}
 		else if (x == 2 && y == 13) //Zbrojomistrz 5
 		{
-
+			Non_Character zbrojmistrz5("Zbrojmistrz5", 'Z');
+			zbrojmistrz5.options(player);
 		}
 		else if (x == 3 && y == 13) //Zbrojomistrz 6
 		{
-
+			Non_Character zbrojmistrz6("Zbrojmistrz6", 'Z');
+			zbrojmistrz6.options(player);
 		}
 		else if (x == 3 && y == 2) //Chemik
 		{
-
+			Non_Character renagan("Chemik Renagan", 'C');
+			renagan.options(player);
 		}
 		else if (x == 5 && y == 1) //Kowal
 		{
-
+			Non_Character andrzej("Kowal Andrzej", 'K');
+			andrzej.options(player);
 		}
 		else if (x == 10 && y == 13) //NPC przy dolnej granicy
 		{
