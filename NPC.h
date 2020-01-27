@@ -1,7 +1,9 @@
 #pragma once
 #include <iostream>
-#include "Square.h"
+#include "character.h"
 #include "ekwipunek.h"
+
+class Character;
 
 class Non_Character
 {
@@ -13,7 +15,7 @@ class Non_Character
 
 
 public:
-	Non_Character(bool first = 0, std::string n = "wiesniak", char type = 'N', short int cho = 0, bool end_talk = 0)
+	Non_Character(std::string n = "wiesniak", char npc_type = 'C', bool first = true, char type = 'N', short int cho = 0, bool end_talk = 0)
 	{
 		first_time = first;
 		choice = cho;
@@ -26,6 +28,6 @@ public:
 	void buy(Character* player);					//kupno
 	void repair(Character* player);					//naprawa zbroi
 	bool pay(int cost, Character* player);			//zaplata
-	void opening_talk(char npc_world[3][3][15][15], Character* player);//gadka wstêpna
+	void opening_talk(Character* player);//gadka wstêpna
 	void talk(Character* player);									//info jakieœ
 };
