@@ -27,10 +27,10 @@
     <ClCompile Include="ekwipunek.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NPC.cpp">
+    <ClCompile Include="Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Square.cpp">
+    <ClCompile Include="NPC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,10 +50,10 @@
     <ClInclude Include="ekwipunek.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NPC.h">
+    <ClInclude Include="Square.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Square.h">
+    <ClInclude Include="NPC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

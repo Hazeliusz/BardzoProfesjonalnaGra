@@ -191,12 +191,12 @@ void Character::useEquipment() {
 	std::cout << "Który przedmiot chcesz u¿yæ? Podaj odpowiedni numer." << std::endl;
 	int indeks = 0;
 	std::cin >> indeks;
-	if (indeks > equipment_eq.size() || indeks < 0) {
+	if (indeks - 1 > equipment_eq.size() || indeks - 1 < 0) {
 		std::cout << "Niepoprawny wybór!" << std::endl;
 	}
 	else {
-		equipment_eq[indeks].take_buff(&this->special);
-		equipment_eq.erase(equipment_eq.begin() + indeks);
+		equipment_eq[indeks - 1].take_buff(&this->special);
+		equipment_eq.erase(equipment_eq.begin() + indeks - 1);
 	}
 }
 
